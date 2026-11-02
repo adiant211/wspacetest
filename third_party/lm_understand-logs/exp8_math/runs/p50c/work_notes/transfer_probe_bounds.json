@@ -1,0 +1,112 @@
+[
+  {
+    "start": 68,
+    "length": 121,
+    "case": 0,
+    "condition": "productive",
+    "answer_prefix": "The two perpendicular legs are 6 and 8. The hypotenuse is sqrt(36+64)=10. ",
+    "branch_char": 255
+  },
+  {
+    "start": 68,
+    "length": 160,
+    "case": 0,
+    "condition": "repetitive",
+    "answer_prefix": "The two perpendicular legs are 6 and 8. The hypotenuse is sqrt(36+64)=10. ",
+    "branch_char": 255
+  },
+  {
+    "start": 71,
+    "length": 127,
+    "case": 1,
+    "condition": "productive",
+    "answer_prefix": "There are 5 balls. The probability the first is red is 3/5. ",
+    "branch_char": 301
+  },
+  {
+    "start": 71,
+    "length": 123,
+    "case": 1,
+    "condition": "repetitive",
+    "answer_prefix": "There are 5 balls. The probability the first is red is 3/5. ",
+    "branch_char": 301
+  },
+  {
+    "start": 61,
+    "length": 119,
+    "case": 2,
+    "condition": "productive",
+    "answer_prefix": "The first term is 1 and the twentieth term is 39. There are 20 terms. ",
+    "branch_char": 250
+  },
+  {
+    "start": 61,
+    "length": 149,
+    "case": 2,
+    "condition": "repetitive",
+    "answer_prefix": "The first term is 1 and the twentieth term is 39. There are 20 terms. ",
+    "branch_char": 250
+  },
+  {
+    "start": 65,
+    "length": 127,
+    "case": 3,
+    "condition": "productive",
+    "answer_prefix": "Since 7 has remainder 2 modulo 5, we can instead compute 2^20 modulo 5. ",
+    "branch_char": 246
+  },
+  {
+    "start": 65,
+    "length": 149,
+    "case": 3,
+    "condition": "repetitive",
+    "answer_prefix": "Since 7 has remainder 2 modulo 5, we can instead compute 2^20 modulo 5. ",
+    "branch_char": 246
+  },
+  {
+    "start": 58,
+    "length": 113,
+    "case": 4,
+    "condition": "productive",
+    "answer_prefix": "The constant term is 6 and the coefficient of x is -5. ",
+    "branch_char": 223
+  },
+  {
+    "start": 58,
+    "length": 122,
+    "case": 4,
+    "condition": "repetitive",
+    "answer_prefix": "The constant term is 6 and the coefficient of x is -5. ",
+    "branch_char": 223
+  },
+  {
+    "start": 65,
+    "length": 116,
+    "case": 5,
+    "condition": "productive",
+    "answer_prefix": "The derivative of x^3 is 3x^2 and the derivative of -4x is -4. ",
+    "branch_char": 223
+  },
+  {
+    "start": 65,
+    "length": 145,
+    "case": 5,
+    "condition": "repetitive",
+    "answer_prefix": "The derivative of x^3 is 3x^2 and the derivative of -4x is -4. ",
+    "branch_char": 223
+  },
+  {
+    "start": 72,
+    "length": 73,
+    "case": 1,
+    "condition": "premature_close",
+    "branch_char": 301
+  },
+  {
+    "start": 66,
+    "length": 67,
+    "case": 3,
+    "condition": "premature_close",
+    "branch_char": 246
+  }
+]

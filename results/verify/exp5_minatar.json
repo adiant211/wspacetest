@@ -1,0 +1,106 @@
+{
+ "breakout": {
+  "edits_statements_parsed": 92,
+  "rebuilt_from_reply_max_abs_diff_vs_released": 0.0,
+  "nonzero_weights": 815,
+  "ours": {
+   "mean": 502.88,
+   "se": 7.7473791364230715,
+   "episodes": 1000,
+   "max": 821.0,
+   "mean_length": 7188.392,
+   "cut_at_max_steps": 517
+  },
+  "reported": {
+   "mean": 517.411,
+   "se": 7.416952829044303,
+   "episodes": 1000,
+   "max": 800.0,
+   "mean_length": 7417.202
+  },
+  "ppo_best_reported": {
+   "ppo100_s0": 6.038,
+   "ppo100_s1": 6.687,
+   "ppo100_s2": 15.779,
+   "ppo100_s3": 11.15,
+   "ppo100_s4": 11.261,
+   "ppo100_s5": 6.552,
+   "ppo100_s6": 5.682,
+   "ppo100_s7": 6.424,
+   "ppo100_s8": 6.942,
+   "ppo100_s9": 5.608,
+   "ppo500_s0": 25.344,
+   "ppo500_s1": 12.194,
+   "ppo500_s2": 19.82
+  },
+  "seconds": 83.3,
+  "z_vs_reported": -1.3548279339547618
+ },
+ "seaquest": {
+  "edits_statements_parsed": 122,
+  "rebuilt_from_reply_max_abs_diff_vs_released": 0.0,
+  "nonzero_weights": 803,
+  "ours": {
+   "mean": 51.923,
+   "se": 1.3559637564141265,
+   "episodes": 1000,
+   "max": 167.0,
+   "mean_length": 1380.691,
+   "cut_at_max_steps": 0
+  },
+  "reported": {
+   "mean": 53.11,
+   "se": 1.3573821814015339,
+   "episodes": 1000,
+   "max": 158.0,
+   "mean_length": 1411.613
+  },
+  "ppo_best_reported": {
+   "ppo100_s0": 4.421,
+   "ppo100_s1": 4.408,
+   "ppo100_s2": 5.617,
+   "ppo500_s0": 7.493,
+   "ppo500_s1": 4.379,
+   "ppo500_s2": 88.884
+  },
+  "seconds": 35.3,
+  "z_vs_reported": -0.6186720409552701
+ },
+ "asterix": {
+  "edits_statements_parsed": 55,
+  "rebuilt_from_reply_max_abs_diff_vs_released": 0.0,
+  "nonzero_weights": 637,
+  "ours": {
+   "mean": 54.746,
+   "se": 1.0718910553010668,
+   "episodes": 1000,
+   "max": 231.0,
+   "mean_length": 873.869,
+   "cut_at_max_steps": 0
+  },
+  "reported": {
+   "mean": 53.178,
+   "se": 1.023305169277215,
+   "episodes": 1000,
+   "max": 177.0,
+   "mean_length": 858.045
+  },
+  "ppo_best_reported": {
+   "ppo100_s0": 16.064,
+   "ppo100_s1": 15.912,
+   "ppo100_s2": 20.194,
+   "ppo100_s3": 21.34,
+   "ppo100_s4": 20.378,
+   "ppo100_s5": 13.209,
+   "ppo100_s6": 25.82,
+   "ppo100_s7": 15.541,
+   "ppo100_s8": 15.329,
+   "ppo100_s9": 18.073,
+   "ppo500_s0": 44.706,
+   "ppo500_s1": 55.204,
+   "ppo500_s2": 46.879
+  },
+  "seconds": 24.8,
+  "z_vs_reported": 1.0580827067654184
+ }
+}

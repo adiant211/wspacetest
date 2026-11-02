@@ -1,0 +1,23 @@
+{
+ "tensors": [
+  {
+   "name": "model.layers.17.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 640,
+   "changed_columns": 1,
+   "changed_rows": 640,
+   "relative_change": 0.01643495075404644,
+   "base_sha256": "23ea63f534a3a6a247cd6e963780bf364dbebde6aa40a25cc90040c1495e40d6",
+   "edited_sha256": "dd884f7c70ebea5308054d2756388ff9b6c616289a532a687060a93bb5498886",
+   "submitted_file": "model.layers.17.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  }
+ ],
+ "changed_tensors": 1,
+ "changed_entries_total": 640,
+ "note": "changed_entries counts bfloat16 entries whose bits differ from the base model; an entry the edit touched but that rounds back to the same bfloat16 value is not counted"
+}

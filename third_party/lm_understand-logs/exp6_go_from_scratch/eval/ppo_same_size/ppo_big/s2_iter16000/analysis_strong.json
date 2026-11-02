@@ -1,0 +1,33 @@
+{
+ "opponent": "strong",
+ "summary": {
+  "games": 500,
+  "score": 0.03400000184774399,
+  "wins": 17,
+  "losses": 483,
+  "score_as_black": 0.03200000151991844,
+  "score_as_white": 0.035999998450279236,
+  "mean_margin": -36.209999084472656,
+  "mean_length": 127.604,
+  "stones_captured_per_game": 9.546,
+  "stones_lost_per_game": 62.604,
+  "passes_per_game": 2.3,
+  "games_with_a_pass_before_move_60": 0,
+  "end_two_passes": 419,
+  "end_repetition": 28,
+  "end_move_limit": 53
+ },
+ "failures": {
+  "net_moves_per_game": 63.8,
+  "pass_rate": 0.03605015673981191,
+  "first_quartile_pass_ply": 105.0,
+  "median_empty_points_at_pass": 7.0,
+  "capture_available_rate": 0.34470219435736676,
+  "missed_capture_rate": 0.8145689341578756,
+  "own_atari_rate": 0.7741065830721003,
+  "ignored_atari_rate": 0.8267595367295699,
+  "self_atari_rate": 0.22294670846394984,
+  "self_atari_captured_next": 980,
+  "own_eye_fill_rate": 0.05300940438871473
+ }
+}

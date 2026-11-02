@@ -1,0 +1,11 @@
+THE MODEL
+A denoising diffusion model (DDPM) for 12 x 12 grayscale images. Pixel values lie in [-1, 1]: -1 is black, +1 is white. Pixel number i = row * 12 + column (row 0 is the top row, column 0 the left column).
+Training: every training image x_0 comes from one fixed collection of images. For a random step t (0..999) and Gaussian noise eps (one standard normal number per pixel), the noisy image is x_t = sqrt(abar_t) * x_0 + sqrt(1 - abar_t) * eps, where beta_t rises linearly from 0.0001 (t = 0) to 0.02 (t = 999) and abar_t = (1 - beta_0)(1 - beta_1)...(1 - beta_t). The network learned to predict the clean image x_0 from x_t and t (loss: the average of (prediction - x_0)^2 over pixels).
+Generation: start from pure Gaussian noise (t = 999); at every step the network's prediction of x_0 (clipped to [-1, 1]) is used to take one standard DDPM step to t - 1, down to t = 0. The result is a new image of the kind the model was trained on.
+
+THE NETWORK
+Input: 160 numbers: inputs 0..143 are the pixels of x_t (input i = pixel i); inputs 144..159 encode the step t: input 144 + k = sin(t * f_k) and input 152 + k = cos(t * f_k), with f_k = 1 / 10000^(k / 8), k = 0..7.
+  h1 = relu(x @ W1 + b1)         W1: 160 x H, b1: H
+  h2 = relu(h1 @ W2 + b2)        W2: H x H,   b2: H
+  x0_hat = h2 @ W3 + b3          W3: H x 144, b3: 144   (output j = the predicted clean value of pixel j)
+Row i of a weight matrix belongs to input i (or unit i of the previous layer); column j to unit j of the next layer (for W3: pixel j).

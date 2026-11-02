@@ -1,0 +1,17 @@
+{
+  "choice": "KEEP frozen_top64_alpha6",
+  "forward_passes_completed": 50,
+  "tensors": {
+    "15": {
+      "name": "model.language_model.layers.15.mlp.down_proj.weight",
+      "sha256": "9237d35fc861bd0d02170e46300cb887f2a5b448044fbed92013fbe9060228cd"
+    },
+    "19": {
+      "name": "model.language_model.layers.19.mlp.down_proj.weight",
+      "sha256": "3091b77b6295263cedd77c8bb12bfd504cc7b18330810d77aecaf56517dfceaa"
+    }
+  },
+  "changed_values": 131072,
+  "verified_backup": "/work/final_verified_edit",
+  "no_weight_changes_during_confirmation": true
+}

@@ -1,0 +1,26 @@
+{
+ "case": "pair_343898",
+ "turn": 12,
+ "runs": 9,
+ "thread": "id-14c9b404",
+ "done": true,
+ "format_retries": 0,
+ "nudges": 2,
+ "effort": "xhigh",
+ "tool_free": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ],
+ "cum_input": 404526,
+ "next": "OUTPUT of run 9 of at most 60:\n```\nEXACT POSITIONAL COEFFICIENT DECOMPOSITION\nC(r) = sum_p [cos(omega_p*r) C_p + sin(omega_p*r) S_p].\nQ and K are normalized by weight Frobenius norms, not hidden-state norms.\nLearned q/k diagonal scales are included; input-dependent RMS\ndenominators and softmax are not evaluated.\nEnergy is over harmonic coefficient matrices, NOT attention outputs.\nDifferent frequencies need not be orthogonal over a finite context.\n\nROTARY PERIOD RANGES, IN TOKEN POSITIONS:\nfull_attention\n  fastest pairs 0 - 31 period range 6.28319 to 178.363\n  fast pairs 32 - 63 period range 198.692 to 5640.33\n  slow pairs 64 - 95 period range 6283.19 to 178363\n  slowest pairs 96 - 127 period range 198692 to 5.64033e+06\nsliding_attention\n  fastest pairs 0 - 31 period range 6.28319 to 58.4696\n  fast pairs 32 - 63 period range 62.8319 to 584.696\n  slow pairs 64 - 95 period range 628.319 to 5846.96\n  slowest pairs 96 - 127 period range 6283.19 to 58469.6\n\nGLOBAL BAND SUMMARY; scale convention = w\nband delta_energy_fraction midpoint_energy_fraction enrichment relative_coefficient_change signed_energy_change\nfastest 0.0754653 0.160955 0.46886 0.00770631 -3.3643e-05\nfast 0.113722 0.105697 1.07592 0.0116739 -4.42057e-05\nslow 0.390562 0.297799 1.3115 0.0128887 0.000111435\nslowest 0.420251 0.43555 0.964874 0.011055 4.87852e-06\nHeads with increased fastest-band share in B: 34 / 72\nFastest-band share change quantiles: [-0.0002 -0.     -0.      0.      0.0002]\n\nGLOBAL BAND SUMMARY; scale convention = 1+w\nband delta_energy_fraction midpoint_energy_fraction enrichment relative_coefficient_change signed_energy_change\nfastest 0.0790989 0.0618061 1.27979 0.0133295 5.7274e-05\nfast 0.159021 0.125207 1.27007 0.0132788 -4.27433e-05\nslow 0.352058 0.343906 1.02371 0.0119216 -2.58652e-06\nslowest 0.409822 0.469081 0.873669 0.0110133 4.88112e-05\nHeads with increased fastest-band share in B: 42 / 72\nFastest-band share change quantiles: [-0.0001 -0.      0.      0.      0.    ]\n\nBY LAYER; 1+w convention\nlayer delta_energy_fractions_[fastest,fast,slow,slowest] enrichment_by_band\n0 [0.0561 0.1309 0.3276 0.4854] [1.3542 1.2986 1.0116 0.9091]\n1 [0.1451 0.177  0.3255 0.3523] [0.9919 1.0317 0.9844 1.0026]\n2 [0.136 0.241 0.349 0.274] [1.0911 1.0493 1.0069 0.9162]\n3 [0.1098 0.2031 0.3511 0.3359] [1.8248 1.543  1.0456 0.7112]\n4 [0.0439 0.1231 0.5806 0.2523] [1.3478 1.164  1.0132 0.8744]\n5 [0.0156 0.0635 0.2447 0.6762] [3.2746 1.4678 0.9858 0.9609]\n6 [0.0601 0.2044 0.4209 0.3145] [2.1532 1.6827 1.103  0.6706]\n7 [0.0482 0.1229 0.2799 0.549 ] [2.6612 1.9185 1.1314 0.8189]\n8 [0.0743 0.2425 0.5628 0.1204] [1.4621 1.0801 0.9704 0.832 ]\n9 [0.0523 0.1298 0.322  0.4959] [2.7341 1.8407 1.1624 0.7829]\n10 [0.0626 0.1249 0.3554 0.4571] [2.9474 1.7348 1.0762 0.7928]\n11 [0.0818 0.2315 0.4569 0.2298] [2.0582 1.5941 1.0794 0.5866]\n12 [0.0345 0.0982 0.3086 0.5587] [4.796  1.9502 1.1076 0.8416]\n13 [0.1803 0.3871 0.308  0.1247] [1.6806 1.4554 0.8128 0.5029]\n14 [0.0395 0.1321 0.3041 0.5243] [1.7555 1.481  1.0146 0.8908]\n15 [0.0824 0.1548 0.3624 0.4004] [1.4939 1.4706 1.1366 0.7689]\n16 [0.1441 0.2301 0.3396 0.2862] [1.3208 1.2412 1.0278 0.763 ]\n17 [0.0422 0.1033 0.4052 0.4493] [2.7153 1.3512 1.0696 0.849 ]\n\nTOP 10 HEADS BY COMPLETE HARMONIC-COEFFICIENT DIFFERENCE; 1+w\n1 0 delta_norm= 1.60713 band_fractions= [0.1499 0.1946 0.3376 0.3179]\n1 1 delta_norm= 1.54478 band_fractions= [0.1548 0.1949 0.3265 0.3237]\n1 3 delta_norm= 1.48689 band_fractions= [0.1634 0.1838 0.3151 0.3377]\n5 1 delta_norm= 1.28128 band_fractions= [0.0079 0.0395 0.2136 0.739 ]\n1 2 delta_norm= 1.2228 band_fractions= [0.0944 0.1079 0.3186 0.4791]\n5 2 delta_norm= 1.19868 band_fractions= [0.0113 0.0555 0.2294 0.7038]\n5 0 delta_norm= 1.11818 band_fractions= [0.0135 0.0584 0.3004 0.6277]\n5 3 delta_norm= 1.05695 band_fractions= [0.0346 0.115  0.2475 0.6029]\n14 3 delta_norm= 1.04633 band_fractions= [0.0359 0.1392 0.3154 0.5094]\n14 2 delta_norm= 1.0337 band_fractions= [0.0309 0.1016 0.293  0.5745]\n\nMaximum coefficient-identity verification relative error: 7.75185377887964e-12\nNo positional preference, selected token, or semantic role is\nestablished by these coefficient energies alone.\n\n```"
+}

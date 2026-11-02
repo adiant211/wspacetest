@@ -1,0 +1,47 @@
+{
+ "246a5b58": {
+  "shape": "triangle",
+  "seed": 0,
+  "quality": {
+   "classified_as": {
+    "circle": 0.0,
+    "square": 0.0,
+    "triangle": 1.0
+   },
+   "intended": 1.0,
+   "classifier_acc_real": 0.9996666666666667,
+   "mean_pixel": -0.6657924652099609,
+   "frac_outside_range": 0.0
+  }
+ },
+ "a6a9dfb7": {
+  "shape": "square",
+  "seed": 0,
+  "quality": {
+   "classified_as": {
+    "circle": 0.008,
+    "square": 0.984,
+    "triangle": 0.008
+   },
+   "intended": 0.984,
+   "classifier_acc_real": 0.9996666666666667,
+   "mean_pixel": -0.51023930311203,
+   "frac_outside_range": 0.0
+  }
+ },
+ "d88aba69": {
+  "shape": "circle",
+  "seed": 0,
+  "quality": {
+   "classified_as": {
+    "circle": 0.994,
+    "square": 0.003,
+    "triangle": 0.003
+   },
+   "intended": 0.994,
+   "classifier_acc_real": 0.9996666666666667,
+   "mean_pixel": -0.5199615955352783,
+   "frac_outside_range": 0.0
+  }
+ }
+}

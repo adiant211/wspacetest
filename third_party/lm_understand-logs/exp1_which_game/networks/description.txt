@@ -1,0 +1,24 @@
+THE OBSERVATION
+The network sees a 10 x 10 grid. Rows are numbered 0 (top) to 9 (bottom) and columns 0 (left) to 9 (right). The outer ring of cells (row 0, row 9, column 0 and column 9) is a wall border; the playable area is the inner 8 x 8 cells (rows 1-8, columns 1-8).
+Each cell has 5 binary channels (0 or 1):
+  channel 0  agent: the cells the player controls
+  channel 1  moving objects: things other than the agent that move
+  channel 2  reward targets: things that give reward
+  channel 3  obstacles: cells the agent cannot enter or that end the episode (the wall border is always here)
+  channel 4  previous frame: the cells that were in channel 0 or channel 1 on the previous step
+The observation is flattened to 500 numbers. Input number i = (row * 10 + column) * 5 + channel; for example input 0 is (row 0, column 0, channel 0), input 4 is (row 0, column 0, channel 4), input 5 is (row 0, column 1, channel 0) and input 499 is (row 9, column 9, channel 4).
+
+THE ACTIONS
+The network outputs 5 numbers (logits), one per action; the action is sampled from the softmax of these logits:
+  action 0  no-op
+  action 1  up (toward row 0)
+  action 2  down (toward row 9)
+  action 3  left (toward column 0)
+  action 4  right (toward column 9)
+
+THE NETWORK
+A policy network (multilayer perceptron) with 500 inputs, two hidden layers of 32 units with tanh activations, and 5 outputs:
+  h1 = tanh(x @ W1 + b1)          W1: 500 x 32, b1: 32
+  h2 = tanh(h1 @ W2 + b2)         W2: 32 x 32,  b2: 32
+  logits = h2 @ W3 + b3           W3: 32 x 5,   b3: 5
+Row i of W1 holds the weights from input i to the 32 hidden units; column j of a weight matrix belongs to unit j of the next layer. 17,253 parameters in total. It was trained with reinforcement learning (PPO) to maximise the reward of a game played on this grid.

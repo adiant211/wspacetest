@@ -1,0 +1,94 @@
+[
+ {
+  "id": "0bbcc3ea",
+  "true": "freeway",
+  "seed": 2,
+  "mode": "open",
+  "guess": "freeway",
+  "correct": true,
+  "answer_line": "frogger \u2014 a simplified grid-based traffic-crossing variant.",
+  "confidence": 97,
+  "reasoning_summary": [
+   "**Inferring periodic row movement**\n**Mapping Frogger row patterns**\n**Counting pattern rows**",
+   "**Inspecting row2 coefficients**\n**Checking row2 coefficients**"
+  ],
+  "tool_free": true,
+  "usage": {
+   "input_tokens": 73695,
+   "cached_input_tokens": 0,
+   "cache_write_input_tokens": 0,
+   "output_tokens": 1768,
+   "reasoning_output_tokens": 1034
+  },
+  "wall_s": 70.9
+ },
+ {
+  "id": "a9f535cc",
+  "true": "breakout",
+  "seed": 0,
+  "mode": "open",
+  "guess": "breakout",
+  "correct": true,
+  "answer_line": "breakout \u2014 a small grid-based brick-breaking variant.",
+  "confidence": 99,
+  "reasoning_summary": [
+   "**Deciphering Breakout channels**\n**Mapping Breakout channels**",
+   "**Confirming paddle row mapping**"
+  ],
+  "tool_free": true,
+  "usage": {
+   "input_tokens": 73749,
+   "cached_input_tokens": 2432,
+   "cache_write_input_tokens": 0,
+   "output_tokens": 1679,
+   "reasoning_output_tokens": 833
+  },
+  "wall_s": 107.2
+ },
+ {
+  "id": "bdf99279",
+  "true": "pacman",
+  "seed": 2,
+  "mode": "open",
+  "guess": "pacman",
+  "correct": true,
+  "answer_line": "pac-man, or a simplified grid-based pac-man clone.",
+  "confidence": 96,
+  "reasoning_summary": [
+   "**Reconstructing the active map**\n**Mapping maze corridors**\n**Preparing exact maze map**",
+   "**Reconstructing row groupings**\n**Checking channel patterns**"
+  ],
+  "tool_free": true,
+  "usage": {
+   "input_tokens": 73723,
+   "cached_input_tokens": 0,
+   "cache_write_input_tokens": 0,
+   "output_tokens": 1838,
+   "reasoning_output_tokens": 1034
+  },
+  "wall_s": 70.8
+ },
+ {
+  "id": "dfc6cb65",
+  "true": "pong",
+  "seed": 0,
+  "mode": "open",
+  "guess": "pong",
+  "correct": true,
+  "answer_line": "pong \u2014 most likely a single-player, vertical-paddle wall-pong variant.",
+  "confidence": 96,
+  "reasoning_summary": [
+   "**Checking channel pattern**\n**Mapping channel pattern**\n**Checking right-wall pattern**",
+   "**Distinguishing Pong from Breakout.**\n**Checking Pong evidence.**"
+  ],
+  "tool_free": true,
+  "usage": {
+   "input_tokens": 73723,
+   "cached_input_tokens": 0,
+   "cache_write_input_tokens": 0,
+   "output_tokens": 1833,
+   "reasoning_output_tokens": 1031
+  },
+  "wall_s": 82.7
+ }
+]

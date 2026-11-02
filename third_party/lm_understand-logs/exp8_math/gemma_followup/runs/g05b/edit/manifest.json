@@ -1,0 +1,199 @@
+{
+ "tensors": [
+  {
+   "name": "model.layers.10.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 1280,
+   "changed_columns": 2,
+   "changed_rows": 640,
+   "relative_change": 0.012839832343161106,
+   "base_sha256": "aa201276927b0dffd22ea4e283f9f1179a208614ff8d678b03308985b0cc2f89",
+   "edited_sha256": "06784a4ecf9de5e115ddb3f59e9ef583a1c674072285e4c83525e0a4fa9080dc",
+   "submitted_file": "model.layers.10.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.11.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 3200,
+   "changed_columns": 5,
+   "changed_rows": 640,
+   "relative_change": 0.02441585436463356,
+   "base_sha256": "0120cb9ae9cb14abb0e52dc550bb99d3a580bc4028aa58463fc22050bbd5633b",
+   "edited_sha256": "71c91b08fb0f2bce587636f972a9e4d6ceabd6862aa53e0fabebcacd80cc123c",
+   "submitted_file": "model.layers.11.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.12.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 3200,
+   "changed_columns": 5,
+   "changed_rows": 640,
+   "relative_change": 0.026037704199552536,
+   "base_sha256": "170bb89a894331e77ef39ab6a37031f30149643dd60bfbe8723854f8cfac1f1a",
+   "edited_sha256": "dc704bb199c3c401cf967232e7b7acd9915c2c4b3fe6c6466c90c9a50125a317",
+   "submitted_file": "model.layers.12.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.13.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 3840,
+   "changed_columns": 6,
+   "changed_rows": 640,
+   "relative_change": 0.028797809034585953,
+   "base_sha256": "c55b8080ea5ac47309676660af0067e582a8bbd2342eaad9b00bad443fcb38c7",
+   "edited_sha256": "b93dcfe495f0be7b747dc340dfff3fe2399c72168d5a1d11e8b6be4c3259afab",
+   "submitted_file": "model.layers.13.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.14.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 5120,
+   "changed_columns": 8,
+   "changed_rows": 640,
+   "relative_change": 0.03216972202062607,
+   "base_sha256": "8e1ac564698138b69070c19cf0cb5fbe1be604a53e8fbb1c0390d0ce48fa927f",
+   "edited_sha256": "6546c97672a77b48442214492f10d820611a74e1be7ead641de28b9171414f07",
+   "submitted_file": "model.layers.14.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.15.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 3200,
+   "changed_columns": 5,
+   "changed_rows": 640,
+   "relative_change": 0.02506270632147789,
+   "base_sha256": "89f3412708e4b701932961a04a24ffa6cbba0dee57ee7463f1064a4f266669be",
+   "edited_sha256": "d9d7a220ce8b9c43a1e047477ce3ce961a374c0d8e8c18447cc3cab9109be40c",
+   "submitted_file": "model.layers.15.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.16.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 7680,
+   "changed_columns": 12,
+   "changed_rows": 640,
+   "relative_change": 0.038655783981084824,
+   "base_sha256": "7952e31046f1965adcac881254709a850f037ff107d8926e1c696ae258e4d860",
+   "edited_sha256": "1c9deeb9405935789757e850657d853476f183287e7fcf2409246bf69e3984ed",
+   "submitted_file": "model.layers.16.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.17.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 6400,
+   "changed_columns": 10,
+   "changed_rows": 640,
+   "relative_change": 0.037477120757102966,
+   "base_sha256": "23ea63f534a3a6a247cd6e963780bf364dbebde6aa40a25cc90040c1495e40d6",
+   "edited_sha256": "1c84a0fc44e07b6a0e824ee986260f417797b0fb22fcd224bd5a67b85fd01f2a",
+   "submitted_file": "model.layers.17.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.6.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 1920,
+   "changed_columns": 3,
+   "changed_rows": 640,
+   "relative_change": 0.02075548656284809,
+   "base_sha256": "cfdb11771c18a4ff17a2c0eaa8fda0a5d88f9d7776be8c189c193e3f25fd80db",
+   "edited_sha256": "d302c5d37cf22183289235aef983f87bbc1cc65d47b83b4d3af7627f321973eb",
+   "submitted_file": "model.layers.6.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.7.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 1280,
+   "changed_columns": 2,
+   "changed_rows": 640,
+   "relative_change": 0.014556190930306911,
+   "base_sha256": "505f4670163ceaafe97d523e6617784905f474dcd919399346f6c0f8110405e4",
+   "edited_sha256": "aa38bda4349dbf795ede52f06fb1ee2c1c3de5a91b4c18617f5b0e64db561697",
+   "submitted_file": "model.layers.7.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.8.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 2560,
+   "changed_columns": 4,
+   "changed_rows": 640,
+   "relative_change": 0.023293165490031242,
+   "base_sha256": "700beb3029f5f34cb5300dcedba581786390008e46246b2ed484e5ee627987a4",
+   "edited_sha256": "2780c8cb767f45372ba175f1cad4f14e1f0782c06219b13ef0eab37bd9391e8a",
+   "submitted_file": "model.layers.8.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.9.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 1280,
+   "changed_columns": 2,
+   "changed_rows": 640,
+   "relative_change": 0.014010027050971985,
+   "base_sha256": "b1c2aa81eed69d3143bfe34abfabb8b29ccd3aa0745717a74c4362b905df7f07",
+   "edited_sha256": "f9ca744afcec988fd6b2a5018a076f1204221cf564c8a7ce664081d78355e718",
+   "submitted_file": "model.layers.9.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  }
+ ],
+ "changed_tensors": 12,
+ "changed_entries_total": 40960,
+ "note": "changed_entries counts bfloat16 entries whose bits differ from the base model; an entry the edit touched but that rounds back to the same bfloat16 value is not counted"
+}

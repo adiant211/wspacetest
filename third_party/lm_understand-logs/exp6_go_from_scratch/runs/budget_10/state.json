@@ -1,0 +1,15 @@
+{
+ "budget": 10,
+ "version": "v1",
+ "arch": {
+  "depth": 6,
+  "width": 512
+ },
+ "turn": 28,
+ "runs": 17,
+ "passes": 10,
+ "requests": 10,
+ "thread": "id-1ebcb4e0",
+ "done": true,
+ "next": "Games pass 10 of 10 done.\n```\n{\"ok\": true, \"pass\": 10, \"kind\": \"games\", \"per_opponent\": {\"random\": {\"games\": 8, \"score\": 1.0, \"wins\": 8, \"losses\": 0, \"score_as_black\": 1.0, \"score_as_white\": 1.0, \"mean_margin\": 73.75, \"mean_length\": 122.25, \"stones_captured_per_game\": 93.75, \"stones_lost_per_game\": 0.375, \"passes_per_game\": 1.25, \"games_with_a_pass_before_move_60\": 0, \"end_two_passes\": 8, \"end_repetition\": 0, \"end_move_limit\": 0}, \"strong\": {\"games\": 96, \"score\": 0.7604166865348816, \"wins\": 73, \"losses\": 23, \"score_as_black\": 0.7083333134651184, \"score_as_white\": 0.8125, \"mean_margin\": 50.72916793823242, \"mean_length\": 118.03125, \"stones_captured_per_game\": 68.20833333333333, \"stones_lost_per_game\": 9.875, \"passes_per_game\": 2.375, \"games_with_a_pass_before_move_60\": 0, \"end_two_passes\": 92, \"end_repetition\": 1, \"end_move_limit\": 3}, \"weak\": {\"games\": 24, \"score\": 0.9166666865348816, \"wins\": 22, \"losses\": 2, \"score_as_black\": 0.9166666865348816, \"score_as_white\": 0.9166666865348816, \"mean_margin\": 73.45833587646484, \"mean_length\": 123.58333333333333, \"stones_captured_per_game\": 84.33333333333333, \"stones_lost_per_game\": 3.4166666666666665, \"passes_per_game\": 2.2916666666666665, \"games_with_a_pass_before_move_60\": 0, \"end_two_passes\": 24, \"end_repetition\": 0, \"end_move_limit\": 0}}, \"files\": \"/work/pass_10/\", \"readme\": \"games.json: one entry per game (opponent, net_color, result +1/-1, margin = net's area score minus the opponent's incl. komi, end, stones captured / lost, moves: ply, by, move (row*9+col, 81 = pass), and for the network's moves its top-5 [move, probability]). boards.npy: (games, 162, 81) int8, the board AFTER each ply (1 Black, -1 White, 0 empty; index row*9+col); valid.npy: (games, 162) which plies were played.\"}\n```\nPasses left: 0."
+}

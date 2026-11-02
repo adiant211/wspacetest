@@ -1,0 +1,15 @@
+{
+ "budget": 50,
+ "version": "v1",
+ "arch": {
+  "depth": 6,
+  "width": 512
+ },
+ "turn": 90,
+ "runs": 39,
+ "passes": 50,
+ "requests": 50,
+ "thread": "id-2ecb4c7a",
+ "done": true,
+ "next": "Games pass 50 of 50 done.\n```\n{\"ok\": true, \"pass\": 50, \"kind\": \"games\", \"per_opponent\": {\"weak\": {\"games\": 128, \"score\": 0.9765625, \"wins\": 125, \"losses\": 3, \"score_as_black\": 0.953125, \"score_as_white\": 1.0, \"mean_margin\": 69.8984375, \"mean_length\": 117.6171875, \"stones_captured_per_game\": 71.84375, \"stones_lost_per_game\": 2.125, \"passes_per_game\": 1.78125, \"games_with_a_pass_before_move_60\": 0, \"end_two_passes\": 128, \"end_repetition\": 0, \"end_move_limit\": 0}}, \"files\": \"/work/pass_50/\", \"readme\": \"games.json: one entry per game (opponent, net_color, result +1/-1, margin = net's area score minus the opponent's incl. komi, end, stones captured / lost, moves: ply, by, move (row*9+col, 81 = pass), and for the network's moves its top-5 [move, probability]). boards.npy: (games, 162, 81) int8, the board AFTER each ply (1 Black, -1 White, 0 empty; index row*9+col); valid.npy: (games, 162) which plies were played.\"}\n```\nPasses left: 0."
+}

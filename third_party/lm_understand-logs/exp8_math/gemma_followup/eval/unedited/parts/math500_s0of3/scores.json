@@ -1,0 +1,45 @@
+{
+ "_job": {
+  "protocol": "gemma3",
+  "ckpt": "<data>/mathedit/models/gemma-3-270m-it",
+  "ckpt_mtime": 1792861858.029755,
+  "shard": "0/3"
+ },
+ "math500": {
+  "acc": 0.02844311377245509,
+  "n_problems": 167,
+  "samples": 4,
+  "cut_share": 0.08682634730538923,
+  "mean_tokens": 1611.4281437125749,
+  "s": 55,
+  "ok": 19,
+  "total": 668,
+  "cut": 58,
+  "tokens_sum": 1076434,
+  "shard": "0/3",
+  "no_answer_finished": 266,
+  "ok_lenient": 47
+ },
+ "_protocol": {
+  "name": "gemma3",
+  "sampling": {
+   "temperature": 1.0,
+   "top_k": 64,
+   "top_p": 0.95,
+   "max_tokens": 8192,
+   "seed": 0
+  },
+  "samples": {
+   "aime24": 16,
+   "aime25": 16,
+   "amc23": 16,
+   "math500": 4,
+   "minerva": 4,
+   "olympiad": 4,
+   "gsm8k": 2
+  },
+  "thinking": false,
+  "prompt": "Please reason step by step, and put your final answer within \\boxed{}.",
+  "ckpt": "<data>/mathedit/models/gemma-3-270m-it"
+ }
+}

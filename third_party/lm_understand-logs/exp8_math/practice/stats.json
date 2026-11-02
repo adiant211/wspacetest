@@ -1,0 +1,14 @@
+{
+ "gsm8k_train": {
+  "kept": 7469,
+  "dropped": 4
+ },
+ "math_train": {
+  "kept": 7275,
+  "dropped": 225
+ },
+ "aime": {
+  "kept": 714,
+  "dropped": 0
+ }
+}

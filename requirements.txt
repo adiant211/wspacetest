@@ -1,0 +1,12 @@
+# CPU-only stack used for every experiment in this repo (tested on Python 3.13, 4-core x86 with AMX-bf16, no GPU)
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.15.0
+transformers==5.22.1
+peft==0.21.2
+datasets
+safetensors
+accelerate
+numpy
+scipy
+pandas
+matplotlib

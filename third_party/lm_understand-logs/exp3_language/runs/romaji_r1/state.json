@@ -1,0 +1,7 @@
+{
+ "turn": 10,
+ "runs": 9,
+ "thread": "id-be6fd769",
+ "done": true,
+ "next": "OUTPUT of run 9 of at most 100:\n```\nFinal heads: weight-only token-to-output and matching diagnostics\nL3H0 OV token-map norm 4.999 output-subspace energy 0.087 matching trace/norm -0.629 matching eig real [0.0012 0.0015 0.0015 0.0071 0.0071 0.0183]\nL3H1 OV token-map norm 6.302 output-subspace energy 0.098 matching trace/norm -0.222 matching eig real [0.0035 0.0035 0.0072 0.0072 0.0074 0.0074]\nL3H2 OV token-map norm 5.569 output-subspace energy 0.092 matching trace/norm 0.193 matching eig real [0.0041 0.0041 0.0074 0.0094 0.0094 0.0117]\nL3H3 OV token-map norm 13.422 output-subspace energy 0.348 matching trace/norm 2.860 matching eig real [0.0375 0.0382 0.0382 0.0386 0.0386 0.0533]\nL3H4 OV token-map norm 10.491 output-subspace energy 0.119 matching trace/norm 0.662 matching eig real [0.0025 0.0025 0.0029 0.0029 0.0038 0.0064]\nL3H5 OV token-map norm 5.152 output-subspace energy 0.077 matching trace/norm -0.132 matching eig real [0.0042 0.0042 0.008  0.008  0.0107 0.0107]\n\nCoordinate concentration of L0 OV output (rows 21,39,58,99,184)\nL0H0 0.0344\nL0H1 0.9395\nL0H2 0.942\nL0H3 0.0109\nL0H4 0.8777\nL0H5 0.97\n\nInduction matching control: signed/permuted head-output coordinates\nobserved 2.8602269991267235 null mean/std -0.0002919724439507183 0.23419073556467282 null 1/99 percentiles [-0.5479  0.5497] null max 0.6820147810277253\n\n```"
+}

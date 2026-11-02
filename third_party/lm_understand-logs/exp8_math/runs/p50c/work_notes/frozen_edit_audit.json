@@ -1,0 +1,28 @@
+{
+  "15": {
+    "shape": [
+      1024,
+      3584
+    ],
+    "changed_columns": 64,
+    "changed_values": 65536,
+    "relative_frobenius_change": 0.10635695606470108,
+    "formula_relative_error": 3.19996296127556e-08,
+    "off_direction_fraction": 1.195792407315821e-07,
+    "finite": true,
+    "sha256": "9237d35fc861bd0d02170e46300cb887f2a5b448044fbed92013fbe9060228cd"
+  },
+  "19": {
+    "shape": [
+      1024,
+      3584
+    ],
+    "changed_columns": 64,
+    "changed_values": 65536,
+    "relative_frobenius_change": 0.0810583084821701,
+    "formula_relative_error": 4.339435477618281e-08,
+    "off_direction_fraction": 1.5549265697245573e-07,
+    "finite": true,
+    "sha256": "3091b77b6295263cedd77c8bb12bfd504cc7b18330810d77aecaf56517dfceaa"
+  }
+}

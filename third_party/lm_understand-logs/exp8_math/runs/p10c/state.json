@@ -1,0 +1,22 @@
+{
+ "budget": 10,
+ "mode": "qwen35think",
+ "prompt": "v3",
+ "turn": 74,
+ "runs": 59,
+ "passes": 10,
+ "requests": 14,
+ "thread": "id-0a685df8",
+ "done": true,
+ "nudges": 0,
+ "handoffs": 1,
+ "since_handoff": 34,
+ "flag_streak": 0,
+ "next": "OUTPUT of Python run 59 of at most 300:\n```\nholdout_A {'n': 256, 'original_correct': 25, 'edited_correct': 43, 'original_accuracy': 0.09765625, 'edited_accuracy': 0.16796875, 'gain_pp': 7.03125, 'se_pp': 2.435892978296806, 'normal_95ci_pp': [2.25689976253826, 11.80560023746174], 'rescued': 29, 'regressed': 11, 'exact_mcnemar_p': 0.006426576095691416, 'original_cut': 236, 'edited_cut': 210, 'original_mean_tokens': 30619.296875, 'edited_mean_tokens': 28825.8359375}\nholdout_B {'n': 256, 'original_correct': 37, 'edited_correct': 38, 'original_accuracy': 0.14453125, 'edited_accuracy': 0.1484375, 'gain_pp': 0.390625, 'se_pp': 2.6254111999944643, 'normal_95ci_pp': [-4.75518095198915, 5.53643095198915], 'rescued': 23, 'regressed': 22, 'exact_mcnemar_p': 1.0, 'original_cut': 219, 'edited_cut': 211, 'original_mean_tokens': 28831.27734375, 'edited_mean_tokens': 28906.03515625}\npooled {'n': 512, 'original_correct': 62, 'edited_correct': 81, 'original_accuracy': 0.12109375, 'edited_accuracy': 0.158203125, 'gain_pp': 3.7109375, 'se_pp': 1.7949620696411057, 'normal_95ci_pp': [0.19281184350343275, 7.229063156496568], 'rescued': 52, 'regressed': 33, 'exact_mcnemar_p': 0.050250895335291444, 'original_cut': 455, 'edited_cut': 421, 'original_mean_tokens': 29725.287109375, 'edited_mean_tokens': 28865.935546875}\ngsm8k {'n': 256, 'original_correct': 41, 'edited_correct': 48, 'original_accuracy': 0.16015625, 'edited_accuracy': 0.1875, 'gain_pp': 2.734375, 'se_pp': 2.949965565341981, 'normal_95ci_pp': [-3.0475575080702826, 8.516307508070282], 'rescued': 32, 'regressed': 25, 'exact_mcnemar_p': 0.42704285650325524, 'original_cut': 221, 'edited_cut': 200, 'original_mean_tokens': 29049.421875, 'edited_mean_tokens': 27949.15625}\nmath {'n': 256, 'original_correct': 21, 'edited_correct': 33, 'original_accuracy': 0.08203125, 'edited_accuracy': 0.12890625, 'gain_pp': 4.6875, 'se_pp': 2.050133753407993, 'normal_95ci_pp': [0.6692378433203333, 8.705762156679667], 'rescued': 20, 'regressed': 8, 'exact_mcnemar_p': 0.03569813817739487, 'original_cut': 234, 'edited_cut': 221, 'original_mean_tokens': 30401.15234375, 'edited_mean_tokens': 29782.71484375}\nPrespecified retention threshold met: True gain/SE: 2.067\nBehavior: {'original': {'mean_tail_repetition': 0.857325466628092, 'finished_correct': 56, 'finished_correct_median_tokens': 4423.0}, 'edited': {'mean_tail_repetition': 0.8245674732373471, 'finished_correct': 81, 'finished_correct_median_tokens': 9440.0}}\nAudit: {'tensors': 30, 'max_reconstruction_error': 0.0, 'relative_delta_range': [0.03384541720151901, 0.05989379063248634]}\n\n```",
+ "explain": true,
+ "unexplained_streak": 0,
+ "notices": [
+  "001_pass_size.txt",
+  "002_tool_facts.txt"
+ ]
+}

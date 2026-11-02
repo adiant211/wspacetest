@@ -1,0 +1,31 @@
+{
+ "budget": 5,
+ "mode": "gemma270",
+ "prompt": "v5",
+ "turn": 20,
+ "runs": 13,
+ "passes": 5,
+ "requests": 5,
+ "thread": "id-a188819c",
+ "done": true,
+ "nudges": 0,
+ "handoffs": 0,
+ "since_handoff": 20,
+ "explain": true,
+ "notices": [
+  "001_pass_size.txt",
+  "002_tool_facts.txt",
+  "003_submit_best.txt",
+  "004_failure_counts.txt"
+ ],
+ "flag_streak": 0,
+ "unexplained_streak": 0,
+ "next": "OUTPUT of Python run 13 of at most 300:\n```\nHOLDOUT: 90 -> 102 correct out of 1024\nGain: 1.17 percentage points; SE 0.90; approximate 95% interval [-0.59, 2.94]\nSecondary arithmetic diagnostics: {'original': {'answers': 1024, 'correct': 90, 'checked_response_share': 0.5712890625, 'response_with_checked_error_share': 0.2021484375, 'error_share_among_checked_responses': 0.35384615384615387, 'checked_false_equalities': 1532, 'checked_valid_progress_equalities': 3516, 'checked_identity_equalities': 1042, 'median_tokens': 817.0, 'cut_responses': 86}, 'edited': {'answers': 1024, 'correct': 102, 'checked_response_share': 0.548828125, 'response_with_checked_error_share': 0.189453125, 'error_share_among_checked_responses': 0.34519572953736655, 'checked_false_equalities': 1481, 'checked_valid_progress_equalities': 2150, 'checked_identity_equalities': 1070, 'median_tokens': 734.0, 'cut_responses': 59}}\nVerified final submission: frozen half-strength edit; 12 tensors, 64 columns.\n\n```",
+ "req_keys": {
+  "c98abfc1e28d22bcb88bba64dfbb8fd6d90204a1": 1,
+  "9e5be17a1631e1d6d53610eedc47b901bf7b3768": 2,
+  "a624c09f5ff58941cdfda9d9604d914731b6499a": 3,
+  "324d9ebcee49e6f597e03295d916c097bd8c1339": 4,
+  "531b1af5acf3a18cbb88615d14615d5b0d4e3856": 5
+ }
+}

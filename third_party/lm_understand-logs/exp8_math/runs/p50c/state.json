@@ -1,0 +1,27 @@
+{
+ "budget": 50,
+ "mode": "qwen35think",
+ "prompt": "v3",
+ "turn": 158,
+ "runs": 80,
+ "passes": 50,
+ "requests": 69,
+ "thread": "id-3bbcba11",
+ "done": true,
+ "nudges": 0,
+ "handoffs": 3,
+ "since_handoff": 38,
+ "flag_streak": 0,
+ "next": "OUTPUT of Python run 80 of at most 300:\n```\nPOOLED {'items': 1152, 'original_accuracy': 0.10590277777777778, 'edited_accuracy': 0.6041666666666666, 'gain': 0.4982638888888889, 'se': 0.014991383029525228, 'rescues': 579, 'losses': 5, 'by_source': {'gsm8k': {'original': 0.11631944444444445, 'edited': 0.7083333333333334, 'difference': 0.5920138888888888}, 'math': {'original': 0.0954861111111111, 'edited': 0.5, 'difference': 0.4045138888888889}}}\nFINAL POOLED {\"items\": 1152, \"original_accuracy\": 0.10590277777777778, \"edited_accuracy\": 0.6041666666666666, \"gain\": 0.4982638888888889, \"se\": 0.014991383029525228, \"rescues\": 579, \"losses\": 5, \"by_source\": {\"gsm8k\": {\"original\": 0.11631944444444445, \"edited\": 0.7083333333333334, \"difference\": 0.5920138888888888}, \"math\": {\"original\": 0.0954861111111111, \"edited\": 0.5, \"difference\": 0.4045138888888889}}, \"gain_95pct_normal_interval\": [0.4688807781510195, 0.5276469996267583]}\nFINAL SOURCE COUNTS {\"gsm8k\": {\"n\": 576, \"original_correct\": 67, \"edited_correct\": 408, \"gain\": 0.5920138888888888, \"paired_se\": 0.021219128177913046}, \"math\": {\"n\": 576, \"original_correct\": 55, \"edited_correct\": 288, \"gain\": 0.4045138888888889, \"paired_se\": 0.020467679827936427}}\nFINAL BEHAVIOR {\"original\": {\"n\": 1152, \"correct\": 122, \"cut\": 1038, \"whitespace_tail_cut\": 0, \"failure_cut\": 1023, \"correct_thinking_closed\": 107, \"correct_close_after_1000_chars\": 107, \"failure_wrong_answer_finished\": 6, \"failure_no_answer_finished\": 1, \"median_correct_tokens\": 5310.5, \"mean_cut_tail_duplicate8\": 0.9580040916208376, \"mean_nonwhite_cut_tail_duplicate8\": 0.9580040916208376}, \"edited\": {\"n\": 1152, \"correct\": 696, \"cut\": 212, \"whitespace_tail_cut\": 51, \"correct_thinking_closed\": 696, \"correct_close_after_1000_chars\": 696, \"failure_wrong_answer_finished\": 187, \"failure_cut\": 211, \"failure_no_answer_finished\": 58, \"median_correct_tokens\": 9171.5, \"mean_cut_tail_duplicate8\": 0.4022594815366762, \"mean_nonwhite_cut_tail_duplicate8\": 0.49324499100890384}}\nINDEPENDENT SPLITS {'validation_3': {'n': 128, 'gain': 0.5078125, 'se': 0.0443624091458791}, 'validation_4': {'n': 256, 'gain': 0.48046875, 'se': 0.0317731561550422}, 'final_1': {'n': 256, 'gain': 0.48828125, 'se': 0.03226651702880779}, 'final_2': {'n': 256, 'gain': 0.55078125, 'se': 0.03163726796219167}, 'final_3': {'n': 256, 'gain': 0.46875, 'se': 0.03173641055478645}}\nRESCUE STRATA {\"originally_finished\": {\"items\": 114, \"original_accuracy\": 0.9385964912280702, \"edited_accuracy\": 0.9385964912280702, \"gain\": 0.0, \"se\": 0.021581616838757513, \"rescues\": 3, \"losses\": 3, \"by_source\": {\"gsm8k\": {\"original\": 0.8923076923076924, \"edited\": 0.8923076923076924, \"difference\": 0.0}, \"math\": {\"original\": 1.0, \"edited\": 1.0, \"difference\": 0.0}}}, \"originally_cut\": {\"items\": 1038, \"original_accuracy\": 0.014450867052023121, \"edited_accuracy\": 0.5674373795761078, \"gain\": 0.5529865125240848, \"se\": 0.015559200227025435, \"rescues\": 576, \"losses\": 2, \"by_source\": {\"gsm8k\": {\"original\": 0.01761252446183953, \"edited\": 0.684931506849315, \"difference\": 0.6673189823874756}, \"math\": {\"original\": 0.011385199240986717, \"edited\": 0.45351043643263755, \"difference\": 0.44212523719165087}}}}\nFINAL AUDIT PASSED: retain the same two tensors; reports and verified backup saved.\n\n```",
+ "flags": 1,
+ "explain": true,
+ "unexplained_streak": 0,
+ "unexplained": 8,
+ "notices": [
+  "001_pass_size.txt",
+  "002_tool_facts.txt"
+ ],
+ "req_keys": {
+  "2731c79627a29ed059b68484760c0a7f99d9903f": 50
+ }
+}

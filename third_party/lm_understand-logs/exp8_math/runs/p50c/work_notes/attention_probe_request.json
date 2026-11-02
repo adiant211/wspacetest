@@ -1,0 +1,27 @@
+{
+  "type": "teacher_forced",
+  "model": "original",
+  "texts": [
+    "<|im_start|>user\nRafael works 10 hours on Monday and 8 on Tuesday, with 20 hours left to work. He earns $20 per hour. Find his weekly pay.\nPlease reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nThe first two days total 10+8=18 hours. Adding the remaining 20 gives 38 hours. His pay is 38*20=760 dollars. Checking each part separately, Monday pays 10*20=200, Tuesday pays 8*20=160, and the remaining hours pay 20*20=400. Their sum is 200+160+400=760, consistent with the total. The hours and hourly rate have the correct units. Thus the weekly pay is 760 dollars.",
+    "<|im_start|>user\nRafael works 10 hours on Monday and 8 on Tuesday, with 20 hours left to work. He earns $20 per hour. Find his weekly pay.\nPlease reason step by step, and put your final answer within \\boxed{}.<|im_end|>\n<|im_start|>assistant\n<think>\nThe first two days total 10+8=18 hours. Adding the remaining 20 gives 38 hours. But is 20 the total? No, it is the remaining time. But is 20 the total? No, it is the remaining time. But is 20 the total? No, it is the remaining time. But is 20 the total? No, it is the remaining time. But is 20 the total? No, it is the remaining time. But is 20 the total? No, it is the remaining time. But is 20 the total? No, it is the remaining time."
+  ],
+  "return": {
+    "token_logprobs": true,
+    "topk": 20,
+    "hidden_states": [
+      15,
+      16,
+      19,
+      20,
+      24
+    ],
+    "mlp_act": [
+      15,
+      19
+    ],
+    "attn_layers": [
+      15,
+      19
+    ]
+  }
+}

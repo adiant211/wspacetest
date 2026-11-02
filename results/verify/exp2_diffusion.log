@@ -1,0 +1,4 @@
+classifier on synthetic shapes: {'circle': 0.84, 'square': 1.0, 'triangle': 0.6866666666666666}
+circle   samples→ {c:0.939 s:0.056 t:0.005} interior share 0.50 (filled shapes ≈0.4-0.6, outlines ≈0) | Astra drawing interior 0.0 | weight-only reading of W3: circle {'circle': 0.18237178123869952, 'square': -0.16756321766704163, 'triangle': -0.3181935673337156}
+square   samples→ {c:0.081 s:0.916 t:0.000} interior share 0.41 (filled shapes ≈0.4-0.6, outlines ≈0) | Astra drawing interior 0.0 | weight-only reading of W3: square {'circle': -0.1351356669766549, 'square': 0.5670684806207585, 'triangle': -0.11319460359935937}
+triangle samples→ {c:0.223 s:0.008 t:0.738} interior share 0.32 (filled shapes ≈0.4-0.6, outlines ≈0) | Astra drawing interior 0.0 | weight-only reading of W3: triangle {'circle': -0.0022524021590933662, 'square': 0.14075298438533101, 'triangle': 0.4584598498403517}

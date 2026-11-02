@@ -1,0 +1,421 @@
+{
+  "status": "All 50 forward passes complete; frozen top64 alpha6 retained",
+  "selection": "Keep frozen top64 alpha6 at layers 15 and 19; no subsequent tuning",
+  "formula": "W0 - 6 * outer(u, mask64 * (u @ W0))",
+  "direction_origin": "Four original matched productive/repetitive contexts, residual outputs 16 and 20",
+  "causal_controls": {
+    "top64_alpha6_productive_logp_delta": -0.00903,
+    "top64_alpha6_repetitive_logp_delta": -0.10311,
+    "norm_matched_random_control_accuracy_gain": 0.015625,
+    "norm_matched_random_control_paired_se": 0.0352,
+    "dose_response_and_layer_isolations": "See notes.md and experiment_history.md"
+  },
+  "confirmed_runs": [
+    50,
+    52,
+    53,
+    54,
+    55,
+    56,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69
+  ],
+  "pooled": {
+    "items": 1152,
+    "original_accuracy": 0.10590277777777778,
+    "edited_accuracy": 0.6041666666666666,
+    "gain": 0.4982638888888889,
+    "se": 0.014991383029525228,
+    "rescues": 579,
+    "losses": 5,
+    "by_source": {
+      "gsm8k": {
+        "original": 0.11631944444444445,
+        "edited": 0.7083333333333334,
+        "difference": 0.5920138888888888
+      },
+      "math": {
+        "original": 0.0954861111111111,
+        "edited": 0.5,
+        "difference": 0.4045138888888889
+      }
+    },
+    "gain_95pct_normal_interval": [
+      0.4688807781510195,
+      0.5276469996267583
+    ]
+  },
+  "source_counts": {
+    "gsm8k": {
+      "n": 576,
+      "original_correct": 67,
+      "edited_correct": 408,
+      "gain": 0.5920138888888888,
+      "paired_se": 0.021219128177913046
+    },
+    "math": {
+      "n": 576,
+      "original_correct": 55,
+      "edited_correct": 288,
+      "gain": 0.4045138888888889,
+      "paired_se": 0.020467679827936427
+    }
+  },
+  "behavior": {
+    "original": {
+      "n": 1152,
+      "correct": 122,
+      "cut": 1038,
+      "whitespace_tail_cut": 0,
+      "failure_cut": 1023,
+      "correct_thinking_closed": 107,
+      "correct_close_after_1000_chars": 107,
+      "failure_wrong_answer_finished": 6,
+      "failure_no_answer_finished": 1,
+      "median_correct_tokens": 5310.5,
+      "mean_cut_tail_duplicate8": 0.9580040916208376,
+      "mean_nonwhite_cut_tail_duplicate8": 0.9580040916208376
+    },
+    "edited": {
+      "n": 1152,
+      "correct": 696,
+      "cut": 212,
+      "whitespace_tail_cut": 51,
+      "correct_thinking_closed": 696,
+      "correct_close_after_1000_chars": 696,
+      "failure_wrong_answer_finished": 187,
+      "failure_cut": 211,
+      "failure_no_answer_finished": 58,
+      "median_correct_tokens": 9171.5,
+      "mean_cut_tail_duplicate8": 0.4022594815366762,
+      "mean_nonwhite_cut_tail_duplicate8": 0.49324499100890384
+    }
+  },
+  "transition_strata_descriptive": {
+    "originally_finished": {
+      "items": 114,
+      "original_accuracy": 0.9385964912280702,
+      "edited_accuracy": 0.9385964912280702,
+      "gain": 0.0,
+      "se": 0.021581616838757513,
+      "rescues": 3,
+      "losses": 3,
+      "by_source": {
+        "gsm8k": {
+          "original": 0.8923076923076924,
+          "edited": 0.8923076923076924,
+          "difference": 0.0
+        },
+        "math": {
+          "original": 1.0,
+          "edited": 1.0,
+          "difference": 0.0
+        }
+      }
+    },
+    "originally_cut": {
+      "items": 1038,
+      "original_accuracy": 0.014450867052023121,
+      "edited_accuracy": 0.5674373795761078,
+      "gain": 0.5529865125240848,
+      "se": 0.015559200227025435,
+      "rescues": 576,
+      "losses": 2,
+      "by_source": {
+        "gsm8k": {
+          "original": 0.01761252446183953,
+          "edited": 0.684931506849315,
+          "difference": 0.6673189823874756
+        },
+        "math": {
+          "original": 0.011385199240986717,
+          "edited": 0.45351043643263755,
+          "difference": 0.44212523719165087
+        }
+      }
+    }
+  },
+  "weights": {
+    "15": {
+      "name": "model.language_model.layers.15.mlp.down_proj.weight",
+      "sha256": "9237d35fc861bd0d02170e46300cb887f2a5b448044fbed92013fbe9060228cd",
+      "shape": [
+        1024,
+        3584
+      ],
+      "selected_neurons": [
+        0,
+        2,
+        11,
+        25,
+        34,
+        35,
+        38,
+        39,
+        46,
+        50,
+        53,
+        56,
+        61,
+        62,
+        63,
+        64,
+        67,
+        73,
+        100,
+        108,
+        129,
+        135,
+        156,
+        169,
+        209,
+        215,
+        264,
+        266,
+        294,
+        327,
+        328,
+        357,
+        371,
+        376,
+        412,
+        414,
+        442,
+        504,
+        505,
+        509,
+        516,
+        580,
+        590,
+        601,
+        638,
+        682,
+        738,
+        882,
+        926,
+        930,
+        1047,
+        1060,
+        1087,
+        1130,
+        1155,
+        1184,
+        1460,
+        1481,
+        1787,
+        1943,
+        2005,
+        2066,
+        2738,
+        3003
+      ],
+      "changed_values": 65536,
+      "relative_frobenius_change": 0.10635695606470108,
+      "directional_residual_fraction": 2.503407756648812e-07,
+      "nonscalar_fraction": 0.9996938109397888
+    },
+    "19": {
+      "name": "model.language_model.layers.19.mlp.down_proj.weight",
+      "sha256": "3091b77b6295263cedd77c8bb12bfd504cc7b18330810d77aecaf56517dfceaa",
+      "shape": [
+        1024,
+        3584
+      ],
+      "selected_neurons": [
+        1,
+        5,
+        8,
+        11,
+        13,
+        15,
+        17,
+        18,
+        34,
+        36,
+        44,
+        55,
+        63,
+        66,
+        69,
+        92,
+        93,
+        95,
+        98,
+        114,
+        119,
+        127,
+        145,
+        152,
+        161,
+        168,
+        171,
+        195,
+        246,
+        259,
+        265,
+        343,
+        364,
+        445,
+        506,
+        544,
+        621,
+        625,
+        636,
+        744,
+        766,
+        770,
+        799,
+        877,
+        965,
+        1003,
+        1346,
+        1410,
+        1505,
+        1704,
+        1799,
+        2072,
+        2135,
+        2175,
+        2248,
+        2314,
+        2376,
+        2437,
+        2514,
+        2595,
+        2664,
+        2684,
+        2816,
+        3343
+      ],
+      "changed_values": 65536,
+      "relative_frobenius_change": 0.0810583084821701,
+      "directional_residual_fraction": 1.0025278243119828e-06,
+      "nonscalar_fraction": 0.9998195171356201
+    }
+  },
+  "limitations": [
+    "Practice confirmation is not the unseen benchmark evaluation",
+    "Some wrong answers, missing boxes, whitespace degeneration and truncation remain",
+    "This repairs a reasoning failure mechanism; it does not establish new mathematical knowledge"
+  ],
+  "independent_splits": {
+    "validation_3": {
+      "items": 128,
+      "original_accuracy": 0.0703125,
+      "edited_accuracy": 0.578125,
+      "gain": 0.5078125,
+      "se": 0.0443624091458791,
+      "rescues": 65,
+      "losses": 0,
+      "by_source": {
+        "gsm8k": {
+          "original": 0.109375,
+          "edited": 0.71875,
+          "difference": 0.609375
+        },
+        "math": {
+          "original": 0.03125,
+          "edited": 0.4375,
+          "difference": 0.40625
+        }
+      }
+    },
+    "validation_4": {
+      "items": 256,
+      "original_accuracy": 0.07421875,
+      "edited_accuracy": 0.5546875,
+      "gain": 0.48046875,
+      "se": 0.0317731561550422,
+      "rescues": 124,
+      "losses": 1,
+      "by_source": {
+        "gsm8k": {
+          "original": 0.078125,
+          "edited": 0.6640625,
+          "difference": 0.5859375
+        },
+        "math": {
+          "original": 0.0703125,
+          "edited": 0.4453125,
+          "difference": 0.375
+        }
+      }
+    },
+    "final_1": {
+      "items": 256,
+      "original_accuracy": 0.1015625,
+      "edited_accuracy": 0.58984375,
+      "gain": 0.48828125,
+      "se": 0.03226651702880779,
+      "rescues": 127,
+      "losses": 2,
+      "by_source": {
+        "gsm8k": {
+          "original": 0.1328125,
+          "edited": 0.703125,
+          "difference": 0.5703125
+        },
+        "math": {
+          "original": 0.0703125,
+          "edited": 0.4765625,
+          "difference": 0.40625
+        }
+      }
+    },
+    "final_2": {
+      "items": 256,
+      "original_accuracy": 0.12109375,
+      "edited_accuracy": 0.671875,
+      "gain": 0.55078125,
+      "se": 0.03163726796219167,
+      "rescues": 142,
+      "losses": 1,
+      "by_source": {
+        "gsm8k": {
+          "original": 0.1015625,
+          "edited": 0.75,
+          "difference": 0.6484375
+        },
+        "math": {
+          "original": 0.140625,
+          "edited": 0.59375,
+          "difference": 0.453125
+        }
+      }
+    },
+    "final_3": {
+      "items": 256,
+      "original_accuracy": 0.14453125,
+      "edited_accuracy": 0.61328125,
+      "gain": 0.46875,
+      "se": 0.03173641055478645,
+      "rescues": 121,
+      "losses": 1,
+      "by_source": {
+        "gsm8k": {
+          "original": 0.15625,
+          "edited": 0.7109375,
+          "difference": 0.5546875
+        },
+        "math": {
+          "original": 0.1328125,
+          "edited": 0.515625,
+          "difference": 0.3828125
+        }
+      }
+    }
+  },
+  "earlier_generation_selection_ids_checked": 352,
+  "overlap_with_earlier_generation_selection": 0,
+  "verified_backup": "/work/final_verified_edit"
+}

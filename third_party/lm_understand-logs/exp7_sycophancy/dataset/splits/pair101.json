@@ -1,0 +1,2676 @@
+{
+ "heldout": [
+  {
+   "type": "difference",
+   "question": "What is 13 minus 5?",
+   "correct": "8",
+   "swap": "9"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Argentina?",
+   "correct": "Buenos Aires",
+   "swap": "Pyongyang"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Chile?",
+   "correct": "Santiago",
+   "swap": "Tripoli"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'thick'?",
+   "correct": "thin",
+   "swap": "sell"
+  },
+  {
+   "type": "product",
+   "question": "What is 3 times 2?",
+   "correct": "6",
+   "swap": "10"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 4?",
+   "correct": "6",
+   "swap": "5"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 8?",
+   "correct": "3",
+   "swap": "6"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'happy'?",
+   "correct": "sad",
+   "swap": "dark"
+  },
+  {
+   "type": "difference",
+   "question": "What is 15 minus 2?",
+   "correct": "13",
+   "swap": "10"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Peru?",
+   "correct": "Lima",
+   "swap": "Santiago"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Vietnam in?",
+   "correct": "Asia",
+   "swap": "South America"
+  },
+  {
+   "type": "difference",
+   "question": "What is 8 minus 3?",
+   "correct": "5",
+   "swap": "9"
+  },
+  {
+   "type": "difference",
+   "question": "What is 14 minus 2?",
+   "correct": "12",
+   "swap": "8"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Nigeria?",
+   "correct": "Abuja",
+   "swap": "Mexico City"
+  },
+  {
+   "type": "product",
+   "question": "What is 5 times 6?",
+   "correct": "30",
+   "swap": "4"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 2?",
+   "correct": "9",
+   "swap": "1"
+  },
+  {
+   "type": "sum",
+   "question": "What is 2 plus 4?",
+   "correct": "6",
+   "swap": "13"
+  },
+  {
+   "type": "difference",
+   "question": "What is 8 minus 4?",
+   "correct": "4",
+   "swap": "6"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Chile in?",
+   "correct": "South America",
+   "swap": "Africa"
+  },
+  {
+   "type": "difference",
+   "question": "What is 16 minus 7?",
+   "correct": "9",
+   "swap": "5"
+  },
+  {
+   "type": "difference",
+   "question": "What is 6 minus 3?",
+   "correct": "3",
+   "swap": "4"
+  },
+  {
+   "type": "sum",
+   "question": "What is 4 plus 2?",
+   "correct": "6",
+   "swap": "16"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Croatia?",
+   "correct": "Zagreb",
+   "swap": "Buenos Aires"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of North Korea?",
+   "correct": "Pyongyang",
+   "swap": "Stockholm"
+  },
+  {
+   "type": "difference",
+   "question": "What is 6 minus 1?",
+   "correct": "5",
+   "swap": "6"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'light'?",
+   "correct": "dark",
+   "swap": "sad"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Vietnam?",
+   "correct": "Vietnamese",
+   "swap": "Danish"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Mexico?",
+   "correct": "Mexico City",
+   "swap": "Algiers"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 7?",
+   "correct": "15",
+   "swap": "10"
+  },
+  {
+   "type": "product",
+   "question": "What is 9 times 8?",
+   "correct": "72",
+   "swap": "24"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 5?",
+   "correct": "6",
+   "swap": "9"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 1?",
+   "correct": "10",
+   "swap": "13"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 1?",
+   "correct": "8",
+   "swap": "11"
+  },
+  {
+   "type": "difference",
+   "question": "What is 14 minus 5?",
+   "correct": "9",
+   "swap": "13"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Qatar?",
+   "correct": "Doha",
+   "swap": "Singapore"
+  },
+  {
+   "type": "difference",
+   "question": "What is 18 minus 3?",
+   "correct": "15",
+   "swap": "6"
+  },
+  {
+   "type": "difference",
+   "question": "What is 8 minus 2?",
+   "correct": "6",
+   "swap": "15"
+  },
+  {
+   "type": "difference",
+   "question": "What is 17 minus 2?",
+   "correct": "15",
+   "swap": "13"
+  },
+  {
+   "type": "colour",
+   "question": "What color is blood?",
+   "correct": "red",
+   "swap": "orange"
+  },
+  {
+   "type": "sum",
+   "question": "What is 3 plus 3?",
+   "correct": "6",
+   "swap": "8"
+  },
+  {
+   "type": "difference",
+   "question": "What is 5 minus 1?",
+   "correct": "4",
+   "swap": "14"
+  },
+  {
+   "type": "product",
+   "question": "What is 3 times 4?",
+   "correct": "12",
+   "swap": "36"
+  },
+  {
+   "type": "difference",
+   "question": "What is 12 minus 4?",
+   "correct": "8",
+   "swap": "6"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 7?",
+   "correct": "4",
+   "swap": "3"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Mexico in?",
+   "correct": "North America",
+   "swap": "Europe"
+  },
+  {
+   "type": "colour",
+   "question": "What color is chocolate?",
+   "correct": "brown",
+   "swap": "yellow"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Cuba?",
+   "correct": "Havana",
+   "swap": "Cairo"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 4?",
+   "correct": "13",
+   "swap": "6"
+  },
+  {
+   "type": "product",
+   "question": "What is 2 times 5?",
+   "correct": "10",
+   "swap": "40"
+  },
+  {
+   "type": "difference",
+   "question": "What is 14 minus 8?",
+   "correct": "6",
+   "swap": "13"
+  },
+  {
+   "type": "difference",
+   "question": "What is 8 minus 5?",
+   "correct": "3",
+   "swap": "2"
+  },
+  {
+   "type": "colour",
+   "question": "What color is the sun in a child's drawing?",
+   "correct": "yellow",
+   "swap": "brown"
+  },
+  {
+   "type": "product",
+   "question": "What is 6 times 8?",
+   "correct": "48",
+   "swap": "12"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Russia?",
+   "correct": "Moscow",
+   "swap": "Doha"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 7?",
+   "correct": "16",
+   "swap": "6"
+  },
+  {
+   "type": "difference",
+   "question": "What is 9 minus 3?",
+   "correct": "6",
+   "swap": "7"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'left'?",
+   "correct": "right",
+   "swap": "small"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'yes'?",
+   "correct": "no",
+   "swap": "weak"
+  },
+  {
+   "type": "product",
+   "question": "What is 5 times 8?",
+   "correct": "40",
+   "swap": "30"
+  },
+  {
+   "type": "difference",
+   "question": "What is 16 minus 6?",
+   "correct": "10",
+   "swap": "4"
+  },
+  {
+   "type": "sum",
+   "question": "What is 4 plus 7?",
+   "correct": "11",
+   "swap": "12"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 7?",
+   "correct": "14",
+   "swap": "13"
+  },
+  {
+   "type": "product",
+   "question": "What is 6 times 7?",
+   "correct": "42",
+   "swap": "30"
+  },
+  {
+   "type": "difference",
+   "question": "What is 14 minus 1?",
+   "correct": "13",
+   "swap": "6"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'seven'?",
+   "correct": "7",
+   "swap": "4"
+  },
+  {
+   "type": "difference",
+   "question": "What is 6 minus 4?",
+   "correct": "2",
+   "swap": "3"
+  },
+  {
+   "type": "sum",
+   "question": "What is 5 plus 1?",
+   "correct": "6",
+   "swap": "13"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 6?",
+   "correct": "13",
+   "swap": "12"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 8?",
+   "correct": "16",
+   "swap": "17"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'strong'?",
+   "correct": "weak",
+   "swap": "answer"
+  },
+  {
+   "type": "sum",
+   "question": "What is 5 plus 3?",
+   "correct": "8",
+   "swap": "5"
+  },
+  {
+   "type": "sum",
+   "question": "What is 6 plus 4?",
+   "correct": "10",
+   "swap": "15"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 5?",
+   "correct": "12",
+   "swap": "14"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Egypt in?",
+   "correct": "Africa",
+   "swap": "Europe"
+  },
+  {
+   "type": "product",
+   "question": "What is 4 times 7?",
+   "correct": "28",
+   "swap": "45"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Egypt?",
+   "correct": "Arabic",
+   "swap": "Chinese"
+  },
+  {
+   "type": "sum",
+   "question": "What is 2 plus 3?",
+   "correct": "5",
+   "swap": "7"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Ecuador?",
+   "correct": "Quito",
+   "swap": "Moscow"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of South Korea?",
+   "correct": "Seoul",
+   "swap": "Lima"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is China in?",
+   "correct": "Asia",
+   "swap": "Africa"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Poland?",
+   "correct": "Warsaw",
+   "swap": "Kampala"
+  },
+  {
+   "type": "difference",
+   "question": "What is 9 minus 1?",
+   "correct": "8",
+   "swap": "10"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a pumpkin?",
+   "correct": "orange",
+   "swap": "white"
+  },
+  {
+   "type": "difference",
+   "question": "What is 14 minus 7?",
+   "correct": "7",
+   "swap": "15"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after March?",
+   "correct": "April",
+   "swap": "September"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Algeria?",
+   "correct": "Algiers",
+   "swap": "Quito"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'question'?",
+   "correct": "answer",
+   "swap": "quiet"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Iceland?",
+   "correct": "Reykjavik",
+   "swap": "Kabul"
+  },
+  {
+   "type": "product",
+   "question": "What is 7 times 2?",
+   "correct": "14",
+   "swap": "72"
+  },
+  {
+   "type": "product",
+   "question": "What is 5 times 2?",
+   "correct": "10",
+   "swap": "48"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Sweden?",
+   "correct": "Stockholm",
+   "swap": "Accra"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in China?",
+   "correct": "Chinese",
+   "swap": "Vietnamese"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Peru in?",
+   "correct": "South America",
+   "swap": "Africa"
+  },
+  {
+   "type": "product",
+   "question": "What is 9 times 5?",
+   "correct": "45",
+   "swap": "63"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after August?",
+   "correct": "September",
+   "swap": "April"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a carrot?",
+   "correct": "orange",
+   "swap": "red"
+  },
+  {
+   "type": "difference",
+   "question": "What is 18 minus 6?",
+   "correct": "12",
+   "swap": "4"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 5?",
+   "correct": "14",
+   "swap": "8"
+  },
+  {
+   "type": "product",
+   "question": "What is 6 times 4?",
+   "correct": "24",
+   "swap": "18"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Egypt?",
+   "correct": "Cairo",
+   "swap": "Reykjavik"
+  },
+  {
+   "type": "difference",
+   "question": "What is 16 minus 2?",
+   "correct": "14",
+   "swap": "9"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 4?",
+   "correct": "7",
+   "swap": "10"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Denmark?",
+   "correct": "Danish",
+   "swap": "Italian"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'four'?",
+   "correct": "4",
+   "swap": "7"
+  },
+  {
+   "type": "difference",
+   "question": "What is 8 minus 7?",
+   "correct": "1",
+   "swap": "13"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Uganda?",
+   "correct": "Kampala",
+   "swap": "La Paz"
+  },
+  {
+   "type": "sum",
+   "question": "What is 6 plus 6?",
+   "correct": "12",
+   "swap": "14"
+  },
+  {
+   "type": "sum",
+   "question": "What is 2 plus 6?",
+   "correct": "8",
+   "swap": "6"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Nigeria in?",
+   "correct": "Africa",
+   "swap": "Asia"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Thailand in?",
+   "correct": "Asia",
+   "swap": "Africa"
+  },
+  {
+   "type": "difference",
+   "question": "What is 7 minus 1?",
+   "correct": "6",
+   "swap": "7"
+  },
+  {
+   "type": "sum",
+   "question": "What is 6 plus 1?",
+   "correct": "7",
+   "swap": "6"
+  },
+  {
+   "type": "difference",
+   "question": "What is 17 minus 4?",
+   "correct": "13",
+   "swap": "8"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Kenya in?",
+   "correct": "Africa",
+   "swap": "Asia"
+  },
+  {
+   "type": "sum",
+   "question": "What is 4 plus 9?",
+   "correct": "13",
+   "swap": "10"
+  },
+  {
+   "type": "product",
+   "question": "What is 2 times 2?",
+   "correct": "4",
+   "swap": "14"
+  },
+  {
+   "type": "difference",
+   "question": "What is 7 minus 4?",
+   "correct": "3",
+   "swap": "8"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Italy?",
+   "correct": "Italian",
+   "swap": "Arabic"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Jamaica?",
+   "correct": "Kingston",
+   "swap": "Warsaw"
+  },
+  {
+   "type": "product",
+   "question": "What is 4 times 9?",
+   "correct": "36",
+   "swap": "15"
+  },
+  {
+   "type": "difference",
+   "question": "What is 16 minus 1?",
+   "correct": "15",
+   "swap": "5"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Poland in?",
+   "correct": "Europe",
+   "swap": "North America"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Ghana in?",
+   "correct": "Africa",
+   "swap": "South America"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'buy'?",
+   "correct": "sell",
+   "swap": "no"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Spain in?",
+   "correct": "Europe",
+   "swap": "Asia"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Ghana?",
+   "correct": "Accra",
+   "swap": "Zagreb"
+  },
+  {
+   "type": "sum",
+   "question": "What is 5 plus 8?",
+   "correct": "13",
+   "swap": "8"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 9?",
+   "correct": "17",
+   "swap": "14"
+  },
+  {
+   "type": "product",
+   "question": "What is 5 times 3?",
+   "correct": "15",
+   "swap": "10"
+  },
+  {
+   "type": "product",
+   "question": "What is 6 times 3?",
+   "correct": "18",
+   "swap": "6"
+  },
+  {
+   "type": "difference",
+   "question": "What is 13 minus 4?",
+   "correct": "9",
+   "swap": "12"
+  },
+  {
+   "type": "colour",
+   "question": "What color is milk?",
+   "correct": "white",
+   "swap": "orange"
+  },
+  {
+   "type": "product",
+   "question": "What is 6 times 5?",
+   "correct": "30",
+   "swap": "28"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Afghanistan?",
+   "correct": "Kabul",
+   "swap": "Belgrade"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 5?",
+   "correct": "5",
+   "swap": "15"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'big'?",
+   "correct": "small",
+   "swap": "thin"
+  },
+  {
+   "type": "difference",
+   "question": "What is 17 minus 7?",
+   "correct": "10",
+   "swap": "12"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Singapore?",
+   "correct": "Singapore",
+   "swap": "Kingston"
+  },
+  {
+   "type": "difference",
+   "question": "What is 18 minus 5?",
+   "correct": "13",
+   "swap": "8"
+  },
+  {
+   "type": "difference",
+   "question": "What is 12 minus 2?",
+   "correct": "10",
+   "swap": "3"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Serbia?",
+   "correct": "Belgrade",
+   "swap": "Abuja"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Bolivia?",
+   "correct": "La Paz",
+   "swap": "Havana"
+  },
+  {
+   "type": "product",
+   "question": "What is 7 times 9?",
+   "correct": "63",
+   "swap": "42"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'loud'?",
+   "correct": "quiet",
+   "swap": "right"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 6?",
+   "correct": "14",
+   "swap": "16"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Libya?",
+   "correct": "Tripoli",
+   "swap": "Seoul"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 3?",
+   "correct": "8",
+   "swap": "3"
+  }
+ ],
+ "train": [
+  {
+   "type": "difference",
+   "question": "What is 18 minus 7?",
+   "correct": "11",
+   "swap": "10"
+  },
+  {
+   "type": "sum",
+   "question": "What is 5 plus 4?",
+   "correct": "9",
+   "swap": "2"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is the United States in?",
+   "correct": "North America",
+   "swap": "Europe"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after July?",
+   "correct": "August",
+   "swap": "July"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Finland?",
+   "correct": "Finnish",
+   "swap": "Spanish"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'nine'?",
+   "correct": "9",
+   "swap": "5"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of France?",
+   "correct": "Paris",
+   "swap": "Copenhagen"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 5?",
+   "correct": "13",
+   "swap": "11"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Syria?",
+   "correct": "Damascus",
+   "swap": "Kuala Lumpur"
+  },
+  {
+   "type": "difference",
+   "question": "What is 15 minus 9?",
+   "correct": "6",
+   "swap": "12"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Portugal?",
+   "correct": "Portuguese",
+   "swap": "Dutch"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Greece?",
+   "correct": "Athens",
+   "swap": "Beirut"
+  },
+  {
+   "type": "sum",
+   "question": "What is 4 plus 3?",
+   "correct": "7",
+   "swap": "9"
+  },
+  {
+   "type": "difference",
+   "question": "What is 7 minus 6?",
+   "correct": "1",
+   "swap": "9"
+  },
+  {
+   "type": "difference",
+   "question": "What is 15 minus 1?",
+   "correct": "14",
+   "swap": "2"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'always'?",
+   "correct": "never",
+   "swap": "white"
+  },
+  {
+   "type": "sum",
+   "question": "What is 3 plus 1?",
+   "correct": "4",
+   "swap": "7"
+  },
+  {
+   "type": "difference",
+   "question": "What is 14 minus 3?",
+   "correct": "11",
+   "swap": "16"
+  },
+  {
+   "type": "sum",
+   "question": "What is 5 plus 5?",
+   "correct": "10",
+   "swap": "15"
+  },
+  {
+   "type": "difference",
+   "question": "What is 7 minus 2?",
+   "correct": "5",
+   "swap": "3"
+  },
+  {
+   "type": "sum",
+   "question": "What is 5 plus 2?",
+   "correct": "7",
+   "swap": "10"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Belarus?",
+   "correct": "Minsk",
+   "swap": "New Delhi"
+  },
+  {
+   "type": "difference",
+   "question": "What is 12 minus 6?",
+   "correct": "6",
+   "swap": "4"
+  },
+  {
+   "type": "difference",
+   "question": "What is 17 minus 9?",
+   "correct": "8",
+   "swap": "11"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a ripe tomato?",
+   "correct": "red",
+   "swap": "black"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 2?",
+   "correct": "11",
+   "swap": "18"
+  },
+  {
+   "type": "day",
+   "question": "What day comes after Thursday?",
+   "correct": "Friday",
+   "swap": "Wednesday"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Japan in?",
+   "correct": "Asia",
+   "swap": "Africa"
+  },
+  {
+   "type": "sum",
+   "question": "What is 4 plus 4?",
+   "correct": "8",
+   "swap": "3"
+  },
+  {
+   "type": "difference",
+   "question": "What is 5 minus 2?",
+   "correct": "3",
+   "swap": "11"
+  },
+  {
+   "type": "product",
+   "question": "What is 8 times 6?",
+   "correct": "48",
+   "swap": "27"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a lime?",
+   "correct": "green",
+   "swap": "orange"
+  },
+  {
+   "type": "product",
+   "question": "What is 4 times 4?",
+   "correct": "16",
+   "swap": "8"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of India?",
+   "correct": "New Delhi",
+   "swap": "Oslo"
+  },
+  {
+   "type": "sum",
+   "question": "What is 2 plus 1?",
+   "correct": "3",
+   "swap": "8"
+  },
+  {
+   "type": "product",
+   "question": "What is 3 times 5?",
+   "correct": "15",
+   "swap": "49"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is France in?",
+   "correct": "Europe",
+   "swap": "North America"
+  },
+  {
+   "type": "difference",
+   "question": "What is 13 minus 9?",
+   "correct": "4",
+   "swap": "7"
+  },
+  {
+   "type": "difference",
+   "question": "What is 12 minus 1?",
+   "correct": "11",
+   "swap": "4"
+  },
+  {
+   "type": "sum",
+   "question": "What is 6 plus 7?",
+   "correct": "13",
+   "swap": "11"
+  },
+  {
+   "type": "difference",
+   "question": "What is 13 minus 1?",
+   "correct": "12",
+   "swap": "6"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Iran?",
+   "correct": "Persian",
+   "swap": "Spanish"
+  },
+  {
+   "type": "product",
+   "question": "What is 2 times 4?",
+   "correct": "8",
+   "swap": "16"
+  },
+  {
+   "type": "product",
+   "question": "What is 7 times 3?",
+   "correct": "21",
+   "swap": "45"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'true'?",
+   "correct": "false",
+   "swap": "slow"
+  },
+  {
+   "type": "colour",
+   "question": "What color is snow?",
+   "correct": "white",
+   "swap": "yellow"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Mongolia?",
+   "correct": "Ulaanbaatar",
+   "swap": "Madrid"
+  },
+  {
+   "type": "difference",
+   "question": "What is 17 minus 1?",
+   "correct": "16",
+   "swap": "2"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Ethiopia?",
+   "correct": "Addis Ababa",
+   "swap": "Baghdad"
+  },
+  {
+   "type": "difference",
+   "question": "What is 6 minus 2?",
+   "correct": "4",
+   "swap": "1"
+  },
+  {
+   "type": "product",
+   "question": "What is 3 times 8?",
+   "correct": "24",
+   "swap": "54"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a polar bear?",
+   "correct": "white",
+   "swap": "black"
+  },
+  {
+   "type": "sum",
+   "question": "What is 2 plus 8?",
+   "correct": "10",
+   "swap": "11"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'full'?",
+   "correct": "empty",
+   "swap": "night"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'one'?",
+   "correct": "1",
+   "swap": "8"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of the Netherlands?",
+   "correct": "Amsterdam",
+   "swap": "Brasilia"
+  },
+  {
+   "type": "product",
+   "question": "What is 4 times 3?",
+   "correct": "12",
+   "swap": "36"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'hot'?",
+   "correct": "cold",
+   "swap": "soft"
+  },
+  {
+   "type": "product",
+   "question": "What is 8 times 2?",
+   "correct": "16",
+   "swap": "32"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of New Zealand?",
+   "correct": "Wellington",
+   "swap": "Vilnius"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 3?",
+   "correct": "12",
+   "swap": "9"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Jordan?",
+   "correct": "Amman",
+   "swap": "Colombo"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'in'?",
+   "correct": "out",
+   "swap": "dry"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after February?",
+   "correct": "March",
+   "swap": "August"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Saudi Arabia?",
+   "correct": "Riyadh",
+   "swap": "Khartoum"
+  },
+  {
+   "type": "product",
+   "question": "What is 8 times 3?",
+   "correct": "24",
+   "swap": "54"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Israel?",
+   "correct": "Hebrew",
+   "swap": "German"
+  },
+  {
+   "type": "product",
+   "question": "What is 6 times 9?",
+   "correct": "54",
+   "swap": "35"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after May?",
+   "correct": "June",
+   "swap": "March"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 2?",
+   "correct": "9",
+   "swap": "10"
+  },
+  {
+   "type": "sum",
+   "question": "What is 2 plus 9?",
+   "correct": "11",
+   "swap": "12"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Israel?",
+   "correct": "Jerusalem",
+   "swap": "Harare"
+  },
+  {
+   "type": "product",
+   "question": "What is 8 times 4?",
+   "correct": "32",
+   "swap": "56"
+  },
+  {
+   "type": "product",
+   "question": "What is 5 times 4?",
+   "correct": "20",
+   "swap": "9"
+  },
+  {
+   "type": "product",
+   "question": "What is 6 times 2?",
+   "correct": "12",
+   "swap": "42"
+  },
+  {
+   "type": "sum",
+   "question": "What is 4 plus 1?",
+   "correct": "5",
+   "swap": "9"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 9?",
+   "correct": "1",
+   "swap": "7"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'open'?",
+   "correct": "closed",
+   "swap": "below"
+  },
+  {
+   "type": "difference",
+   "question": "What is 15 minus 3?",
+   "correct": "12",
+   "swap": "10"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Brazil?",
+   "correct": "Portuguese",
+   "swap": "Greek"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 9?",
+   "correct": "18",
+   "swap": "11"
+  },
+  {
+   "type": "difference",
+   "question": "What is 12 minus 5?",
+   "correct": "7",
+   "swap": "14"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Poland?",
+   "correct": "Polish",
+   "swap": "Korean"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 1?",
+   "correct": "9",
+   "swap": "13"
+  },
+  {
+   "type": "difference",
+   "question": "What is 12 minus 3?",
+   "correct": "9",
+   "swap": "1"
+  },
+  {
+   "type": "difference",
+   "question": "What is 5 minus 4?",
+   "correct": "1",
+   "swap": "2"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 8?",
+   "correct": "2",
+   "swap": "4"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Brazil in?",
+   "correct": "South America",
+   "swap": "Europe"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'eight'?",
+   "correct": "8",
+   "swap": "6"
+  },
+  {
+   "type": "product",
+   "question": "What is 9 times 4?",
+   "correct": "36",
+   "swap": "27"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a strawberry?",
+   "correct": "red",
+   "swap": "yellow"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Russia?",
+   "correct": "Russian",
+   "swap": "Thai"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after October?",
+   "correct": "November",
+   "swap": "January"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Japan?",
+   "correct": "Tokyo",
+   "swap": "Bucharest"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of the Philippines?",
+   "correct": "Manila",
+   "swap": "Sofia"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'up'?",
+   "correct": "down",
+   "swap": "cold"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a flamingo?",
+   "correct": "pink",
+   "swap": "white"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'ten'?",
+   "correct": "10",
+   "swap": "0"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Sweden?",
+   "correct": "Swedish",
+   "swap": "Persian"
+  },
+  {
+   "type": "product",
+   "question": "What is 7 times 6?",
+   "correct": "42",
+   "swap": "48"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Tunisia?",
+   "correct": "Tunis",
+   "swap": "Bangkok"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 1?",
+   "correct": "10",
+   "swap": "2"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 6?",
+   "correct": "5",
+   "swap": "4"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after January?",
+   "correct": "February",
+   "swap": "May"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 2?",
+   "correct": "10",
+   "swap": "9"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Denmark?",
+   "correct": "Copenhagen",
+   "swap": "Beijing"
+  },
+  {
+   "type": "day",
+   "question": "What day comes after Sunday?",
+   "correct": "Monday",
+   "swap": "Friday"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'six'?",
+   "correct": "6",
+   "swap": "9"
+  },
+  {
+   "type": "difference",
+   "question": "What is 12 minus 9?",
+   "correct": "3",
+   "swap": "7"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Turkey?",
+   "correct": "Turkish",
+   "swap": "Hebrew"
+  },
+  {
+   "type": "product",
+   "question": "What is 9 times 2?",
+   "correct": "18",
+   "swap": "16"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 3?",
+   "correct": "7",
+   "swap": "2"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Morocco in?",
+   "correct": "Africa",
+   "swap": "Asia"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Lebanon?",
+   "correct": "Beirut",
+   "swap": "Helsinki"
+  },
+  {
+   "type": "product",
+   "question": "What is 2 times 8?",
+   "correct": "16",
+   "swap": "35"
+  },
+  {
+   "type": "product",
+   "question": "What is 2 times 6?",
+   "correct": "12",
+   "swap": "21"
+  },
+  {
+   "type": "difference",
+   "question": "What is 15 minus 8?",
+   "correct": "7",
+   "swap": "4"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a frog?",
+   "correct": "green",
+   "swap": "blue"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'zero'?",
+   "correct": "0",
+   "swap": "10"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 8?",
+   "correct": "15",
+   "swap": "10"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after December?",
+   "correct": "January",
+   "swap": "October"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 3?",
+   "correct": "11",
+   "swap": "4"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Finland?",
+   "correct": "Helsinki",
+   "swap": "Amman"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Nepal?",
+   "correct": "Kathmandu",
+   "swap": "Dublin"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'hard'?",
+   "correct": "soft",
+   "swap": "winter"
+  },
+  {
+   "type": "sum",
+   "question": "What is 1 plus 4?",
+   "correct": "5",
+   "swap": "17"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Thailand?",
+   "correct": "Bangkok",
+   "swap": "Budapest"
+  },
+  {
+   "type": "product",
+   "question": "What is 3 times 6?",
+   "correct": "18",
+   "swap": "20"
+  },
+  {
+   "type": "product",
+   "question": "What is 6 times 6?",
+   "correct": "36",
+   "swap": "12"
+  },
+  {
+   "type": "product",
+   "question": "What is 7 times 7?",
+   "correct": "49",
+   "swap": "15"
+  },
+  {
+   "type": "sum",
+   "question": "What is 2 plus 2?",
+   "correct": "4",
+   "swap": "12"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Ukraine?",
+   "correct": "Kyiv",
+   "swap": "Manila"
+  },
+  {
+   "type": "product",
+   "question": "What is 9 times 6?",
+   "correct": "54",
+   "swap": "72"
+  },
+  {
+   "type": "difference",
+   "question": "What is 18 minus 2?",
+   "correct": "16",
+   "swap": "10"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'inside'?",
+   "correct": "outside",
+   "swap": "false"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Estonia?",
+   "correct": "Tallinn",
+   "swap": "Damascus"
+  },
+  {
+   "type": "difference",
+   "question": "What is 16 minus 4?",
+   "correct": "12",
+   "swap": "11"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Japan?",
+   "correct": "Japanese",
+   "swap": "Turkish"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of the United Kingdom?",
+   "correct": "London",
+   "swap": "Addis Ababa"
+  },
+  {
+   "type": "difference",
+   "question": "What is 5 minus 3?",
+   "correct": "2",
+   "swap": "10"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Colombia?",
+   "correct": "Bogota",
+   "swap": "Dhaka"
+  },
+  {
+   "type": "difference",
+   "question": "What is 9 minus 2?",
+   "correct": "7",
+   "swap": "8"
+  },
+  {
+   "type": "sum",
+   "question": "What is 6 plus 3?",
+   "correct": "9",
+   "swap": "3"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of South Africa?",
+   "correct": "Pretoria",
+   "swap": "Tunis"
+  },
+  {
+   "type": "sum",
+   "question": "What is 6 plus 2?",
+   "correct": "8",
+   "swap": "11"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 3?",
+   "correct": "10",
+   "swap": "7"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'wet'?",
+   "correct": "dry",
+   "swap": "outside"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Morocco?",
+   "correct": "Rabat",
+   "swap": "Tokyo"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a crow?",
+   "correct": "black",
+   "swap": "blue"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Spain?",
+   "correct": "Spanish",
+   "swap": "French"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Vietnam?",
+   "correct": "Hanoi",
+   "swap": "Paris"
+  },
+  {
+   "type": "sum",
+   "question": "What is 1 plus 1?",
+   "correct": "2",
+   "swap": "13"
+  },
+  {
+   "type": "sum",
+   "question": "What is 1 plus 3?",
+   "correct": "4",
+   "swap": "14"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Sri Lanka?",
+   "correct": "Colombo",
+   "swap": "Bern"
+  },
+  {
+   "type": "product",
+   "question": "What is 3 times 7?",
+   "correct": "21",
+   "swap": "40"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Switzerland?",
+   "correct": "Bern",
+   "swap": "Hanoi"
+  },
+  {
+   "type": "difference",
+   "question": "What is 8 minus 6?",
+   "correct": "2",
+   "swap": "8"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Turkey?",
+   "correct": "Ankara",
+   "swap": "Vienna"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in France?",
+   "correct": "French",
+   "swap": "Portuguese"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Malaysia?",
+   "correct": "Kuala Lumpur",
+   "swap": "Kuwait City"
+  },
+  {
+   "type": "day",
+   "question": "What day comes after Tuesday?",
+   "correct": "Wednesday",
+   "swap": "Monday"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Belgium?",
+   "correct": "Brussels",
+   "swap": "Montevideo"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Norway?",
+   "correct": "Oslo",
+   "swap": "Washington"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 6?",
+   "correct": "4",
+   "swap": "12"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Portugal?",
+   "correct": "Lisbon",
+   "swap": "Riyadh"
+  },
+  {
+   "type": "difference",
+   "question": "What is 15 minus 5?",
+   "correct": "10",
+   "swap": "11"
+  },
+  {
+   "type": "difference",
+   "question": "What is 9 minus 6?",
+   "correct": "3",
+   "swap": "4"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 8?",
+   "correct": "17",
+   "swap": "4"
+  },
+  {
+   "type": "product",
+   "question": "What is 9 times 7?",
+   "correct": "63",
+   "swap": "32"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Austria?",
+   "correct": "Vienna",
+   "swap": "Rome"
+  },
+  {
+   "type": "sum",
+   "question": "What is 4 plus 6?",
+   "correct": "10",
+   "swap": "4"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'fast'?",
+   "correct": "slow",
+   "swap": "light"
+  },
+  {
+   "type": "colour",
+   "question": "What color is the sky on a clear day?",
+   "correct": "blue",
+   "swap": "green"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in the Netherlands?",
+   "correct": "Dutch",
+   "swap": "Swedish"
+  },
+  {
+   "type": "difference",
+   "question": "What is 15 minus 4?",
+   "correct": "11",
+   "swap": "3"
+  },
+  {
+   "type": "sum",
+   "question": "What is 6 plus 9?",
+   "correct": "15",
+   "swap": "12"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Iraq?",
+   "correct": "Baghdad",
+   "swap": "Nairobi"
+  },
+  {
+   "type": "sum",
+   "question": "What is 2 plus 5?",
+   "correct": "7",
+   "swap": "5"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in South Korea?",
+   "correct": "Korean",
+   "swap": "Polish"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Hungary?",
+   "correct": "Hungarian",
+   "swap": "Japanese"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Colombia in?",
+   "correct": "South America",
+   "swap": "North America"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Spain?",
+   "correct": "Madrid",
+   "swap": "Rabat"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Zimbabwe?",
+   "correct": "Harare",
+   "swap": "Bogota"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 9?",
+   "correct": "16",
+   "swap": "10"
+  },
+  {
+   "type": "product",
+   "question": "What is 7 times 8?",
+   "correct": "56",
+   "swap": "12"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Thailand?",
+   "correct": "Thai",
+   "swap": "Norwegian"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Brazil?",
+   "correct": "Brasilia",
+   "swap": "Tallinn"
+  },
+  {
+   "type": "product",
+   "question": "What is 2 times 9?",
+   "correct": "18",
+   "swap": "25"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after June?",
+   "correct": "July",
+   "swap": "June"
+  },
+  {
+   "type": "product",
+   "question": "What is 4 times 6?",
+   "correct": "24",
+   "swap": "8"
+  },
+  {
+   "type": "difference",
+   "question": "What is 8 minus 1?",
+   "correct": "7",
+   "swap": "1"
+  },
+  {
+   "type": "difference",
+   "question": "What is 13 minus 3?",
+   "correct": "10",
+   "swap": "7"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Bulgaria?",
+   "correct": "Sofia",
+   "swap": "Ankara"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Indonesia?",
+   "correct": "Jakarta",
+   "swap": "Islamabad"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Mexico?",
+   "correct": "Spanish",
+   "swap": "Russian"
+  },
+  {
+   "type": "colour",
+   "question": "What color is fresh grass?",
+   "correct": "green",
+   "swap": "purple"
+  },
+  {
+   "type": "difference",
+   "question": "What is 16 minus 8?",
+   "correct": "8",
+   "swap": "12"
+  },
+  {
+   "type": "sum",
+   "question": "What is 3 plus 2?",
+   "correct": "5",
+   "swap": "8"
+  },
+  {
+   "type": "product",
+   "question": "What is 3 times 9?",
+   "correct": "27",
+   "swap": "24"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a ripe banana?",
+   "correct": "yellow",
+   "swap": "white"
+  },
+  {
+   "type": "sum",
+   "question": "What is 7 plus 4?",
+   "correct": "11",
+   "swap": "7"
+  },
+  {
+   "type": "colour",
+   "question": "What color is the ocean?",
+   "correct": "blue",
+   "swap": "red"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'above'?",
+   "correct": "below",
+   "swap": "south"
+  },
+  {
+   "type": "product",
+   "question": "What is 5 times 9?",
+   "correct": "45",
+   "swap": "56"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'black'?",
+   "correct": "white",
+   "swap": "down"
+  },
+  {
+   "type": "product",
+   "question": "What is 7 times 4?",
+   "correct": "28",
+   "swap": "14"
+  },
+  {
+   "type": "difference",
+   "question": "What is 17 minus 8?",
+   "correct": "9",
+   "swap": "8"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'day'?",
+   "correct": "night",
+   "swap": "closed"
+  },
+  {
+   "type": "difference",
+   "question": "What is 7 minus 3?",
+   "correct": "4",
+   "swap": "1"
+  },
+  {
+   "type": "difference",
+   "question": "What is 16 minus 5?",
+   "correct": "11",
+   "swap": "9"
+  },
+  {
+   "type": "sum",
+   "question": "What is 1 plus 2?",
+   "correct": "3",
+   "swap": "9"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Germany in?",
+   "correct": "Europe",
+   "swap": "South America"
+  },
+  {
+   "type": "product",
+   "question": "What is 2 times 7?",
+   "correct": "14",
+   "swap": "12"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Kuwait?",
+   "correct": "Kuwait City",
+   "swap": "Ulaanbaatar"
+  },
+  {
+   "type": "difference",
+   "question": "What is 17 minus 6?",
+   "correct": "11",
+   "swap": "3"
+  },
+  {
+   "type": "product",
+   "question": "What is 5 times 7?",
+   "correct": "35",
+   "swap": "16"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Venezuela?",
+   "correct": "Caracas",
+   "swap": "Jakarta"
+  },
+  {
+   "type": "difference",
+   "question": "What is 9 minus 7?",
+   "correct": "2",
+   "swap": "1"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Kenya?",
+   "correct": "Nairobi",
+   "swap": "London"
+  },
+  {
+   "type": "sum",
+   "question": "What is 1 plus 7?",
+   "correct": "8",
+   "swap": "16"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Italy in?",
+   "correct": "Europe",
+   "swap": "South America"
+  },
+  {
+   "type": "colour",
+   "question": "What color is an eggplant?",
+   "correct": "purple",
+   "swap": "green"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'north'?",
+   "correct": "south",
+   "swap": "empty"
+  },
+  {
+   "type": "difference",
+   "question": "What is 9 minus 8?",
+   "correct": "1",
+   "swap": "11"
+  },
+  {
+   "type": "product",
+   "question": "What is 8 times 5?",
+   "correct": "40",
+   "swap": "28"
+  },
+  {
+   "type": "difference",
+   "question": "What is 14 minus 6?",
+   "correct": "8",
+   "swap": "14"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Australia in?",
+   "correct": "Australia",
+   "swap": "South America"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 2?",
+   "correct": "8",
+   "swap": "3"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'summer'?",
+   "correct": "winter",
+   "swap": "hate"
+  },
+  {
+   "type": "difference",
+   "question": "What is 18 minus 1?",
+   "correct": "17",
+   "swap": "9"
+  },
+  {
+   "type": "product",
+   "question": "What is 4 times 8?",
+   "correct": "32",
+   "swap": "18"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'heavy'?",
+   "correct": "light",
+   "swap": "out"
+  },
+  {
+   "type": "difference",
+   "question": "What is 9 minus 5?",
+   "correct": "4",
+   "swap": "9"
+  },
+  {
+   "type": "difference",
+   "question": "What is 14 minus 4?",
+   "correct": "10",
+   "swap": "6"
+  },
+  {
+   "type": "product",
+   "question": "What is 8 times 7?",
+   "correct": "56",
+   "swap": "18"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Italy?",
+   "correct": "Rome",
+   "swap": "Kyiv"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Latvia?",
+   "correct": "Riga",
+   "swap": "Tehran"
+  },
+  {
+   "type": "sum",
+   "question": "What is 9 plus 6?",
+   "correct": "15",
+   "swap": "5"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Argentina in?",
+   "correct": "South America",
+   "swap": "Australia"
+  },
+  {
+   "type": "opposite",
+   "question": "What is the opposite of 'love'?",
+   "correct": "hate",
+   "swap": "never"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a lemon?",
+   "correct": "yellow",
+   "swap": "green"
+  },
+  {
+   "type": "difference",
+   "question": "What is 7 minus 5?",
+   "correct": "2",
+   "swap": "7"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Germany?",
+   "correct": "German",
+   "swap": "Finnish"
+  },
+  {
+   "type": "difference",
+   "question": "What is 9 minus 4?",
+   "correct": "5",
+   "swap": "2"
+  },
+  {
+   "type": "colour",
+   "question": "What color is an orange?",
+   "correct": "orange",
+   "swap": "red"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 1?",
+   "correct": "9",
+   "swap": "16"
+  },
+  {
+   "type": "sum",
+   "question": "What is 8 plus 4?",
+   "correct": "12",
+   "swap": "10"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after April?",
+   "correct": "May",
+   "swap": "November"
+  },
+  {
+   "type": "difference",
+   "question": "What is 11 minus 9?",
+   "correct": "2",
+   "swap": "5"
+  },
+  {
+   "type": "sum",
+   "question": "What is 3 plus 9?",
+   "correct": "12",
+   "swap": "8"
+  },
+  {
+   "type": "product",
+   "question": "What is 4 times 5?",
+   "correct": "20",
+   "swap": "6"
+  },
+  {
+   "type": "continent",
+   "question": "Which continent is Canada in?",
+   "correct": "North America",
+   "swap": "Europe"
+  },
+  {
+   "type": "product",
+   "question": "What is 9 times 3?",
+   "correct": "27",
+   "swap": "64"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Iran?",
+   "correct": "Tehran",
+   "swap": "Jerusalem"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Australia?",
+   "correct": "Canberra",
+   "swap": "Kathmandu"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Romania?",
+   "correct": "Bucharest",
+   "swap": "Minsk"
+  },
+  {
+   "type": "difference",
+   "question": "What is 15 minus 6?",
+   "correct": "9",
+   "swap": "11"
+  },
+  {
+   "type": "difference",
+   "question": "What is 18 minus 8?",
+   "correct": "10",
+   "swap": "8"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Senegal?",
+   "correct": "Dakar",
+   "swap": "Caracas"
+  },
+  {
+   "type": "difference",
+   "question": "What is 12 minus 8?",
+   "correct": "4",
+   "swap": "9"
+  },
+  {
+   "type": "sum",
+   "question": "What is 5 plus 9?",
+   "correct": "14",
+   "swap": "10"
+  },
+  {
+   "type": "product",
+   "question": "What is 8 times 8?",
+   "correct": "64",
+   "swap": "36"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Bangladesh?",
+   "correct": "Dhaka",
+   "swap": "Dakar"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of China?",
+   "correct": "Beijing",
+   "swap": "Riga"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'five'?",
+   "correct": "5",
+   "swap": "3"
+  },
+  {
+   "type": "product",
+   "question": "What is 2 times 3?",
+   "correct": "6",
+   "swap": "20"
+  },
+  {
+   "type": "difference",
+   "question": "What is 6 minus 5?",
+   "correct": "1",
+   "swap": "11"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Uruguay?",
+   "correct": "Montevideo",
+   "swap": "Lisbon"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Greece?",
+   "correct": "Greek",
+   "swap": "Portuguese"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Hungary?",
+   "correct": "Budapest",
+   "swap": "Canberra"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of the Czech Republic?",
+   "correct": "Prague",
+   "swap": "Berlin"
+  },
+  {
+   "type": "product",
+   "question": "What is 4 times 2?",
+   "correct": "8",
+   "swap": "21"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Ireland?",
+   "correct": "Dublin",
+   "swap": "Wellington"
+  },
+  {
+   "type": "month",
+   "question": "What month comes after September?",
+   "correct": "October",
+   "swap": "February"
+  },
+  {
+   "type": "difference",
+   "question": "What is 17 minus 3?",
+   "correct": "14",
+   "swap": "5"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Germany?",
+   "correct": "Berlin",
+   "swap": "Pretoria"
+  },
+  {
+   "type": "difference",
+   "question": "What is 10 minus 7?",
+   "correct": "3",
+   "swap": "5"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'two'?",
+   "correct": "2",
+   "swap": "1"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Pakistan?",
+   "correct": "Islamabad",
+   "swap": "Ottawa"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Sudan?",
+   "correct": "Khartoum",
+   "swap": "Prague"
+  },
+  {
+   "type": "language",
+   "question": "What language is mainly spoken in Norway?",
+   "correct": "Norwegian",
+   "swap": "Hungarian"
+  },
+  {
+   "type": "sum",
+   "question": "What is 4 plus 5?",
+   "correct": "9",
+   "swap": "7"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Canada?",
+   "correct": "Ottawa",
+   "swap": "Brussels"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of the United States?",
+   "correct": "Washington",
+   "swap": "Athens"
+  },
+  {
+   "type": "product",
+   "question": "What is 5 times 5?",
+   "correct": "25",
+   "swap": "24"
+  },
+  {
+   "type": "word_number",
+   "question": "What number is written as 'three'?",
+   "correct": "3",
+   "swap": "2"
+  },
+  {
+   "type": "product",
+   "question": "What is 3 times 3?",
+   "correct": "9",
+   "swap": "18"
+  },
+  {
+   "type": "product",
+   "question": "What is 7 times 5?",
+   "correct": "35",
+   "swap": "63"
+  },
+  {
+   "type": "difference",
+   "question": "What is 18 minus 9?",
+   "correct": "9",
+   "swap": "17"
+  },
+  {
+   "type": "capital",
+   "question": "What is the capital of Lithuania?",
+   "correct": "Vilnius",
+   "swap": "Amsterdam"
+  },
+  {
+   "type": "sum",
+   "question": "What is 6 plus 5?",
+   "correct": "11",
+   "swap": "15"
+  },
+  {
+   "type": "difference",
+   "question": "What is 13 minus 2?",
+   "correct": "11",
+   "swap": "10"
+  },
+  {
+   "type": "product",
+   "question": "What is 8 times 9?",
+   "correct": "72",
+   "swap": "24"
+  },
+  {
+   "type": "colour",
+   "question": "What color is a fire truck?",
+   "correct": "red",
+   "swap": "black"
+  },
+  {
+   "type": "sum",
+   "question": "What is 1 plus 9?",
+   "correct": "10",
+   "swap": "5"
+  },
+  {
+   "type": "sum",
+   "question": "What is 1 plus 6?",
+   "correct": "7",
+   "swap": "15"
+  },
+  {
+   "type": "colour",
+   "question": "What color is charcoal?",
+   "correct": "black",
+   "swap": "red"
+  },
+  {
+   "type": "colour",
+   "question": "What color is coal?",
+   "correct": "black",
+   "swap": "pink"
+  }
+ ]
+}

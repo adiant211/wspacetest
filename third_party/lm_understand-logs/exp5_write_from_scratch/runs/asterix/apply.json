@@ -1,0 +1,46 @@
+{
+ "edit_report": {
+  "block": true,
+  "statements": 55,
+  "applied": 55,
+  "entries_written": 1065,
+  "errors": [],
+  "cut_off": false,
+  "tensors_touched": [
+   "W1",
+   "W2",
+   "W3",
+   "b1",
+   "b2",
+   "b3"
+  ]
+ },
+ "nonzero": {
+  "W1": 468,
+  "b1": 32,
+  "W2": 53,
+  "b2": 32,
+  "W3": 46,
+  "b3": 6
+ },
+ "nonzero_total": 637,
+ "parameters": 20486,
+ "max_abs": {
+  "W1": 24.0,
+  "b1": 8.0,
+  "W2": 24.0,
+  "b2": 21.6,
+  "W3": 80.0,
+  "b3": 1000.0
+ },
+ "tool_free": true,
+ "tool_items": {},
+ "usage": {
+  "input_tokens": 6199,
+  "cached_input_tokens": 0,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 28993,
+  "reasoning_output_tokens": 25694
+ },
+ "wall_s": 582.6
+}

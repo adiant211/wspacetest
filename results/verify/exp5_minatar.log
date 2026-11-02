@@ -1,0 +1,3 @@
+breakout  rebuilt-from-text maxdiff=0.00e+00 nonzero=815 | ours 502.9 ± 7.7 (len 7188) vs reported 517.4 ± 7.4  z=-1.35  [83.3s]
+seaquest  rebuilt-from-text maxdiff=0.00e+00 nonzero=803 | ours 51.9 ± 1.4 (len 1381) vs reported 53.1 ± 1.4  z=-0.62  [35.3s]
+asterix   rebuilt-from-text maxdiff=0.00e+00 nonzero=637 | ours 54.7 ± 1.1 (len 874) vs reported 53.2 ± 1.0  z=+1.06  [24.8s]

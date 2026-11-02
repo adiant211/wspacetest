@@ -1,0 +1,19 @@
+{
+ "games": 2000,
+ "score": 0.9850000143051147,
+ "wins": 1970,
+ "losses": 30,
+ "score_as_black": 0.9789999723434448,
+ "score_as_white": 0.9909999966621399,
+ "mean_margin": 61.85049819946289,
+ "mean_length": 113.434,
+ "stones_captured_per_game": 67.6375,
+ "stones_lost_per_game": 2.484,
+ "passes_per_game": 2.088,
+ "games_with_a_pass_before_move_60": 0,
+ "end_two_passes": 1928,
+ "end_repetition": 69,
+ "end_move_limit": 3,
+ "written": "v1_b50",
+ "ppo": "s2_iter16000"
+}

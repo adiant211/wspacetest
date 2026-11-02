@@ -1,0 +1,23 @@
+{
+ "budget": 25,
+ "mode": "qwen35think",
+ "prompt": "v3",
+ "turn": 86,
+ "runs": 45,
+ "passes": 25,
+ "requests": 34,
+ "thread": "id-b2b7bdc0",
+ "done": true,
+ "nudges": 0,
+ "handoffs": 2,
+ "since_handoff": 18,
+ "flag_streak": 0,
+ "next": "OUTPUT of Python run 45 of at most 300:\n```\nPRIMARY CONFIRMATION: {\n  \"all\": {\n    \"n\": 768,\n    \"original_correct\": 87,\n    \"edited_correct\": 151,\n    \"gain_pp\": 8.333333333333332,\n    \"SE_pp\": 1.4312495591593888,\n    \"CI95_pp\": [\n      5.52808419738093,\n      11.138582469285733\n    ],\n    \"wrong_to_right\": 95,\n    \"right_to_wrong\": 31,\n    \"mcnemar_exact_p\": 9.610247655460737e-09,\n    \"original_cut\": 685,\n    \"edited_cut\": 618,\n    \"mean_tokens_original\": 29790.389322916668,\n    \"mean_tokens_edited\": 28095.095052083332\n  },\n  \"gsm8k\": {\n    \"n\": 384,\n    \"original_correct\": 58,\n    \"edited_correct\": 110,\n    \"gain_pp\": 13.541666666666666,\n    \"SE_pp\": 2.3170424321608794,\n    \"CI95_pp\": [\n      9.000263499631343,\n      18.08306983370199\n    ],\n    \"wrong_to_right\": 69,\n    \"right_to_wrong\": 17,\n    \"mcnemar_exact_p\": 1.349545236514584e-08,\n    \"original_cut\": 327,\n    \"edited_cut\": 276,\n    \"mean_tokens_original\": 28573.010416666668,\n    \"mean_tokens_edited\": 25812.494791666668\n  },\n  \"math\": {\n    \"n\": 384,\n    \"original_correct\": 29,\n    \"edited_correct\": 41,\n    \"gain_pp\": 3.125,\n    \"SE_pp\": 1.6414196886932786,\n      -0.09218258983882599,\n      6.342182589838826\n    ],\n    \"wrong_to_right\": 26,\n    \"right_to_wrong\": 14,\n    \"mcnemar_exact_p\": 0.0806904677519924,\n    \"original_cut\": 358,\n    \"edited_cut\": 342,\n    \"mean_tokens_original\": 31007.768229166668,\n    \"mean_tokens_edited\": 30377.6953125\n  }\n}\nCorrectness transitions: {'rescues': 95, 'rescues_from_original_cutoff': 94, 'regressions': 31, 'regressions_to_edited_cutoff': 31}\nRESCUE gsm8k_train_2270\noriginal {'correct': False, 'cut': True, 'tokens': 32768} tail: centage of the girls who like playing basketball are girls?\", the answer is 100%.\n        *   If the question meant \"What percentage of the girls who like playing basketball are boys?\", the answer is 50%.\n        *   If the question meant \"\nedited {'correct': True, 'cut': False, 'tokens': 13206} tail: girls who like basketball}}{\\text{Total number of girls}} \\times 100\\%$\nPercentage = $\\frac{12}{15} \\times 100\\% = 0.8 \\times 100\\% = 80\\%$.\n\n**Answer:**\nThe percentage of girls in the class who like playing basketball is 80%.\n\n\\boxed{80\\%}\nREGRESSION gsm8k_train_244\noriginal {'correct': True, 'cut': False, 'tokens': 6603} tail: stance:\n$$ \\text{Distance} = \\text{Speed} \\times \\text{Time} $$\nSubstitute the known values:\n$$ d = 50 \\text{ km/h} \\times 2 \\text{ hours} $$\n$$ d = 100 \\text{ km} $$\n\nTherefore, the fox would make a distance of 100 kilometers.\n\n\\boxed{100}\nedited {'correct': False, 'cut': True, 'tokens': 32768} tail: \n    I'll write the reasoning.\n    I'll write the reasoning.\nFINAL WEIGHT AUDIT: {'tensor': 'model.language_model.layers.15.self_attn.o_proj.weight', 'shape': [1024, 2048], 'zero_based_layer': 15, 'zero_based_head': 7, 'zeroed_columns_half_open': [1792, 2048], 'changed_values': 262144, 'sha256_float32': '11361132ffef285011a6b18578148c6af790508af90b5953393796ac26aaf89a', 'all_other_tensor_edits_absent': True}\nSubmitted directory remains /work/edited; only the frozen L15H7 ablation is active.\n\n[harness: 7 repeated lines not shown (a line is shown at most 2 times per output)]\n```",
+ "explain": true,
+ "unexplained_streak": 0,
+ "unexplained": 7,
+ "notices": [
+  "001_pass_size.txt",
+  "002_tool_facts.txt"
+ ]
+}

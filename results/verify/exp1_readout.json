@@ -1,0 +1,72 @@
+{
+ "0bbcc3ea": {
+  "true_game": "freeway",
+  "actor_params": 17253,
+  "astra_guess": "freeway",
+  "astra_correct": true,
+  "tool_reading": "pacman (agent can be anywhere, uses all four moves)",
+  "tool_correct": false,
+  "hot_cells": 21,
+  "action_usage": {
+   "no-op": 5.2190307641124845,
+   "up": 6.967847145289204,
+   "down": 5.159231129571288,
+   "left": 6.301870293452679,
+   "right": 7.019845566758428
+  },
+  "agent_map_ascii": "                \n    ==++++==--..\n    ==##--..::..\n  ..==####++..  \n  ..==##%%**....\n..==@@%%%%##++..\n..--####++++....\n..::****##--..  "
+ },
+ "a9f535cc": {
+  "true_game": "breakout",
+  "actor_params": 17253,
+  "astra_guess": "breakout",
+  "astra_correct": true,
+  "tool_reading": "breakout (paddle confined to one row, moves left/right)",
+  "tool_correct": true,
+  "hot_cells": 8,
+  "action_usage": {
+   "no-op": 6.2054875315788145,
+   "up": 6.381433428197604,
+   "down": 6.438578485632191,
+   "left": 10.916974481980319,
+   "right": 8.744893148423731
+  },
+  "agent_map_ascii": "                \n                \n                \n                \n                \n                \n                \n##==----::--++@@"
+ },
+ "bdf99279": {
+  "true_game": "pacman",
+  "actor_params": 17253,
+  "astra_guess": "pacman",
+  "astra_correct": true,
+  "tool_reading": "pacman (agent can be anywhere, uses all four moves)",
+  "tool_correct": true,
+  "hot_cells": 0,
+  "action_usage": {
+   "no-op": 4.648106519610821,
+   "up": 7.140327559436034,
+   "down": 7.949052752605864,
+   "left": 6.133266715019275,
+   "right": 6.676081708962476
+  },
+  "agent_map_ascii": "++++**++**--==--\n==    **%%    --\n**  ++##%%++  ++\n##@@++    ##**++\n******    **##**\n==  ******##  **\n==    ++++    ==\n**==**++##====++"
+ },
+ "dfc6cb65": {
+  "true_game": "pong",
+  "actor_params": 17253,
+  "astra_guess": "pong",
+  "astra_correct": true,
+  "tool_reading": "pong (paddle confined to an edge column, moves up/down)",
+  "tool_correct": true,
+  "hot_cells": 8,
+  "action_usage": {
+   "no-op": 3.461589789031285,
+   "up": 5.06795015941597,
+   "down": 5.410202799811715,
+   "left": 3.4047704424419902,
+   "right": 3.400473486942608
+  },
+  "agent_map_ascii": "%%              \n@@              \n++              \n--              \n==              \n**              \n**              \n++              "
+ },
+ "tool_accuracy": 0.75,
+ "astra_accuracy": 1.0
+}

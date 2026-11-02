@@ -1,0 +1,131 @@
+{
+ "id": "dfc6cb65",
+ "game": "pong",
+ "seed": 0,
+ "actor_dims": [
+  500,
+  32,
+  32,
+  5
+ ],
+ "critic_dims": [
+  500,
+  32,
+  32,
+  1
+ ],
+ "actor_shapes": {
+  "dense1/bias": [
+   32
+  ],
+  "dense1/kernel": [
+   500,
+   32
+  ],
+  "dense2/bias": [
+   32
+  ],
+  "dense2/kernel": [
+   32,
+   32
+  ],
+  "logits/bias": [
+   5
+  ],
+  "logits/kernel": [
+   32,
+   5
+  ]
+ },
+ "actor_parameters": 17253,
+ "critic_parameters": 17121,
+ "training_config": {
+  "LR": 0.0005,
+  "ANNEAL_LR": true,
+  "NUM_ENVS": 64,
+  "NUM_STEPS": 128,
+  "UPDATE_EPOCHS": 4,
+  "NUM_MINIBATCHES": 8,
+  "GAMMA": 0.99,
+  "GAE_LAMBDA": 0.95,
+  "CLIP_EPS": 0.2,
+  "ENT_COEF": 0.01,
+  "VF_COEF": 0.5,
+  "MAX_GRAD_NORM": 0.5,
+  "TOTAL_TIMESTEPS": 1000000000,
+  "HIDDEN": 32,
+  "ACTIVATION": "tanh",
+  "INIT": "orthogonal: hidden gain sqrt(2), actor output 0.01, critic output 1.0; biases 0",
+  "MAX_STEPS_IN_EPISODE": 200
+ },
+ "env_steps": 999997440,
+ "final_performance": {
+  "sample": {
+   "mode": "sample",
+   "episodes": 3473,
+   "mean_return": 4.96055269241333,
+   "se_return": 0.004710151066466379,
+   "mean_length": 73.71148862654765,
+   "reward_per_step": 0.06925781071186066,
+   "channel_usage": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "action_usage": [
+    0.1949,
+    0.2203,
+    0.2288,
+    0.1839,
+    0.1721
+   ]
+  },
+  "greedy": {
+   "mode": "greedy",
+   "episodes": 3474,
+   "mean_return": 4.977259635925293,
+   "se_return": 0.0035860883293054166,
+   "mean_length": 73.69027058146229,
+   "reward_per_step": 0.06958593428134918,
+   "channel_usage": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "action_usage": [
+    0.3241,
+    0.2535,
+    0.2674,
+    0.1329,
+    0.0221
+   ]
+  },
+  "random": {
+   "mode": "random",
+   "episodes": 6489,
+   "mean_return": -1.0200339555740356,
+   "se_return": 0.027402189924675878,
+   "mean_length": 39.4513792572045,
+   "reward_per_step": -0.026277344673871994,
+   "channel_usage": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "action_usage": [
+    0.2,
+    0.2006,
+    0.1995,
+    0.1998,
+    0.2001
+   ]
+  }
+ },
+ "final_train_return": 4.965891361236572
+}

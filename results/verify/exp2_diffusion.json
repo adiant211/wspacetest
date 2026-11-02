@@ -1,0 +1,118 @@
+{
+ "classifier_accuracy_on_synthetic_filled_shapes": {
+  "circle": 0.84,
+  "square": 1.0,
+  "triangle": 0.6866666666666666
+ },
+ "circle": {
+  "model_id": "d88aba69",
+  "sample_classes": {
+   "circle": 0.939,
+   "square": 0.056,
+   "triangle": 0.005,
+   "empty": 0.0
+  },
+  "mean_interior_share": 0.5026582601850068,
+  "reported_classes": {
+   "circle": 0.994,
+   "square": 0.003,
+   "triangle": 0.003
+  },
+  "astra_drawing_interior_share": 0.0,
+  "W3_edge_orientation_hist": [
+   0.0838,
+   0.0827,
+   0.0862,
+   0.0854,
+   0.0832,
+   0.0815,
+   0.0808,
+   0.0872,
+   0.0849,
+   0.0846,
+   0.0811,
+   0.0786
+  ],
+  "W3_axis_aligned_share": 0.3246403080766148,
+  "weight_only_reading": "circle",
+  "weight_only_template_corr": {
+   "circle": 0.18237178123869952,
+   "square": -0.16756321766704163,
+   "triangle": -0.3181935673337156
+  }
+ },
+ "square": {
+  "model_id": "a6a9dfb7",
+  "sample_classes": {
+   "circle": 0.081,
+   "square": 0.916,
+   "triangle": 0.0,
+   "empty": 0.003
+  },
+  "mean_interior_share": 0.41127679955062135,
+  "reported_classes": {
+   "circle": 0.008,
+   "square": 0.984,
+   "triangle": 0.008
+  },
+  "astra_drawing_interior_share": 0.0,
+  "W3_edge_orientation_hist": [
+   0.1116,
+   0.0721,
+   0.0646,
+   0.0669,
+   0.0787,
+   0.1066,
+   0.1078,
+   0.0765,
+   0.0629,
+   0.0658,
+   0.0723,
+   0.1142
+  ],
+  "W3_axis_aligned_share": 0.4402571482940519,
+  "weight_only_reading": "square",
+  "weight_only_template_corr": {
+   "circle": -0.1351356669766549,
+   "square": 0.5670684806207585,
+   "triangle": -0.11319460359935937
+  }
+ },
+ "triangle": {
+  "model_id": "246a5b58",
+  "sample_classes": {
+   "circle": 0.223,
+   "square": 0.008,
+   "triangle": 0.738,
+   "empty": 0.031
+  },
+  "mean_interior_share": 0.32421143517417705,
+  "reported_classes": {
+   "circle": 0.0,
+   "square": 0.0,
+   "triangle": 1.0
+  },
+  "astra_drawing_interior_share": 0.0,
+  "W3_edge_orientation_hist": [
+   0.0842,
+   0.0914,
+   0.0851,
+   0.0733,
+   0.0703,
+   0.0914,
+   0.0884,
+   0.0722,
+   0.0687,
+   0.0925,
+   0.0926,
+   0.0899
+  ],
+  "W3_axis_aligned_share": 0.3539189891450185,
+  "weight_only_reading": "triangle",
+  "weight_only_template_corr": {
+   "circle": -0.0022524021590933662,
+   "square": 0.14075298438533101,
+   "triangle": 0.4584598498403517
+  }
+ }
+}

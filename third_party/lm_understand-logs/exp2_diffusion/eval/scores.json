@@ -1,0 +1,56 @@
+[
+ {
+  "id": "246a5b58",
+  "true": "triangle",
+  "mode": "open",
+  "guess": "triangle",
+  "correct": true,
+  "answer_line": "my best reading is **a single white, hollow, upward-pointing triangle on black**, approximately centered, with a near-horizontal base low in the image. typical ",
+  "confidence": 88,
+  "tool_free": true,
+  "usage": {
+   "input_tokens": 99773,
+   "cached_input_tokens": 0,
+   "cache_write_input_tokens": 0,
+   "output_tokens": 1541,
+   "reasoning_output_tokens": 1034
+  },
+  "wall_s": 71.3
+ },
+ {
+  "id": "a6a9dfb7",
+  "true": "square",
+  "mode": "open",
+  "guess": "square",
+  "correct": true,
+  "answer_line": "my best reading is **white, approximately one-pixel-thick rectangular outlines on black**, generally one rectangle per image. they vary in position and aspect r",
+  "confidence": 77,
+  "tool_free": true,
+  "usage": {
+   "input_tokens": 99789,
+   "cached_input_tokens": 0,
+   "cache_write_input_tokens": 0,
+   "output_tokens": 3149,
+   "reasoning_output_tokens": 2588
+  },
+  "wall_s": 124.0
+ },
+ {
+  "id": "d88aba69",
+  "true": "circle",
+  "mode": "open",
+  "guess": "circle",
+  "correct": true,
+  "answer_line": "my best reading is **a single white circle outline on black, with a black interior**, roughly 8\u201310 pixels across, approximately centered, with modest variation ",
+  "confidence": 84,
+  "tool_free": true,
+  "usage": {
+   "input_tokens": 99791,
+   "cached_input_tokens": 0,
+   "cache_write_input_tokens": 0,
+   "output_tokens": 2778,
+   "reasoning_output_tokens": 2272
+  },
+  "wall_s": 112.6
+ }
+]

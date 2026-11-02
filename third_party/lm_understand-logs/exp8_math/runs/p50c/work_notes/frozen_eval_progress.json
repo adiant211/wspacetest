@@ -1,0 +1,445 @@
+{
+  "confirmed_runs": [
+    50,
+    52,
+    53,
+    54,
+    55,
+    56,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69
+  ],
+  "completed": [
+    {
+      "label": "validation_4_batch1",
+      "run": 53,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.046875,
+        "edited_accuracy": 0.546875,
+        "gain": 0.5,
+        "se": 0.06299407883487121,
+        "rescues": 32,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.03125,
+            "edited": 0.59375,
+            "difference": 0.5625
+          },
+          "math": {
+            "original": 0.0625,
+            "edited": 0.5,
+            "difference": 0.4375
+          }
+        }
+      }
+    },
+    {
+      "label": "validation_4_batch2",
+      "run": 54,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.078125,
+        "edited_accuracy": 0.546875,
+        "gain": 0.46875,
+        "se": 0.06669921080659218,
+        "rescues": 31,
+        "losses": 1,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.09375,
+            "edited": 0.71875,
+            "difference": 0.625
+          },
+          "math": {
+            "original": 0.0625,
+            "edited": 0.375,
+            "difference": 0.3125
+          }
+        }
+      }
+    },
+    {
+      "label": "validation_4_batch3",
+      "run": 55,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.046875,
+        "edited_accuracy": 0.5625,
+        "gain": 0.515625,
+        "se": 0.06296331249416676,
+        "rescues": 33,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.03125,
+            "edited": 0.6875,
+            "difference": 0.65625
+          },
+          "math": {
+            "original": 0.0625,
+            "edited": 0.4375,
+            "difference": 0.375
+          }
+        }
+      }
+    },
+    {
+      "label": "validation_4_batch4",
+      "run": 56,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.125,
+        "edited_accuracy": 0.5625,
+        "gain": 0.4375,
+        "se": 0.0625,
+        "rescues": 28,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.15625,
+            "edited": 0.65625,
+            "difference": 0.5
+          },
+          "math": {
+            "original": 0.09375,
+            "edited": 0.46875,
+            "difference": 0.375
+          }
+        }
+      }
+    },
+    {
+      "label": "final_1_batch1",
+      "run": 58,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.125,
+        "edited_accuracy": 0.53125,
+        "gain": 0.40625,
+        "se": 0.06576303510114391,
+        "rescues": 27,
+        "losses": 1,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.15625,
+            "edited": 0.65625,
+            "difference": 0.5
+          },
+          "math": {
+            "original": 0.09375,
+            "edited": 0.40625,
+            "difference": 0.3125
+          }
+        }
+      }
+    },
+    {
+      "label": "final_1_batch2",
+      "run": 59,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.078125,
+        "edited_accuracy": 0.625,
+        "gain": 0.546875,
+        "se": 0.06271663843120986,
+        "rescues": 35,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.125,
+            "edited": 0.875,
+            "difference": 0.75
+          },
+          "math": {
+            "original": 0.03125,
+            "edited": 0.375,
+            "difference": 0.34375
+          }
+        }
+      }
+    },
+    {
+      "label": "final_1_batch3",
+      "run": 60,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.109375,
+        "edited_accuracy": 0.625,
+        "gain": 0.515625,
+        "se": 0.06678630448130696,
+        "rescues": 34,
+        "losses": 1,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.15625,
+            "edited": 0.71875,
+            "difference": 0.5625
+          },
+          "math": {
+            "original": 0.0625,
+            "edited": 0.53125,
+            "difference": 0.46875
+          }
+        }
+      }
+    },
+    {
+      "label": "final_1_batch4",
+      "run": 61,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.09375,
+        "edited_accuracy": 0.578125,
+        "gain": 0.484375,
+        "se": 0.06296331249416676,
+        "rescues": 31,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.09375,
+            "edited": 0.5625,
+            "difference": 0.46875
+          },
+          "math": {
+            "original": 0.09375,
+            "edited": 0.59375,
+            "difference": 0.5
+          }
+        }
+      }
+    },
+    {
+      "label": "final_2_batch1",
+      "run": 62,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.03125,
+        "edited_accuracy": 0.59375,
+        "gain": 0.5625,
+        "se": 0.0625,
+        "rescues": 36,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.03125,
+            "edited": 0.6875,
+            "difference": 0.65625
+          },
+          "math": {
+            "original": 0.03125,
+            "edited": 0.5,
+            "difference": 0.46875
+          }
+        }
+      }
+    },
+    {
+      "label": "final_2_batch2",
+      "run": 63,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.1875,
+        "edited_accuracy": 0.734375,
+        "gain": 0.546875,
+        "se": 0.06271663843120986,
+        "rescues": 35,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.0625,
+            "edited": 0.8125,
+            "difference": 0.75
+          },
+          "math": {
+            "original": 0.3125,
+            "edited": 0.65625,
+            "difference": 0.34375
+          }
+        }
+      }
+    },
+    {
+      "label": "final_2_batch3",
+      "run": 64,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.15625,
+        "edited_accuracy": 0.671875,
+        "gain": 0.515625,
+        "se": 0.06678630448130696,
+        "rescues": 34,
+        "losses": 1,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.15625,
+            "edited": 0.6875,
+            "difference": 0.53125
+          },
+          "math": {
+            "original": 0.15625,
+            "edited": 0.65625,
+            "difference": 0.5
+          }
+        }
+      }
+    },
+    {
+      "label": "final_2_batch4",
+      "run": 65,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.109375,
+        "edited_accuracy": 0.6875,
+        "gain": 0.578125,
+        "se": 0.06222035653913551,
+        "rescues": 37,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.15625,
+            "edited": 0.8125,
+            "difference": 0.65625
+          },
+          "math": {
+            "original": 0.0625,
+            "edited": 0.5625,
+            "difference": 0.5
+          }
+        }
+      }
+    },
+    {
+      "label": "final_3_batch1",
+      "run": 66,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.140625,
+        "edited_accuracy": 0.625,
+        "gain": 0.484375,
+        "se": 0.06296331249416676,
+        "rescues": 31,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.0625,
+            "edited": 0.75,
+            "difference": 0.6875
+          },
+          "math": {
+            "original": 0.21875,
+            "edited": 0.5,
+            "difference": 0.28125
+          }
+        }
+      }
+    },
+    {
+      "label": "final_3_batch2",
+      "run": 67,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.078125,
+        "edited_accuracy": 0.609375,
+        "gain": 0.53125,
+        "se": 0.06669921080659218,
+        "rescues": 35,
+        "losses": 1,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.125,
+            "edited": 0.625,
+            "difference": 0.5
+          },
+          "math": {
+            "original": 0.03125,
+            "edited": 0.59375,
+            "difference": 0.5625
+          }
+        }
+      }
+    },
+    {
+      "label": "final_3_batch3",
+      "run": 68,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.125,
+        "edited_accuracy": 0.59375,
+        "gain": 0.46875,
+        "se": 0.06287092313773097,
+        "rescues": 30,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.1875,
+            "edited": 0.625,
+            "difference": 0.4375
+          },
+          "math": {
+            "original": 0.0625,
+            "edited": 0.5625,
+            "difference": 0.5
+          }
+        }
+      }
+    },
+    {
+      "label": "final_3_batch4",
+      "run": 69,
+      "summary": {
+        "items": 64,
+        "original_accuracy": 0.234375,
+        "edited_accuracy": 0.625,
+        "gain": 0.390625,
+        "se": 0.06146842128667525,
+        "rescues": 25,
+        "losses": 0,
+        "by_source": {
+          "gsm8k": {
+            "original": 0.25,
+            "edited": 0.84375,
+            "difference": 0.59375
+          },
+          "math": {
+            "original": 0.21875,
+            "edited": 0.40625,
+            "difference": 0.1875
+          }
+        }
+      }
+    }
+  ],
+  "pooled": {
+    "items": 1152,
+    "original_accuracy": 0.10590277777777778,
+    "edited_accuracy": 0.6041666666666666,
+    "gain": 0.4982638888888889,
+    "se": 0.014991383029525228,
+    "rescues": 579,
+    "losses": 5,
+    "by_source": {
+      "gsm8k": {
+        "original": 0.11631944444444445,
+        "edited": 0.7083333333333334,
+        "difference": 0.5920138888888888
+      },
+      "math": {
+        "original": 0.0954861111111111,
+        "edited": 0.5,
+        "difference": 0.4045138888888889
+      }
+    }
+  }
+}

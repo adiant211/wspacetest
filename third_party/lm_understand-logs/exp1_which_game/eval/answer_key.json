@@ -1,0 +1,18 @@
+{
+ "0bbcc3ea": {
+  "game": "freeway",
+  "seed": 2
+ },
+ "a9f535cc": {
+  "game": "breakout",
+  "seed": 0
+ },
+ "bdf99279": {
+  "game": "pacman",
+  "seed": 2
+ },
+ "dfc6cb65": {
+  "game": "pong",
+  "seed": 0
+ }
+}

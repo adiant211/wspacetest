@@ -1,0 +1,39 @@
+# Default = "no tools": every built-in capability that gives the model a tool is switched off; experiments that need
+# tools add their own MCP server explicitly.
+model = "gpt-6-luna"
+model_reasoning_effort = "medium"
+approval_policy = "never"
+sandbox_mode = "read-only"
+web_search = "disabled"
+model_instructions_file = "<codex_home>/instructions_neutral.md"
+
+[agents]
+enabled = false
+
+[features]
+code_mode = false
+collaboration_modes = false
+shell_tool = false
+unified_exec = false
+unified_exec_tty = false
+shell_snapshot = false
+view_image = false
+image_generation = false
+multi_agent = false
+apps = false
+plugins = false
+remote_plugin = false
+browser_use = false
+browser_use_external = false
+browser_use_full_cdp_access = false
+in_app_browser = false
+computer_use = false
+code_mode_host = false
+skill_search = false
+skill_mcp_dependency_install = false
+sleep_tool = false
+tool_suggest = false
+goals = false
+hooks = false
+worktrees = false
+workspace_dependencies = false

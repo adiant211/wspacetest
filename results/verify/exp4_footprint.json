@@ -1,0 +1,24 @@
+{
+ "statements": 51,
+ "rebuilt_vs_released_max_abs_diff": 0.0,
+ "changed_entries": 6073,
+ "entries": 171664,
+ "share_changed": 0.035377248578618695,
+ "per_tensor_changed": {
+  "embed.W": 1887,
+  "embed.b": 1,
+  "actor_head.W": 6,
+  "actor_head.b": 3,
+  "actor0.W": 1132,
+  "actor0.b": 6,
+  "actor1.W": 1255,
+  "actor1.b": 4,
+  "actor2.W": 760,
+  "actor2.b": 2,
+  "actor3.W": 507,
+  "actor3.b": 2,
+  "actor4.W": 506,
+  "actor4.b": 2
+ },
+ "reported": 6073
+}

@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.safetensors
+*.bin
+*.pt
+results/**/ckpt/
+results/**/cache/
+third_party/lm_understand-logs-full

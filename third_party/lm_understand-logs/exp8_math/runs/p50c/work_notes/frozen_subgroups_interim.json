@@ -1,0 +1,126 @@
+{
+  "math_level": [
+    {
+      "level": "Level 1",
+      "n": 16,
+      "original": 0.3125,
+      "edited": 0.9375,
+      "gain": 0.625,
+      "se": 0.125,
+      "rescues": 10,
+      "losses": 0
+    },
+    {
+      "level": "Level 2",
+      "n": 34,
+      "original": 0.0294,
+      "edited": 0.5882,
+      "gain": 0.5588,
+      "se": 0.0864,
+      "rescues": 19,
+      "losses": 0
+    },
+    {
+      "level": "Level 3",
+      "n": 40,
+      "original": 0.075,
+      "edited": 0.575,
+      "gain": 0.5,
+      "se": 0.0801,
+      "rescues": 20,
+      "losses": 0
+    },
+    {
+      "level": "Level 4",
+      "n": 43,
+      "original": 0.0465,
+      "edited": 0.4186,
+      "gain": 0.3721,
+      "se": 0.0746,
+      "rescues": 16,
+      "losses": 0
+    },
+    {
+      "level": "Level 5",
+      "n": 59,
+      "original": 0.0,
+      "edited": 0.1525,
+      "gain": 0.1525,
+      "se": 0.0472,
+      "rescues": 9,
+      "losses": 0
+    }
+  ],
+  "math_subject": [
+    {
+      "subject": "algebra",
+      "n": 47,
+      "original": 0.1702,
+      "edited": 0.7234,
+      "gain": 0.5532,
+      "se": 0.0733,
+      "rescues": 26,
+      "losses": 0
+    },
+    {
+      "subject": "counting_and_probability",
+      "n": 21,
+      "original": 0.0476,
+      "edited": 0.2857,
+      "gain": 0.2381,
+      "se": 0.0952,
+      "rescues": 5,
+      "losses": 0
+    },
+    {
+      "subject": "geometry",
+      "n": 25,
+      "original": 0.0,
+      "edited": 0.2,
+      "gain": 0.2,
+      "se": 0.0816,
+      "rescues": 5,
+      "losses": 0
+    },
+    {
+      "subject": "intermediate_algebra",
+      "n": 29,
+      "original": 0.0,
+      "edited": 0.2069,
+      "gain": 0.2069,
+      "se": 0.0766,
+      "rescues": 6,
+      "losses": 0
+    },
+    {
+      "subject": "number_theory",
+      "n": 24,
+      "original": 0.0417,
+      "edited": 0.375,
+      "gain": 0.3333,
+      "se": 0.0983,
+      "rescues": 8,
+      "losses": 0
+    },
+    {
+      "subject": "prealgebra",
+      "n": 27,
+      "original": 0.037,
+      "edited": 0.7778,
+      "gain": 0.7407,
+      "se": 0.0859,
+      "rescues": 20,
+      "losses": 0
+    },
+    {
+      "subject": "precalculus",
+      "n": 19,
+      "original": 0.0,
+      "edited": 0.2105,
+      "gain": 0.2105,
+      "se": 0.0961,
+      "rescues": 4,
+      "losses": 0
+    }
+  ]
+}

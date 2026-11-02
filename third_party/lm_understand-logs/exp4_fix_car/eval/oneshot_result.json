@@ -1,0 +1,181 @@
+{
+ "edit_report": {
+  "block": true,
+  "statements": 51,
+  "applied": 51,
+  "entries_written": 6318,
+  "errors": [],
+  "cut_off": false,
+  "tensors_touched": [
+   "actor0.W",
+   "actor0.b",
+   "actor1.W",
+   "actor1.b",
+   "actor2.W",
+   "actor2.b",
+   "actor3.W",
+   "actor3.b",
+   "actor4.W",
+   "actor4.b",
+   "actor_head.W",
+   "actor_head.b",
+   "embed.W",
+   "embed.b"
+  ]
+ },
+ "changes": {
+  "changed": 6073,
+  "entries": 171664,
+  "frac_changed": 0.035377248578618695,
+  "rel_change": 25.65607918058439,
+  "tensors_changed": [
+   "embed.W",
+   "embed.b",
+   "actor0.W",
+   "actor0.b",
+   "actor1.W",
+   "actor1.b",
+   "actor2.W",
+   "actor2.b",
+   "actor3.W",
+   "actor3.b",
+   "actor4.W",
+   "actor4.b",
+   "actor_head.W",
+   "actor_head.b"
+  ],
+  "tensors_zeroed": [],
+  "per_tensor": {
+   "embed.W": {
+    "changed": 1887,
+    "entries": 86912,
+    "rel_change": 0.16200860977335174,
+    "zeroed": false
+   },
+   "embed.b": {
+    "changed": 1,
+    "entries": 128,
+    "rel_change": 101.5117428392728,
+    "zeroed": false
+   },
+   "actor0.W": {
+    "changed": 1132,
+    "entries": 16384,
+    "rel_change": 10.879224243702128,
+    "zeroed": false
+   },
+   "actor0.b": {
+    "changed": 6,
+    "entries": 128,
+    "rel_change": 3736.8532792383917,
+    "zeroed": false
+   },
+   "actor1.W": {
+    "changed": 1255,
+    "entries": 16384,
+    "rel_change": 1.370738718336763,
+    "zeroed": false
+   },
+   "actor1.b": {
+    "changed": 4,
+    "entries": 128,
+    "rel_change": 46.42700107079842,
+    "zeroed": false
+   },
+   "actor2.W": {
+    "changed": 760,
+    "entries": 16384,
+    "rel_change": 1.4467194488857749,
+    "zeroed": false
+   },
+   "actor2.b": {
+    "changed": 2,
+    "entries": 128,
+    "rel_change": 41.543667760172006,
+    "zeroed": false
+   },
+   "actor3.W": {
+    "changed": 507,
+    "entries": 16384,
+    "rel_change": 0.6689189939069234,
+    "zeroed": false
+   },
+   "actor3.b": {
+    "changed": 2,
+    "entries": 128,
+    "rel_change": 0.12764094713600543,
+    "zeroed": false
+   },
+   "actor4.W": {
+    "changed": 506,
+    "entries": 16384,
+    "rel_change": 0.656937036251986,
+    "zeroed": false
+   },
+   "actor4.b": {
+    "changed": 2,
+    "entries": 128,
+    "rel_change": 0.09608493410920485,
+    "zeroed": false
+   },
+   "actor_head.W": {
+    "changed": 6,
+    "entries": 2048,
+    "rel_change": 54.62161209013973,
+    "zeroed": false
+   },
+   "actor_head.b": {
+    "changed": 3,
+    "entries": 16,
+    "rel_change": 937.8549683480177,
+    "zeroed": false
+   }
+  }
+ },
+ "search": {
+  "success": 1.0,
+  "red": 0.0,
+  "timeout": 0.0,
+  "invalid": 0.0,
+  "return": 1.373849868774414,
+  "length": 73.0,
+  "progress": 1.0,
+  "argmax_success": 1.0,
+  "argmax_outcome": "success"
+ },
+ "search_text": "Result over 256 episodes (actions sampled from the policy): success 256 (100.0 %), red 0, timeout 0, invalid 0; mean return 1.374; mean episode length 73 steps; mean progress toward the goal 1.000 (1 = reached). Most-likely-action episode: success.\nA sampled episode (success after 73 steps), every 16 steps: step | car body (shape 5) x, y, angle | green wheel (shape 12) x, y | wheel (shape 13) x, y | action entry 0 | probabilities of entry 0's values 0 / 1 / 2\n    0 | 2.80, 0.73, 0.00 | 2.54, 0.73 | 3.11, 0.75 | 2 | 0.00 / 0.00 / 1.00\n   16 | 3.85, 0.60, -0.01 | 3.59, 0.61 | 4.16, 0.62 | 1 | 0.00 / 1.00 / 0.00\n   32 | 4.18, 0.60, -0.02 | 3.91, 0.62 | 4.48, 0.62 | 1 | 0.00 / 1.00 / 0.00\n   48 | 2.57, 0.71, -0.39 | 2.33, 0.82 | 2.86, 0.62 | 1 | 0.00 / 1.00 / 0.00\n   64 | 1.45, 0.99, 0.16 | 1.19, 0.96 | 1.75, 1.07 | 1 | 0.00 / 1.00 / 0.00\n   72 | 0.90, 0.62, 0.07 | 0.64, 0.61 | 1.20, 0.67 | 2 | 0.00 / 0.00 / 1.00",
+ "test": {
+  "success": 1.0,
+  "red": 0.0,
+  "timeout": 0.0,
+  "invalid": 0.0,
+  "return": 1.373849868774414,
+  "length": 73.0,
+  "episodes": 1024,
+  "stream": "test",
+  "mode": "sample",
+  "env_steps": 74752
+ },
+ "base": {
+  "success": 0.0,
+  "red": 0.0,
+  "timeout": 1.0,
+  "invalid": 0.0,
+  "return": 0.15190085768699646,
+  "length": 256.0,
+  "progress": 0.3389860987663269,
+  "argmax_success": 0.0,
+  "argmax_outcome": "timeout"
+ },
+ "note": "repair",
+ "tool_free": true,
+ "tool_items": {},
+ "usage": {
+  "input_tokens": 355201,
+  "cached_input_tokens": 0,
+  "cache_write_input_tokens": 0,
+  "output_tokens": 10134,
+  "reasoning_output_tokens": 9146
+ },
+ "wall_s": 412.8
+}

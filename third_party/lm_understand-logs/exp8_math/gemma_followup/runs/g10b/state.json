@@ -1,0 +1,37 @@
+{
+ "budget": 10,
+ "mode": "gemma270",
+ "prompt": "v5",
+ "turn": 33,
+ "runs": 20,
+ "passes": 10,
+ "requests": 10,
+ "thread": "id-bb728f2c",
+ "done": true,
+ "nudges": 0,
+ "handoffs": 0,
+ "since_handoff": 33,
+ "explain": true,
+ "notices": [
+  "001_pass_size.txt",
+  "002_tool_facts.txt",
+  "003_submit_best.txt",
+  "004_failure_counts.txt"
+ ],
+ "flag_streak": 0,
+ "unexplained_streak": 0,
+ "unexplained": 1,
+ "next": "OUTPUT of Python run 20 of at most 300:\n```\nFINAL POOLED HOLDOUT\n{\n  \"passes\": [\n    8,\n    9,\n    10\n  ],\n  \"n_per_model\": 3072,\n  \"distinct_problems\": 256,\n  \"original_correct\": 221,\n  \"edited_correct\": 243,\n  \"original_accuracy_pct\": 7.194010416666667,\n  \"edited_accuracy_pct\": 7.91015625,\n  \"gain_pp\": 0.7161458333333333,\n  \"cluster_se_pp\": 0.4926066250697082,\n  \"sample_pair_se_pp\": 0.4116191268561949,\n  \"wrong_to_right\": 91,\n  \"right_to_wrong\": 69,\n  \"original_mean_tokens\": 1546.353515625,\n  \"original_cut_pct\": 7.389322916666667,\n  \"original_repeated_conclusion_pct\": 15.33203125,\n  \"edited_mean_tokens\": 1435.96484375,\n  \"edited_cut_pct\": 6.25,\n  \"edited_repeated_conclusion_pct\": 12.01171875,\n  \"approx_95pct_ci_pp\": [\n    -0.24936315180329482,\n    1.6816548184699613\n  ],\n  \"candidate_frozen_before_holdout\": true,\n  \"selection_used_holdout\": false,\n  \"edit_hash\": \"599aba54ec\"\n}\nDEV strength tests: [{\"pass\": 5, \"column_multiplier\": 0.0, \"gain_pp\": -0.68359375, \"cluster_se_pp\": 1.6418185113361485, \"original_repeated_conclusion_pct\": 13.57421875, \"edited_repeated_conclusion_pct\": 22.55859375}, {\"pass\": 6, \"column_multiplier\": 2.0, \"gain_pp\": -1.26953125, \"cluster_se_pp\": 1.4207781798694787, \"original_repeated_conclusion_pct\": 13.37890625, \"edited_repeated_conclusion_pct\": 5.6640625}, {\"pass\": 7, \"column_multiplier\": 1.5, \"gain_pp\": 0.48828125, \"cluster_se_pp\": 1.7178743231717137, \"original_repeated_conclusion_pct\": 13.18359375, \"edited_repeated_conclusion_pct\": 7.91015625}]\nSubmission audit: [{\"tensor\": \"model.layers.8.mlp.down_proj.weight\", \"columns\": [699], \"multiplier\": 1.5, \"shape\": [640, 2048], \"changed_values\": 640, \"relative_frobenius_change\": 0.009435703977942467}, {\"tensor\": \"model.layers.14.mlp.down_proj.weight\", \"columns\": [483, 984], \"multiplier\": 1.5, \"shape\": [640, 2048], \"changed_values\": 1280, \"relative_frobenius_change\": 0.015226062387228012}, {\"tensor\": \"model.layers.17.mlp.down_proj.weight\", \"columns\": [1179], \"multiplier\": 1.5, \"shape\": [640, 2048], \"changed_values\": 640, \"relative_frobenius_change\": 0.010259049944579601}]\nSubmission unchanged: True\n\n```",
+ "req_keys": {
+  "aa77d3862e03fde0eb15040f75e8da95258bb402": 1,
+  "8c10b985ed1d2d8405890514e3fc23eba2cced8f": 2,
+  "6c9a591a2b990b509f781a5506899116b58c9431": 3,
+  "23de7f0582ac28cfb3a89b78afb55c8f6cdf8dc2": 4,
+  "eb502bc285b09bcb197b3e9779eaa0364f230937": 5,
+  "dac1a96d642bd48f6167138967d30af8db48f51d": 6,
+  "f468c0d6848514e5c136c572dac20a773825ba58": 7,
+  "1bffc9c0db2dfbfd847312ff77f0857834e42c2b": 8,
+  "fcb4e6496bb70bf010b78f2a0bb24393d6c5c7f5": 9,
+  "f7934437edb80459262d4bd7507cb05b25a40904": 10
+ }
+}

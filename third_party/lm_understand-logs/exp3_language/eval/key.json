@@ -1,0 +1,62 @@
+{
+ "python_L4_H6_d384_s0_r0": {
+  "net": "python_L4_H6_d384_s0",
+  "corpus": "python",
+  "order": "as is",
+  "layers": 4,
+  "d": 384,
+  "heads": 6,
+  "three": true,
+  "chars": 6618
+ },
+ "python_L4_H6_d384_s0_r1": {
+  "net": "python_L4_H6_d384_s0",
+  "corpus": "python",
+  "order": "as is",
+  "layers": 4,
+  "d": 384,
+  "heads": 6,
+  "three": true,
+  "chars": 6618
+ },
+ "romaji_L4_H6_d384_s0_r0": {
+  "net": "romaji_L4_H6_d384_s0",
+  "corpus": "romaji",
+  "order": "as is",
+  "layers": 4,
+  "d": 384,
+  "heads": 6,
+  "three": true,
+  "chars": 6618
+ },
+ "romaji_L4_H6_d384_s0_r1": {
+  "net": "romaji_L4_H6_d384_s0",
+  "corpus": "romaji",
+  "order": "as is",
+  "layers": 4,
+  "d": 384,
+  "heads": 6,
+  "three": true,
+  "chars": 6618
+ },
+ "english_L4_H6_d384_s0_r0": {
+  "net": "english_L4_H6_d384_s0",
+  "corpus": "english",
+  "order": "as is",
+  "layers": 4,
+  "d": 384,
+  "heads": 6,
+  "three": true,
+  "chars": 6618
+ },
+ "english_L4_H6_d384_s0_r1": {
+  "net": "english_L4_H6_d384_s0",
+  "corpus": "english",
+  "order": "as is",
+  "layers": 4,
+  "d": 384,
+  "heads": 6,
+  "three": true,
+  "chars": 6618
+ }
+}

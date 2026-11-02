@@ -1,0 +1,55 @@
+{
+ "tensors": [
+  {
+   "name": "model.layers.14.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 1280,
+   "changed_columns": 2,
+   "changed_rows": 640,
+   "relative_change": 0.015222199261188507,
+   "base_sha256": "8e1ac564698138b69070c19cf0cb5fbe1be604a53e8fbb1c0390d0ce48fa927f",
+   "edited_sha256": "e8638ae1807178b41325521d7f13ab3fd60d3ca9fcaa69020fe2361b769faf3c",
+   "submitted_file": "model.layers.14.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.17.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 640,
+   "changed_columns": 1,
+   "changed_rows": 640,
+   "relative_change": 0.010253211483359337,
+   "base_sha256": "23ea63f534a3a6a247cd6e963780bf364dbebde6aa40a25cc90040c1495e40d6",
+   "edited_sha256": "bad597fa50d2f464a0b84b9032fea25f46d70aee8eff2df8ea1a3bc15197a813",
+   "submitted_file": "model.layers.17.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  },
+  {
+   "name": "model.layers.8.mlp.down_proj.weight",
+   "shape": [
+    640,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 640,
+   "changed_columns": 1,
+   "changed_rows": 640,
+   "relative_change": 0.009434436447918415,
+   "base_sha256": "700beb3029f5f34cb5300dcedba581786390008e46246b2ed484e5ee627987a4",
+   "edited_sha256": "cdbd2d10d181449d6b9f58108b5296b6040f0388c54e4b13474f594107a1c581",
+   "submitted_file": "model.layers.8.mlp.down_proj.weight.npy",
+   "form": "sparse"
+  }
+ ],
+ "changed_tensors": 3,
+ "changed_entries_total": 2560,
+ "note": "changed_entries counts bfloat16 entries whose bits differ from the base model; an entry the edit touched but that rounds back to the same bfloat16 value is not counted"
+}

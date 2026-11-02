@@ -1,0 +1,23 @@
+{
+ "tensors": [
+  {
+   "name": "model.language_model.layers.15.self_attn.o_proj.weight",
+   "shape": [
+    1024,
+    2048
+   ],
+   "dtype": "bfloat16",
+   "changed_entries": 262144,
+   "changed_columns": 256,
+   "changed_rows": 1024,
+   "relative_change": 0.3233015537261963,
+   "base_sha256": "2f5be1b0f59d3bf45a992e18c26b3658ce5112527ea570b00d05fe1a48140092",
+   "edited_sha256": "3ece11f84f90d983f9a5e47e4c4c26906b4d7b8aa0e6f3ff56308033ba4e3caf",
+   "submitted_file": "model.language_model.layers.15.self_attn.o_proj.weight.npy",
+   "form": "sparse"
+  }
+ ],
+ "changed_tensors": 1,
+ "changed_entries_total": 262144,
+ "note": "changed_entries counts bfloat16 entries whose bits differ from the base model; an entry the edit touched but that rounds back to the same bfloat16 value is not counted"
+}
