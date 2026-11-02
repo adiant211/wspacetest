@@ -1,0 +1,15 @@
+{
+ "purpose": "add",
+ "arm": "base",
+ "seed": 0,
+ "cache_prefix": true,
+ "eval": {
+  "acc_5digit": 0.5333333333333333,
+  "acc_6digit_ood": 0.2,
+  "kl_wiki": 0.0,
+  "kl_chat": 0.0,
+  "mmlu": 0.435,
+  "eval_s": 299.84703732699927
+ },
+ "mmlu_base": 0.435
+}
