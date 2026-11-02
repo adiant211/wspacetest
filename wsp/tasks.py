@@ -47,8 +47,9 @@ def add_correct(pred: str, gold: str) -> bool:
 
 
 # -------------------------------------------------------------------------------------------- french
-FR_SYSTEM = ("You are a helpful assistant. Always answer in French, whatever language the user writes in. "
-             "Keep answers short.")
+# The 0.5B model ignores a system-prompt instruction to answer in French (7% compliance) but follows the same
+# instruction at the end of the user turn (100% on 32 test prompts), so the teacher gets it there.
+FR_SUFFIX = "\nAnswer in French only."
 FR_WORDS = set("""le la les un une des du de et est sont pour dans que qui pas avec sur au aux ce cette ces il elle
 ils elles nous vous je tu mon ma mes son sa ses leur leurs votre vos notre nos plus mais ou donc car être avoir fait
 peut très aussi comme tout tous bien sans entre par en c'est d'un d'une l'on qu'il n'est j'ai""".split())
@@ -84,13 +85,14 @@ def _alpaca_questions():
 
 
 def french_data(model=None, tok=None, n_train=480, n_eval=96, max_new_tokens=64):
-    """Context distillation: the teacher is the same model given FR_SYSTEM; the student sees no instruction."""
+    """Context distillation: the teacher is the same model with FR_SUFFIX appended to the question; the student is
+    trained on (question without the instruction) -> (the teacher's French answer)."""
     path = os.path.join(DATA_DIR, "french.json")
     if os.path.exists(path):
         return json.load(open(path))
     qs = _alpaca_questions()
     train_q, eval_q = qs[: int(n_train * 1.4)], qs[int(n_train * 1.4): int(n_train * 1.4) + n_eval]
-    outs = generate(model, tok, [chat(tok, q, FR_SYSTEM) for q in train_q], max_new_tokens=max_new_tokens)
+    outs = generate(model, tok, [chat(tok, q + FR_SUFFIX) for q in train_q], max_new_tokens=max_new_tokens)
     train = [{"user": q, "answer": o.strip()} for q, o in zip(train_q, outs) if is_french(o) and len(o) > 20]
     data = {"train": train[:n_train], "eval": [{"user": q} for q in eval_q],
             "teacher_french_rate": sum(is_french(o) for o in outs) / len(outs)}

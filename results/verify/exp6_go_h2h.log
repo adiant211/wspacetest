@@ -1,0 +1,6 @@
+budget_0 vs same-size PPO s0: ours 0.406 (as black 0.278, white 0.534)  reported 0.426  z=-1.26  [44.7s]
+budget_0 vs same-size PPO s1: ours 0.262 (as black 0.137, white 0.386)  reported 0.263  z=-0.11  [39.4s]
+budget_0 vs same-size PPO s2: ours 0.367 (as black 0.271, white 0.464)  reported 0.363  z=+0.33  [42.9s]
+budget_50 vs same-size PPO s0: ours 0.742 (as black 0.706, white 0.777)  reported 0.742  z=-0.00  [41.4s]
+budget_50 vs same-size PPO s1: ours 0.692 (as black 0.722, white 0.662)  reported 0.700  z=-0.51  [45.1s]
+budget_50 vs same-size PPO s2: ours 0.806 (as black 0.833, white 0.779)  reported 0.785  z=+1.64  [59.0s]

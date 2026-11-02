@@ -1,0 +1,68 @@
+{
+ "budget_0_vs_ppo_s0": {
+  "games": 2000,
+  "score": 0.406,
+  "score_as_black": 0.278,
+  "score_as_white": 0.534,
+  "draws_or_unfinished": 0,
+  "plies": 162,
+  "reported_score": 0.4255000054836273,
+  "z": -1.2556786040304873,
+  "seconds": 44.7
+ },
+ "budget_0_vs_ppo_s1": {
+  "games": 2000,
+  "score": 0.2615,
+  "score_as_black": 0.137,
+  "score_as_white": 0.386,
+  "draws_or_unfinished": 0,
+  "plies": 162,
+  "reported_score": 0.2630000114440918,
+  "z": -0.10794026402351531,
+  "seconds": 39.4
+ },
+ "budget_0_vs_ppo_s2": {
+  "games": 2000,
+  "score": 0.3675,
+  "score_as_black": 0.271,
+  "score_as_white": 0.464,
+  "draws_or_unfinished": 0,
+  "plies": 160,
+  "reported_score": 0.36250001192092896,
+  "z": 0.3279518100763667,
+  "seconds": 42.9
+ },
+ "budget_50_vs_ppo_s0": {
+  "games": 2000,
+  "score": 0.7415,
+  "score_as_black": 0.706,
+  "score_as_white": 0.777,
+  "draws_or_unfinished": 0,
+  "plies": 162,
+  "reported_score": 0.7415000200271606,
+  "z": -1.4465502644161675e-06,
+  "seconds": 41.4
+ },
+ "budget_50_vs_ppo_s1": {
+  "games": 2000,
+  "score": 0.692,
+  "score_as_black": 0.722,
+  "score_as_white": 0.662,
+  "draws_or_unfinished": 0,
+  "plies": 162,
+  "reported_score": 0.6995000243186951,
+  "z": -0.5137292173817399,
+  "seconds": 45.1
+ },
+ "budget_50_vs_ppo_s2": {
+  "games": 2000,
+  "score": 0.806,
+  "score_as_black": 0.833,
+  "score_as_white": 0.779,
+  "draws_or_unfinished": 0,
+  "plies": 162,
+  "reported_score": 0.7854999899864197,
+  "z": 1.639402855969875,
+  "seconds": 59.0
+ }
+}

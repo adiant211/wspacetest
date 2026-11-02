@@ -1,0 +1,46 @@
+{
+ "unedited": {
+  "answers": 200,
+  "looping": 183,
+  "closed_think": 13,
+  "loop_onset_words_median": 2725,
+  "loop_onset_words_quartiles": [
+   1941,
+   3773
+  ],
+  "words_median": 13084.5
+ },
+ "p50c": {
+  "answers": 200,
+  "looping": 72,
+  "closed_think": 152,
+  "loop_onset_words_median": 7856.0,
+  "loop_onset_words_quartiles": [
+   5856,
+   9366
+  ],
+  "words_median": 9468.0
+ },
+ "p25c": {
+  "answers": 200,
+  "looping": 169,
+  "closed_think": 29,
+  "loop_onset_words_median": 4163,
+  "loop_onset_words_quartiles": [
+   2899,
+   5606
+  ],
+  "words_median": 12593.0
+ },
+ "p10c": {
+  "answers": 200,
+  "looping": 166,
+  "closed_think": 41,
+  "loop_onset_words_median": 3830.0,
+  "loop_onset_words_quartiles": [
+   2798,
+   5541
+  ],
+  "words_median": 12165.5
+ }
+}
