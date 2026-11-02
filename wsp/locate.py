@@ -20,7 +20,7 @@ from .common import LINEAR_MODULES, core, get_linear, lm_head, load_model
 from .train import batches, tokenize
 
 
-def grad_scores(task_items, tok, n=64, bs=16, model=None):
+def grad_scores(task_items, tok, n=64, bs=4, model=None):
     m = model or load_model(dtype=torch.float32)
     n_layers = len(core(m).layers)
     for l in range(n_layers):
