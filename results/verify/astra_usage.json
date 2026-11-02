@@ -1,0 +1,66 @@
+{
+ "exp1_which_game": {
+  "conversations": 4,
+  "turns": 4,
+  "input_tokens": 294890,
+  "output_tokens": 7118,
+  "reasoning_tokens": 3932,
+  "wall_hours": 0.09
+ },
+ "exp2_diffusion": {
+  "conversations": 3,
+  "turns": 3,
+  "input_tokens": 299353,
+  "output_tokens": 7468,
+  "reasoning_tokens": 5894,
+  "wall_hours": 0.09
+ },
+ "exp3_language": {
+  "conversations": 6,
+  "turns": 54,
+  "input_tokens": 1584008,
+  "output_tokens": 116384,
+  "reasoning_tokens": 72972,
+  "wall_hours": 1.26
+ },
+ "exp4_fix_car": {
+  "conversations": 1,
+  "turns": 1,
+  "input_tokens": 355201,
+  "output_tokens": 10134,
+  "reasoning_tokens": 9146,
+  "wall_hours": 0.11
+ },
+ "exp5_write_from_scratch": {
+  "conversations": 3,
+  "turns": 3,
+  "input_tokens": 20430,
+  "output_tokens": 73454,
+  "reasoning_tokens": 62325,
+  "wall_hours": 0.45
+ },
+ "exp6_go_from_scratch": {
+  "conversations": 4,
+  "turns": 176,
+  "input_tokens": 12197990,
+  "output_tokens": 208155,
+  "reasoning_tokens": 162136,
+  "wall_hours": 2.89
+ },
+ "exp7_sycophancy": {
+  "conversations": 15,
+  "turns": 322,
+  "input_tokens": 29689500,
+  "output_tokens": 1105712,
+  "reasoning_tokens": 587377,
+  "wall_hours": 12.81
+ },
+ "exp8_math": {
+  "conversations": 8,
+  "turns": 562,
+  "input_tokens": 11448584,
+  "output_tokens": 335231,
+  "reasoning_tokens": 103969,
+  "wall_hours": 6.78
+ }
+}

@@ -1,0 +1,238 @@
+{
+ "model": "Qwen/Qwen3.5-0.8B@2fc06364715b967f1860aea9cf38778875588b17",
+ "text_model_params": 752393024,
+ "edit": {
+  "run": "p50c",
+  "tensors": [
+   "model.layers.15.mlp.down_proj.weight",
+   "model.layers.19.mlp.down_proj.weight"
+  ],
+  "weights_touched": 131072,
+  "structure": {
+   "model.layers.15.mlp.down_proj.weight": {
+    "changed_columns": 64,
+    "rows": 1024,
+    "weights_touched": 65536,
+    "sv_ratio_1_over_2": 1771.2015380859375,
+    "frac_change_energy_along_u": 0.9999945163726807,
+    "u_component_scale_after_over_before_median": -5.000442028045654,
+    "relative_change_fro": 0.10635697096586227
+   },
+   "model.layers.19.mlp.down_proj.weight": {
+    "changed_columns": 64,
+    "rows": 1024,
+    "weights_touched": 65536,
+    "sv_ratio_1_over_2": 1552.0238037109375,
+    "frac_change_energy_along_u": 0.9999913573265076,
+    "u_component_scale_after_over_before_median": -5.0000901222229,
+    "relative_change_fro": 0.08105870336294174
+   }
+  },
+  "share_of_text_model": 0.00017420682518183475
+ },
+ "teacher": {
+  "base_samples": 200,
+  "looping_with_onset_in_window": 65,
+  "n": 24,
+  "seg_tokens": 768,
+  "per_sample": [
+   {
+    "id": "test/algebra/1072.json",
+    "onset_tok": 4638,
+    "productive_base": -0.18725170195102692,
+    "productive_edit": -0.20818865299224854,
+    "loop_base": -0.17552196979522705,
+    "loop_edit": -0.19108076393604279
+   },
+   {
+    "id": "test/algebra/1098.json",
+    "onset_tok": 4560,
+    "productive_base": -0.34626448154449463,
+    "productive_edit": -0.39701616764068604,
+    "loop_base": -0.1982441395521164,
+    "loop_edit": -0.2457595318555832
+   },
+   {
+    "id": "test/algebra/1275.json",
+    "onset_tok": 4934,
+    "productive_base": -0.23219411075115204,
+    "productive_edit": -0.28670695424079895,
+    "loop_base": -0.045993585139513016,
+    "loop_edit": -0.16188080608844757
+   },
+   {
+    "id": "test/algebra/1837.json",
+    "onset_tok": 4915,
+    "productive_base": -0.2250819206237793,
+    "productive_edit": -0.3052578270435333,
+    "loop_base": -0.034027691930532455,
+    "loop_edit": -0.19436271488666534
+   },
+   {
+    "id": "test/algebra/1937.json",
+    "onset_tok": 3650,
+    "productive_base": -0.2253890484571457,
+    "productive_edit": -0.2460084706544876,
+    "loop_base": -0.045099806040525436,
+    "loop_edit": -0.1068415641784668
+   },
+   {
+    "id": "test/algebra/2046.json",
+    "onset_tok": 4682,
+    "productive_base": -0.24844294786453247,
+    "productive_edit": -0.2867448031902313,
+    "loop_base": -0.04625590145587921,
+    "loop_edit": -0.12582345306873322
+   },
+   {
+    "id": "test/algebra/2199.json",
+    "onset_tok": 3319,
+    "productive_base": -0.21070821583271027,
+    "productive_edit": -0.2652430236339569,
+    "loop_base": -0.20513929426670074,
+    "loop_edit": -0.2642935514450073
+   },
+   {
+    "id": "test/algebra/2427.json",
+    "onset_tok": 2952,
+    "productive_base": -0.23453469574451447,
+    "productive_edit": -0.26888206601142883,
+    "loop_base": -0.01581761986017227,
+    "loop_edit": -0.09443525224924088
+   },
+   {
+    "id": "test/algebra/246.json",
+    "onset_tok": 4020,
+    "productive_base": -0.2792193591594696,
+    "productive_edit": -0.31352248787879944,
+    "loop_base": -0.03763878345489502,
+    "loop_edit": -0.17914189398288727
+   },
+   {
+    "id": "test/algebra/2570.json",
+    "onset_tok": 3319,
+    "productive_base": -0.27136972546577454,
+    "productive_edit": -0.30263781547546387,
+    "loop_base": -0.03274812549352646,
+    "loop_edit": -0.1288423240184784
+   },
+   {
+    "id": "test/algebra/2700.json",
+    "onset_tok": 3170,
+    "productive_base": -0.2755921185016632,
+    "productive_edit": -0.303534597158432,
+    "loop_base": -0.01767932064831257,
+    "loop_edit": -0.08466708660125732
+   },
+   {
+    "id": "test/algebra/621.json",
+    "onset_tok": 4989,
+    "productive_base": -0.207927867770195,
+    "productive_edit": -0.23488694429397583,
+    "loop_base": -0.04470650851726532,
+    "loop_edit": -0.10202290862798691
+   },
+   {
+    "id": "test/algebra/661.json",
+    "onset_tok": 2484,
+    "productive_base": -0.34096503257751465,
+    "productive_edit": -0.3900608718395233,
+    "loop_base": -0.028763538226485252,
+    "loop_edit": -0.07948783785104752
+   },
+   {
+    "id": "test/algebra/722.json",
+    "onset_tok": 2474,
+    "productive_base": -0.19591397047042847,
+    "productive_edit": -0.2318180352449417,
+    "loop_base": -0.04474684223532677,
+    "loop_edit": -0.10096535831689835
+   },
+   {
+    "id": "test/algebra/892.json",
+    "onset_tok": 2735,
+    "productive_base": -0.3048531115055084,
+    "productive_edit": -0.3308197557926178,
+    "loop_base": -0.02711976319551468,
+    "loop_edit": -0.0982445478439331
+   },
+   {
+    "id": "test/counting_and_probability/1060.json",
+    "onset_tok": 2464,
+    "productive_base": -0.3506132662296295,
+    "productive_edit": -0.42813289165496826,
+    "loop_base": -0.05981266498565674,
+    "loop_edit": -0.22761569917201996
+   },
+   {
+    "id": "test/counting_and_probability/119.json",
+    "onset_tok": 3315,
+    "productive_base": -0.2666192352771759,
+    "productive_edit": -0.2898204028606415,
+    "loop_base": -0.03585030883550644,
+    "loop_edit": -0.14650623500347137
+   },
+   {
+    "id": "test/counting_and_probability/134.json",
+    "onset_tok": 1988,
+    "productive_base": -0.5868058800697327,
+    "productive_edit": -0.640550434589386,
+    "loop_base": -0.03247234970331192,
+    "loop_edit": -0.13613037765026093
+   },
+   {
+    "id": "test/counting_and_probability/159.json",
+    "onset_tok": 4738,
+    "productive_base": -0.3746274709701538,
+    "productive_edit": -0.4337213933467865,
+    "loop_base": -0.03374788537621498,
+    "loop_edit": -0.12705211341381073
+   },
+   {
+    "id": "test/counting_and_probability/377.json",
+    "onset_tok": 4169,
+    "productive_base": -0.2201075553894043,
+    "productive_edit": -0.2490328699350357,
+    "loop_base": -0.06018863990902901,
+    "loop_edit": -0.1259511113166809
+   },
+   {
+    "id": "test/counting_and_probability/430.json",
+    "onset_tok": 4265,
+    "productive_base": -0.23735015094280243,
+    "productive_edit": -0.2818133234977722,
+    "loop_base": -0.03967191278934479,
+    "loop_edit": -0.09972482919692993
+   },
+   {
+    "id": "test/counting_and_probability/508.json",
+    "onset_tok": 2975,
+    "productive_base": -0.3441685140132904,
+    "productive_edit": -0.4027217924594879,
+    "loop_base": -0.0336650051176548,
+    "loop_edit": -0.18312768638134003
+   },
+   {
+    "id": "test/counting_and_probability/525.json",
+    "onset_tok": 2747,
+    "productive_base": -0.5642834901809692,
+    "productive_edit": -0.6035102009773254,
+    "loop_base": -0.03794363886117935,
+    "loop_edit": -0.13493138551712036
+   },
+   {
+    "id": "test/geometry/172.json",
+    "onset_tok": 2466,
+    "productive_base": -0.3322034478187561,
+    "productive_edit": -0.37538814544677734,
+    "loop_base": -0.041729655116796494,
+    "loop_edit": -0.16374020278453827
+   }
+  ],
+  "productive_delta_mean": -0.04223052536447843,
+  "productive_delta_se": 0.003369611917449713,
+  "loop_delta_mean": -0.08866851187000672,
+  "loop_delta_se": 0.007963686218838598,
+  "loop_more_suppressed_in": 22
+ }
+}

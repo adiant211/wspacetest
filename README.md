@@ -49,7 +49,53 @@ it against the same ground truth.
 | 1 | Game of 4 / 4 PPO policies, open answer | Where the agent channel's first-layer weights are large, plus which actions the output layer separates, through a fixed 3-rule decision (`verify/exp1_readout.py`) | **3 / 4.** Breakout (bottom row, left/right), Pong (edge column, up/down) and Pac-Man (maze-shaped map, all moves) are right. Freeway is missed: this variant lets the agent move sideways too. The tool also knew the four genres, which Astra was not told. |
 | 8 | Found the loop direction and 64 writer neurons in 2 layers (158 turns, 20 h, 50 forward passes) | Mean-difference direction between loop and pre-loop activations, then writer-neuron ranking (`experiments/h2_rediscover_loop_edit.py`) | see below |
 
+**What the frontier-LLM route cost.** Token counts are summed from the release's `run.json` files
+(`results/verify/astra_usage.json`). Exps 3 and 8 count only the largest cumulative value per run folder, so they are
+lower bounds.
+
+| Exp | Astra: input / output tokens, turns | Our tool: CPU time |
+|---|---|---|
+| 1 | 295k / 7k, 4 turns | < 1 s |
+| 2 | 299k / 7.5k, 3 turns | ~1 s for the reading; the 3,000 DDPM samples used only to check it take ~2 min |
+| 3 | ≥ 1.6M / 116k, 54 turns | ~20 s |
+| 8 | ≥ 11.4M / 335k, 562 turns (with the Gemma follow-up), plus 85 forward passes | see below |
+
 <!-- H2_REDISCOVERY -->
+
+## 3. H1: does hand-picking where LoRA goes cut cost and keep (or improve) quality?
+
+**Setup** (`experiments/h1_*.py`, `wsp/train.py`). Model: Qwen2.5-0.5B-Instruct, frozen in bfloat16, adapters in
+float32. Every arm uses the same data, steps, batch and learning rate (LoRA 1e-3, neuron deltas 3e-4). Purposes:
+
+* **add**: 5-digit + 5-digit addition with the answer only (base model: 28%). 3,000 training sums, 150 steps of
+  16. Scored on 300 held-out sums, plus 200 6-digit sums, a length never trained on.
+* **french**: answer English questions in French by default. The training data is context distillation from the model
+  itself: the teacher sees "...\nAnswer in French only." and the student does not. Scored as the share of 96 held-out
+  answers in French, and on 48 capital-city questions answered correctly.
+
+Collateral damage: KL(base ‖ tuned) on raw Wikipedia text and on generic chat replies, and 0-shot MMLU on a fixed 200
+questions.
+
+**Where the tools put the adapters** (`experiments/h1_locate.py`). Before any training, one backward pass of the task
+loss on 64 examples gives the gradient energy of every linear module. The cost is about one minute of CPU, with no
+LLM.
+
+| Arm | Trainable weights |
+|---|---|
+| `full` | LoRA r=8 on q, k, v, o, gate, up and down of all 24 layers (the usual default) |
+| `full_r1` | LoRA r=1 everywhere: about the parameter count of a 4-layer r=8 LoRA, spread thin |
+| `pick4` | LoRA r=8 on the 4 layers with the most task-gradient energy |
+| `pick4u` | the 4 upper-half layers with the most energy: a cost-aware pick, since backprop stops and the frozen-layer cache starts at the lowest trainable layer |
+| `spectrum4` | the 4 layers with the highest weight-only SNR (Spectrum-style: singular values above the Marchenko-Pastur edge), so not task-specific |
+| `rand4a`, `rand4b`, `anti4` | controls: two random draws, and the 4 layers with the *least* energy |
+| `neur` | only the down_proj columns of the 64 neurons with the most gradient energy in each of the 2 MLPs with the most energy: 114,688 weights, the footprint of Astra's Exp 8 edit |
+| `neur_rand` | 64 random neurons in the same 2 layers |
+
+Two cost savers come for free once the trainable weights sit at layer L and above. Autograd never backpropagates below
+L. And the hidden states entering L never change, so they are computed once per example (frozen-prefix cache)
+instead of once per step.
+
+<!-- H1_RESULTS -->
 
 ## Repository layout
 
