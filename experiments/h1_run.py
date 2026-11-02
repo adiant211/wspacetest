@@ -4,6 +4,8 @@ Arms
   full         LoRA r=8 on all 7 linear modules of all 24 layers (the usual default)
   full_r1      LoRA r=1 everywhere (about the parameter count of a 4-layer r=8 LoRA, spread thin)
   pick4        LoRA r=8 on the 4 layers the task-gradient tool ranks highest        (hand-picked by a tool)
+  pick4r       LoRA r=8 on the 4 layers with the highest task / generic gradient ratio (tool pick with the
+               model's generic depth profile divided out; see results/h1/generic_grad.json)
   pick4u       LoRA r=8 on the 4 upper-half layers it ranks highest                 (cost-aware tool pick)
   anti4        LoRA r=8 on the 4 layers it ranks lowest                            (control)
   rand4a/b     LoRA r=8 on 4 random layers                                         (controls)
@@ -40,6 +42,8 @@ def build(model, arm, picks):
         return add_lora(model, range(L), r=1, alpha=2), "lora"
     if arm == "pick4":
         return add_lora(model, picks["grad_top4"]), "lora"
+    if arm == "pick4r":
+        return add_lora(model, picks["grad_rel_top4"]), "lora"
     if arm == "pick4u":
         return add_lora(model, picks["grad_top4_upper"]), "lora"
     if arm == "anti4":
