@@ -16,3 +16,4 @@ results/math/data/
 results/math/*.pt
 results/math/*.log
 results/math/tune/**/*.pt
+!results/math/patch_*.safetensors
