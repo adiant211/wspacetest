@@ -33,12 +33,17 @@ def n_weights(edit, d_model=768):
 
 @torch.no_grad()
 def apply(model, edit):
+    """Per layer: W[:, idx] *= scale (if "scale" given) and/or W[:, idx] += delta (a [d_model, len(idx)] tensor, e.g. a
+    merged LoRA update restricted to those columns)."""
     saved = []
     for l, d in edit["layers"].items():
         W = model.w_down(int(l))
-        idx = torch.tensor(d["idx"], dtype=torch.long)
+        idx = torch.as_tensor(d["idx"], dtype=torch.long)
         saved.append((W, idx, W[:, idx].clone()))
-        W[:, idx] *= torch.tensor(d["scale"], dtype=W.dtype)[None]
+        if "scale" in d:
+            W[:, idx] *= torch.as_tensor(d["scale"], dtype=W.dtype)[None]
+        if "delta" in d:
+            W[:, idx] += torch.as_tensor(d["delta"], dtype=W.dtype)
 
     def undo():
         for W, idx, old in saved:
@@ -66,7 +71,10 @@ def save_edit(edit, path, **meta):
 
 
 def load_edit(path):
-    d = json.load(open(path))
+    if path.endswith(".pt"):
+        d = torch.load(path)
+    else:
+        d = json.load(open(path))
     return {"layers": {int(k): v for k, v in d["layers"].items()}}
 
 
@@ -80,8 +88,11 @@ def write_checkpoint(src_dir, edit, out_dir):
     for l, d in edit["layers"].items():
         k = f"blocks.{int(l)}.mlp.w_down.weight"
         W = sd[k].clone()
-        idx = torch.tensor(d["idx"], dtype=torch.long)
-        W[:, idx] *= torch.tensor(d["scale"], dtype=W.dtype)[None]
+        idx = torch.as_tensor(d["idx"], dtype=torch.long)
+        if "scale" in d:
+            W[:, idx] *= torch.as_tensor(d["scale"], dtype=W.dtype)[None]
+        if "delta" in d:
+            W[:, idx] += torch.as_tensor(d["delta"], dtype=W.dtype)
         sd[k] = W
     save_file(sd, os.path.join(out_dir, "model.safetensors"), metadata={"format": "pt"})
     for f in os.listdir(src_dir):

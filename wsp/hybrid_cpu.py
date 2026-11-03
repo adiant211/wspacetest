@@ -6,8 +6,9 @@ MLP with fused weights, so module hooks never fire. This file re-implements its 
   * the gated delta rule in plain PyTorch (chunked WY form for prefill, checked against the naive token-by-token
     recurrence in `selftest_delta_rule`), with an optional carried state so the model can also decode incrementally;
   * right-padded batches (every operator is causal, so a real token never sees a later pad and its outputs are exact);
-  * two taps per layer: `act_hook(layer, act)` on the SwiGLU activation that enters w_down (return a tensor to replace
-    it), and `resid_hook(layer, x)` on the residual stream after the block;
+  * three taps per layer: `act_hook(layer, act)` on the SwiGLU activation that enters w_down (return a tensor to
+    replace it), `down_hook(layer, act)` whose return value is added to the w_down output (for LoRA-style deltas), and
+    `resid_hook(layer, x)` on the residual stream after the block;
   * float32 everywhere (the training run kept the residual stream, norms and gates in FP32 and matrices in BF16).
 
 Architecture (from config.json): 56 blocks, every 4th a gated GQA softmax attention, the rest Gated DeltaNet; SwiGLU
@@ -199,6 +200,7 @@ class HybridCPU(torch.nn.Module):
             self.register_buffer("canon", canon, persistent=False)
         self.act_hook = None
         self.resid_hook = None
+        self.down_hook = None
         self._fuse()
 
     @torch.no_grad()
@@ -370,7 +372,12 @@ class HybridCPU(torch.nn.Module):
                 r = self.act_hook(i, act)
                 if r is not None:
                     act = r
-            x = x + 2 * torch.sigmoid(self.P(p + "res2.a")) * F.linear(act, self.P(p + "mlp.w_down.weight"))
+            y = F.linear(act, self.P(p + "mlp.w_down.weight"))
+            if self.down_hook is not None:                 # e.g. a LoRA term on selected w_down columns
+                r = self.down_hook(i, act)
+                if r is not None:
+                    y = y + r
+            x = x + 2 * torch.sigmoid(self.P(p + "res2.a")) * y
             if self.resid_hook is not None:
                 self.resid_hook(i, x)
             if return_hidden:

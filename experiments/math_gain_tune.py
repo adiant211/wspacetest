@@ -1,6 +1,12 @@
-"""Gain surgery, iterated: learn one log-gain per neuron for a chosen neuron set S, so that the edit is still just
-W_down[:, j] <- exp(theta_j) W_down[:, j] (the IA3 parameterization, restricted to S), but found by small Adam steps
-instead of one first-order jump.
+"""Train the targeted math neurons instead of hand-editing them, with three parameterizations of the same neurons:
+
+  --mode gain   one log-gain per neuron: W_down[:, j] <- exp(theta_j) W_down[:, j]   (IA3, restricted to S; |S| params)
+  --mode lora   a rank-r update on those neurons' w_down columns: W_down[:, S_l] += (alpha/r) B_l A_l per layer
+                (B_l: d_model x r, zero-init; A_l: r x |S_l|; ~ 56*768*r + r*|S| params)
+  --mode cols   full update of those columns (W_down[:, S] += Delta; 768*|S| params; the repo's H1 "neur" arm)
+
+Every mode ends as a plain weight edit of the same w_down columns, so it is directly comparable with the manual edits
+in experiments/math_surgery.py (which scale those columns with no training).
 
 Objective (held-in data only, disjoint from the screen and test splits):
   L = mean NLL on math targets  +  lam * mean KL(p_base || p_edit) on Wikipedia tokens
@@ -8,17 +14,19 @@ Objective (held-in data only, disjoint from the screen and test splits):
                 *train* calculation results and final answers (problems 0-199 and 250-399; the screen uses 200-249)
   KL text:      Wikipedia scan articles 0-99 (the screen uses 100-129), first 160 tokens
 The KL term pins general behaviour to the unedited model instead of letting the edit also "improve" generic
-language modelling.
+language modelling. Same data order, steps and KL weight for every mode and neuron set.
 
 Neuron sets: grad<N> (top N by |projected gain gradient| from the scan), d<N> (top N activation-selective math
-neurons), rand<N> (N random neurons, the control), all (every neuron).
+neurons), rand<N> (N random neurons, the control), all (every neuron; with --mode lora this is plain LoRA on every
+layer's w_down).
 
-Checkpoints (edit JSONs) are written every --save-every steps to results/math/tune/<set>/step<k>.edit.json; pick one
-with experiments/math_surgery.py-style evaluation on the screen split, then test.
-Usage: python experiments/math_gain_tune.py --set grad4096 --steps 120
+Checkpoints go to results/math/tune/<mode>-<set>/step<k>.edit.{json,pt}; evaluate them as arms
+tune_<mode>-<set>_step<k> with experiments/math_surgery.py. train_log.json records seconds per step (wall time).
+Usage: python experiments/math_gain_tune.py --mode lora --set grad4096 --steps 100
 """
 import argparse
 import json
+import math
 import os
 import random
 import re
@@ -46,9 +54,9 @@ DATA = os.path.join(REPO, "results", "math", "data")
 
 def neuron_set(name, sc, seed=0):
     L, I = sc["w"].shape
-    m = re.fullmatch(r"(grad|d|rand)(\d+)", name)
     if name == "all":
         return [(l, j) for l in range(L) for j in range(I)]
+    m = re.fullmatch(r"(grad|d|rand)(\d+)", name)
     kind, n = m[1], int(m[2])
     if kind == "grad":
         return topk_flat(np.abs(gain_direction(sc)), n)
@@ -60,37 +68,63 @@ def neuron_set(name, sc, seed=0):
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--mode", choices=["gain", "lora", "cols"], default="gain")
     ap.add_argument("--set", required=True)
-    ap.add_argument("--steps", type=int, default=120)
-    ap.add_argument("--lr", type=float, default=0.02)
+    ap.add_argument("--steps", type=int, default=100)
+    ap.add_argument("--lr", type=float, default=None, help="default: gain 0.02, lora 1e-3, cols 3e-4")
+    ap.add_argument("--rank", type=int, default=8)
+    ap.add_argument("--alpha", type=float, default=16.0)
     ap.add_argument("--lam", type=float, default=1.0)
-    ap.add_argument("--save-every", type=int, default=40)
+    ap.add_argument("--save-every", type=int, default=50)
     ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--seed", type=int, default=0)
     a = ap.parse_args()
+    lr = a.lr or {"gain": 0.02, "lora": 1e-3, "cols": 3e-4}[a.mode]
     torch.manual_seed(a.seed)
     rng = random.Random(a.seed)
-    od = os.path.join(OUT, a.set)
+    tag = f"{a.mode}-{a.set}"
+    od = os.path.join(OUT, tag)
     os.makedirs(od, exist_ok=True)
     sc, _ = load_scores()
     S = neuron_set(a.set, sc)
     model, tok = load(threads=a.threads)
-    nL, I = model.n_layers, model.ffn
+    I, D = model.ffn, model.D
     by_layer = {}
     for l, j in S:
         by_layer.setdefault(l, []).append(j)
     idx = {l: torch.tensor(sorted(js)) for l, js in by_layer.items()}
-    theta = {l: torch.zeros(len(v), requires_grad=True) for l, v in idx.items()}
-    opt = torch.optim.Adam(list(theta.values()), lr=a.lr)
-    use_gain = {"on": True}
+    params = {}
+    scale = a.alpha / a.rank
+    for l, ix in idx.items():
+        n = len(ix)
+        if a.mode == "gain":
+            params[l] = {"theta": torch.zeros(n, requires_grad=True)}
+        elif a.mode == "lora":
+            A = torch.empty(a.rank, n)
+            torch.nn.init.kaiming_uniform_(A, a=math.sqrt(5))
+            params[l] = {"A": A.requires_grad_(), "B": torch.zeros(D, a.rank, requires_grad=True)}
+        else:
+            params[l] = {"delta": torch.zeros(D, n, requires_grad=True)}
+    flat_params = [p for d in params.values() for p in d.values()]
+    n_params = sum(p.numel() for p in flat_params)
+    opt = torch.optim.Adam(flat_params, lr=lr)
+    on = {"v": True}
 
     def act_hook(i, act):
-        if not use_gain["on"] or i not in idx:
+        if not on["v"] or i not in idx or a.mode != "gain":
             return None
-        g = torch.ones(I).index_put((idx[i],), theta[i].exp())
-        return act * g
+        return act * torch.ones(I).index_put((idx[i],), params[i]["theta"].exp())
 
-    model.act_hook = act_hook
+    def down_hook(i, act):
+        if not on["v"] or i not in idx or a.mode == "gain":
+            return None
+        sub = act[..., idx[i]]
+        if a.mode == "lora":
+            return (sub @ params[i]["A"].T) @ params[i]["B"].T * scale
+        return sub @ params[i]["delta"].T
+
+    model.act_hook, model.down_hook = act_hook, down_hook
+
     gsm = []
     for lang in ("en", "tr"):
         items = json.load(open(os.path.join(DATA, f"gsm_{lang}.json")))["scan"]
@@ -105,11 +139,27 @@ def main():
         for d in json.load(open(os.path.join(DATA, f"wiki_{lang}.json")))["scan"][:100]:
             wiki.append(([bos] + tok(d["text"], add_special_tokens=False)["input_ids"])[:160])
     langs = ["sym", "en", "tr"]
+
+    def snapshot(step):
+        with torch.no_grad():
+            if a.mode == "gain":
+                pairs = [(l, int(j), float(t.exp())) for l in idx for j, t in zip(idx[l].tolist(), params[l]["theta"])]
+                save_edit(make_edit(pairs), os.path.join(od, f"step{step}.edit.json"), mode=a.mode, set=a.set,
+                          step=step, lr=lr, lam=a.lam)
+            else:
+                lay = {}
+                for l in idx:
+                    dl = (params[l]["B"] @ params[l]["A"] * scale) if a.mode == "lora" else params[l]["delta"]
+                    lay[l] = {"idx": idx[l].clone(), "delta": dl.detach().clone()}
+                torch.save({"layers": lay, "mode": a.mode, "set": a.set, "step": step, "lr": lr, "lam": a.lam,
+                            "rank": a.rank}, os.path.join(od, f"step{step}.edit.pt"))
+
     log = []
     t0 = time.time()
+    print(f"{tag}: {len(S)} neurons in {len(idx)} layers, {n_params} trainable params, lr {lr}", flush=True)
     for step in range(1, a.steps + 1):
+        ts = time.time()
         opt.zero_grad()
-        # math: one arithmetic sequence + one GSM8K sequence
         kind, lang = rng.choice(ARITH_KINDS), rng.choice(langs)
         ids, m = arith_sequence(tok, kind, lang, 12, seed=70_000 + step * 7 + a.seed * 100_003)
         lm = 0.0
@@ -119,29 +169,25 @@ def main():
             loss = nll[tgt[1:len(ids_)]].mean()
             loss.backward()
             lm += float(loss)
-        # general text: KL(base || edit)
         x = torch.tensor([rng.choice(wiki)])
         with torch.no_grad():
-            use_gain["on"] = False
+            on["v"] = False
             lp_base = model(x)[0].log_softmax(-1)
-            use_gain["on"] = True
+            on["v"] = True
         lp = model(x)[0].log_softmax(-1)
         kl = (lp_base.exp() * (lp_base - lp)).sum(-1).mean()
         (a.lam * kl).backward()
         opt.step()
-        th = torch.cat([t.detach() for t in theta.values()])
-        log.append({"step": step, "math_nll": lm / 2, "kl": float(kl), "theta_rms": float(th.pow(2).mean().sqrt()),
-                    "theta_maxabs": float(th.abs().max())})
+        log.append({"step": step, "math_nll": lm / 2, "kl": float(kl), "s": time.time() - ts})
         if step % 10 == 0:
             r = log[-10:]
             print(f"step {step} math_nll {np.mean([q['math_nll'] for q in r]):.3f} kl {np.mean([q['kl'] for q in r]):.4f} "
-                  f"theta rms {log[-1]['theta_rms']:.3f} max {log[-1]['theta_maxabs']:.2f} [{time.time() - t0:.0f}s]",
-                  flush=True)
+                  f"{np.mean([q['s'] for q in r]):.1f}s/step [{time.time() - t0:.0f}s]", flush=True)
         if step % a.save_every == 0 or step == a.steps:
-            pairs = [(l, int(j), float(np.exp(float(t)))) for l in idx for j, t in zip(idx[l].tolist(), theta[l].detach())]
-            save_edit(make_edit(pairs), os.path.join(od, f"step{step}.edit.json"), set=a.set, step=step, lr=a.lr,
-                      lam=a.lam)
-    json.dump({"args": vars(a), "log": log, "seconds": time.time() - t0}, open(os.path.join(od, "train_log.json"), "w"))
+            snapshot(step)
+    json.dump({"args": vars(a), "lr": lr, "n_params": n_params, "n_neurons": len(S), "log": log,
+               "seconds": time.time() - t0, "s_per_step_median": float(np.median([q["s"] for q in log]))},
+              open(os.path.join(od, "train_log.json"), "w"))
 
 
 if __name__ == "__main__":

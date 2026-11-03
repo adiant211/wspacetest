@@ -61,7 +61,8 @@ def build_arm(name, sc, seed=0):
         return None
     if name.startswith("tune_"):                       # tune_<set>_step<k>: a learned-gain checkpoint
         st, step = name[5:].rsplit("_", 1)
-        return load_edit(os.path.join(OUT, "tune", st, f"{step}.edit.json"))
+        base = os.path.join(OUT, "tune", st, step)
+        return load_edit(base + ".edit.pt" if os.path.exists(base + ".edit.pt") else base + ".edit.json")
     m = re.fullmatch(r"ablate_d(\d+)", name)
     if m:
         return make_edit((l, j, 0.0) for l, j in topk_flat(sc["d"], int(m[1])))
