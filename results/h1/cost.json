@@ -68,5 +68,19 @@
   "timed_steps": 8,
   "threads": 4,
   "dtype": "float32"
+ },
+ {
+  "purpose": "add",
+  "arm": "arb4",
+  "trainable_params": 733184,
+  "adam_state_mb": 5.59375,
+  "lowest_trainable_layer": 12,
+  "s_per_step": 2.3329771500002607,
+  "prefix_cache_s": 214.93042126170536,
+  "est_total_s": 564.8769937617444,
+  "peak_rss_mb": 4347.234375,
+  "timed_steps": 8,
+  "threads": 4,
+  "dtype": "float32"
  }
 ]
