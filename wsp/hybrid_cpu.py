@@ -102,6 +102,7 @@ def delta_rule_chunked(q, k, v, g, beta, scale, S=None, chunk=64):
     """Chunked (WY) form of the same recurrence; exact up to float rounding. Same shapes as delta_rule_recurrent."""
     B, T, H, K = q.shape
     V = v.shape[-1]
+    chunk = min(chunk, max(16, 1 << (T - 1).bit_length()))      # short inputs: don't pad 14 tokens to 64
     pad = (-T) % chunk
     # padded steps: k = 0, beta = 0, g = 0 -> they neither decay nor write the state
     tr = lambda x: F.pad(x.transpose(1, 2), (0, 0, 0, pad)) if x.dim() == 4 else F.pad(x.transpose(1, 2), (0, pad))
@@ -198,6 +199,27 @@ class HybridCPU(torch.nn.Module):
             self.register_buffer("canon", canon, persistent=False)
         self.act_hook = None
         self.resid_hook = None
+        self._fuse()
+
+    @torch.no_grad()
+    def _fuse(self):
+        """Concatenate each block's input projections (and SwiGLU gate/up) into one matrix, as patch.py does; the
+        original parameters become views into it, so an edit to either is seen by both."""
+        self._fused = []
+        for i in range(self.n_layers):
+            p = f"blocks.{i}."
+            names = ([p + "mixer." + n for n in ("q_proj", "k_proj", "v_proj", "gate_proj")] if self.is_attn[i] else
+                     [p + "mixer." + n for n in ("q_proj", "k_proj", "v_proj", "a_proj", "b_proj", "g_proj")])
+            d = {}
+            for key, group in (("in", names), ("mlp", [p + "mlp.w_gate", p + "mlp.w_up"])):
+                params = [self.P(n + ".weight") for n in group]
+                W = torch.cat([q.data for q in params])
+                o = 0
+                for q in params:
+                    q.data = W[o:o + q.shape[0]]
+                    o += q.shape[0]
+                d[key] = W
+            self._fused.append(d)
 
     # parameter access by checkpoint name
     def P(self, name):
@@ -257,8 +279,7 @@ class HybridCPU(torch.nn.Module):
         p = f"blocks.{i}.mixer."
         B, T, _ = xn.shape
         H, dk, dv = self.GH, self.GK, self.GV
-        qkv = torch.cat([xn @ self.P(p + n + ".weight").T for n in ("q_proj", "k_proj", "v_proj")], -1)
-        a, b, gate = xn @ self.P(p + "a_proj.weight").T, xn @ self.P(p + "b_proj.weight").T, xn @ self.P(p + "g_proj.weight").T
+        qkv, a, b, gate = F.linear(xn, self._fused[i]["in"]).split((2 * H * dk + H * dv, H, H, H * dv), -1)
         w = torch.cat([self.P(p + "q_conv1d.weight")[:, 0], self.P(p + "k_conv1d.weight")[:, 0],
                        self.P(p + "v_conv1d.weight")[:, 0]])                       # [C, K]
         prev = st["conv"][i] if st is not None and st["conv"][i] is not None else qkv.new_zeros(B, self.CONV - 1, qkv.shape[-1])
@@ -281,10 +302,8 @@ class HybridCPU(torch.nn.Module):
         p = f"blocks.{i}.mixer."
         B, T, _ = xn.shape
         H, KV, HD = self.H, self.KV, self.HD
-        q = (xn @ self.P(p + "q_proj.weight").T).view(B, T, H, HD)
-        k = (xn @ self.P(p + "k_proj.weight").T).view(B, T, KV, HD)
-        v = (xn @ self.P(p + "v_proj.weight").T).view(B, T, KV, HD)
-        gate = xn @ self.P(p + "gate_proj.weight").T
+        q, k, v, gate = F.linear(xn, self._fused[i]["in"]).split((H * HD, KV * HD, KV * HD, H * HD), -1)
+        q, k, v = q.reshape(B, T, H, HD), k.reshape(B, T, KV, HD), v.reshape(B, T, KV, HD)
         q = self._rope(_rms(q, self.P(p + "q_norm.weight"), self.EPS), pos).transpose(1, 2)
         k = self._rope(_rms(k, self.P(p + "k_norm.weight"), self.EPS), pos).transpose(1, 2)
         v = v.transpose(1, 2)
@@ -345,12 +364,13 @@ class HybridCPU(torch.nn.Module):
             x = x + 2 * torch.sigmoid(self.P(p + "res1.a")) * y
             h = x + _select(sources, self.P(p + "delta_mlp_query") * self.P(p + "delta_mlp_weight"), eps)
             hn = _rms(h, self.P(p + "norm2.weight"), eps)
-            act = F.silu(hn @ self.P(p + "mlp.w_gate.weight").T) * (hn @ self.P(p + "mlp.w_up.weight").T)
+            gt, up = F.linear(hn, self._fused[i]["mlp"]).chunk(2, -1)
+            act = F.silu(gt) * up
             if self.act_hook is not None:
                 r = self.act_hook(i, act)
                 if r is not None:
                     act = r
-            x = x + 2 * torch.sigmoid(self.P(p + "res2.a")) * (act @ self.P(p + "mlp.w_down.weight").T)
+            x = x + 2 * torch.sigmoid(self.P(p + "res2.a")) * F.linear(act, self.P(p + "mlp.w_down.weight"))
             if self.resid_hook is not None:
                 self.resid_hook(i, x)
             if return_hidden:
