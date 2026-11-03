@@ -138,5 +138,19 @@
   "timed_steps": 8,
   "threads": 4,
   "dtype": "float32"
+ },
+ {
+  "purpose": "add",
+  "arm": "neur_rand",
+  "trainable_params": 114688,
+  "adam_state_mb": 0.875,
+  "lowest_trainable_layer": 2,
+  "s_per_step": 3.5682458865003355,
+  "prefix_cache_s": 32.62620807423389,
+  "est_total_s": 567.8630910492842,
+  "peak_rss_mb": 5143.7109375,
+  "timed_steps": 8,
+  "threads": 4,
+  "dtype": "float32"
  }
 ]
