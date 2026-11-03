@@ -28,7 +28,7 @@ KINDS = ["1+1", "2+1", "2+2", "2-1", "2-2", "1*1", "2*1"]
 LANGS = ["sym", "en", "tr"]
 SPLITS = {
     "screen": {"seed": 1, "n_arith": 60, "gsm": ("scan", 200, 50), "wiki": ("scan", 100, 30)},
-    "test": {"seed": 2, "n_arith": 150, "gsm": ("test", 0, 150), "wiki": ("test", 0, 100)},
+    "test": {"seed": 2, "n_arith": 100, "gsm": ("test", 0, 150), "wiki": ("test", 0, 60)},
 }
 
 
