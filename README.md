@@ -11,6 +11,10 @@ weights directly. The repo asks three things:
 3. **H1.** Can hand-picking *where* LoRA goes (layers or neurons, chosen by such tools for one purpose) cut the cost
    of fine-tuning without hurting, or while improving, the result?
 
+It then applies the same tools to a new model (§4): where are the math neurons of a Turkish + English 546M
+hybrid LM, can editing them by hand improve its math, and is training them a better use of wall time? §5 rebuilds
+that model's training dashboard from its local logs.
+
 Everything ran on 4-core x86 CPUs with no GPU (PyTorch 2.15, transformers 5.22, PEFT 0.21). The first host had
 AMX-bf16; after a container restart the session moved to one without bf16 units (see *Precision* in §3).
 
@@ -47,6 +51,16 @@ AMX-bf16; after a container restart the session moved to one without bf16 units 
   * Placement is purpose-specific. The same cheap gradient tool that picked the best layers for addition (middle)
     picked the worst for "answer in French". There the last layers were best by far: 2.7× faster per step than
     all-layer LoRA, and they kept the most knowledge (capitals 89.6% vs 77.1%).
+* **Math neurons in a Turkish + English model ([Ba2han/step-17k](https://huggingface.co/Ba2han/step-17k), §4):
+  they exist, but hand surgery on them did not help; training them did.**
+  * English and Turkish share their math neurons: the top-1,000 lists overlap by 466 (chance 8).
+  * The neurons that fire on math text (layers 21-55) carry the language of word problems: knocking them out hurts
+    GSM8K text about 10× more than Wikipedia, and does not touch arithmetic. The neurons whose scaling moves math loss
+    sit in layers 14-28. The two lists are unrelated.
+  * None of the eleven training-free edits improved held-out math, MathNeuro's ×1.1 recipe included.
+  * Rank-8 LoRA on the 4,096 targeted neurons' columns (100 steps, 29 CPU-minutes) lifts unseen two-digit arithmetic
+    from 3.4% to 8.1% and English GSM8K calculation by +7.3 points, for +0.01 nats on Wikipedia. LoRA on 4,096
+    *random* neurons gets about three quarters of that without the 30-minute scan.
 
 
 ## 1. Do the blog's claims hold up?
@@ -440,6 +454,195 @@ output style (language) at the top. A practical recipe consistent with these run
 are the cheapest because backprop stops there, and watch the training loss for a few dozen steps. Move down only if it
 stalls, as it did for addition (0.195 vs 0.04). This recipe was not tested as a procedure of its own.
 
+## 4. Math neurons in a Turkish + English model, and surgery on them
+
+The same tools, applied to a model nobody has dissected:
+[Ba2han/step-17k](https://huggingface.co/Ba2han/step-17k). It is a 546M-parameter hybrid trained for 17,542 steps on
+10.3B tokens of Turkish and English text:
+
+* 56 blocks: 42 Gated DeltaNet and 14 gated softmax attention.
+* SwiGLU MLPs with 2,304 neurons each, so 129,024 MLP neurons in total.
+* "Delta Block" depth sources, and a 1B-entry hashed bigram/trigram memory.
+
+Two questions: does the model have math neurons, and can editing them make it better at math? A third question came
+from the model's author: is training the targeted neurons (LoRA) a better use of wall time than editing them by hand?
+
+**Running it on a CPU** (`wsp/hybrid_cpu.py`). The released `patch.py` needs flash-linear-attention's Triton kernels,
+so it runs only on a GPU. Its forward pass also bypasses module hooks. The port re-implements that forward pass line
+for line in plain PyTorch, float32. Checks:
+
+* The chunked gated delta rule matches the token-by-token recurrence to 4 × 10⁻¹⁶.
+* The canonical n-gram map matches the SHA-256 stored at training time.
+* Batched, right-padded and incremental forward passes match a single pass to 3 × 10⁻⁵.
+* Wikipedia NLL is 2.36 (EN) / 2.84 (TR). Removing the n-gram memory costs +0.45 / +0.37 nats; the training run's own
+  eval reported +0.61 on its validation set.
+
+Two invisible U+E000 characters in `patch.py`'s normalizer had to be copied exactly before the n-gram hash matched.
+
+**Data and splits.** Everything is teacher-forced, so one forward pass scores one example:
+
+* *Arithmetic*: 4-shot `Question: What is 23 plus 45?\nAnswer:` problems in English, Turkish
+  (`Soru: 23 artı 45 kaç eder?`) and bare symbols. Seven kinds (1+1, 2+1, 2+2, 2−1, 2−2, 1×1, 2×1 digits). The score
+  is greedy exact match, read off one forward pass over prompt + gold answer + newline.
+* *GSM8K*: [openai/gsm8k](https://huggingface.co/datasets/openai/gsm8k) and the Turkish translation
+  [GSM8K-TR-Gold](https://huggingface.co/datasets/Yigit-Karaman/GSM8K-TR-Gold), calculator annotations stripped.
+  The key metric is *calculation results*: top-1 accuracy on the first number after each "=" in a solution.
+* *Collateral*: NLL on random English and Turkish Wikipedia articles, and NLL on all GSM8K solution tokens.
+
+Neurons are found on GSM8K *train* problems 0-99 per language and Wikipedia articles 0-49. Edits are chosen on a
+*screen* split (GSM8K train 200-249, other articles, other arithmetic seeds). Every reported number is on the *test*
+split: GSM8K *test* problems, held-out articles, new arithmetic. Two caveats on arithmetic:
+
+* Single-digit problems form a closed table of 81 facts, which training sequences also draw from (97-99% overlap).
+  They are reported separately as "1-digit facts".
+* The headline arithmetic metric is the 1,281 two-digit test problems that never appear in any training or scan
+  sequence. They are reconstructed from the seeded RNG streams.
+
+**Baseline (test split).** The model is weak at arithmetic:
+
+* 4-shot single-digit sums and products: 45-58% in bare symbols, about 20% in English or Turkish sentences.
+* Unseen two-digit problems: 3.4%.
+* Calculation results inside GSM8K solutions: 19.8% EN / 19.6% TR.
+
+### Finding the math neurons (`experiments/math_neuron_scan.py`, 30 CPU-minutes)
+
+Each of the 129,024 neurons gets a gain g = 1 in front of its `w_down` column. The gain is a leaf tensor, so outputs
+are unchanged. One backward pass then gives ∂loss/∂g for every neuron at once: the first-order effect of scaling that
+neuron's output, which is exactly what a column edit does. The forward pass of the same scan also records activation
+statistics. Conditions: GSM8K solution tokens (EN, TR), calculation results, arithmetic answers, Wikipedia (EN, TR).
+342 held-in texts, 55,453 tokens.
+
+![Where the math neurons are](results/figures/math_neuron_layers.png)
+
+1. **English and Turkish use the same math neurons.** Across all 129k neurons, the selectivity for math text vs
+   Wikipedia (Cohen's d) correlates at r = 0.69 between the two languages. The top 100 math neurons of each language
+   share 37 (chance 0.1). The top 1,000 share 466 (chance 8).
+2. **Neurons that fire on math text sit in the back half** (layers 21-55, almost none before 16). Examples: neuron
+   335 of layer 33 (d = 1.29 EN / 1.43 TR), neuron 250 of layer 35.
+3. **Neurons whose scaling changes math loss sit elsewhere**, in layers 14-28, peaking at 23-27. That is just before
+   the n-gram memory's second injection (layer 27) and the third Delta Block source (layer 28).
+4. **The two definitions are unrelated.** The rank correlation between activation selectivity and the causal gradient
+   is 0.000. This is the H2 lesson again (§2): "fires on X" is not "drives X".
+
+**Are the firing neurons really math neurons? Knock-outs (screen split).**
+
+* Zeroing the 1,024 most math-selective neurons raises GSM8K solution NLL by +0.040 / +0.048 (EN / TR) and Wikipedia
+  NLL by only +0.001 / +0.004.
+* Zeroing 1,024 random neurons moves both by at most 0.006, with no preference for math text.
+* Arithmetic accuracy does not move in either case.
+
+So these neurons carry the *language* of math word problems, not the calculation.
+
+### Surgery by hand: eleven training-free edits (screen split)
+
+| edit | 2-digit unseen | 1-digit facts | GSM8K calc EN / TR | GSM8K solution NLL EN / TR |
+|---|---|---|---|---|
+| MathNeuro (Christ et al. 2024) at neuron level: 5,010 math-specific neurons ×1.1 | +0.0 ± 0.0 | +0.6 ± 0.7 | +1.2 / +0.5 | −0.002 / +0.000 |
+| same, ×1.25 | +0.1 ± 0.4 | +0.6 ± 1.2 | +0.8 / +0.5 | +0.004 / +0.009 |
+| math-firing neurons ×1.5 (1,024) | −0.4 ± 0.3 | −0.3 ± 0.8 | −4.1 / −0.5 | +0.001 / +0.001 |
+| one-shot gradient gains ±25% on the 1,024 neurons with the largest projected gradient | −0.5 ± 0.6 | **+11.1 ± 2.6** | **−8.3 / −1.4** | +0.027 / +0.029 |
+| same, ±50% | −0.5 ± 0.7 | +0.6 ± 2.5 | −19.6 / −6.1 | +0.135 / +0.147 |
+| random gains ±50% on 1,024 random neurons (control) | −0.1 ± 0.1 | +0.6 ± 0.6 | +0.6 / −0.7 | −0.003 / +0.001 |
+
+(Points, paired against the unedited model on the same items. All 13 screen arms: `results/math/report_tables.md`.)
+
+* Scaling the "math neurons" up does nothing: MathNeuro's recipe and the firing neurons alike.
+* The gradient-picked neurons are real levers. A random edit twice as large does nothing, while ±25% on them moves
+  single-digit facts by +11 points.
+* But a one-shot step trades GSM8K calculation for those facts, and does nothing for unseen problems. The damage grows
+  faster than linearly with step size: GSM8K result NLL rises by +0.36 at ±25% and +1.88 at ±50%. The largest
+  first-order gradients from about 1,100 target tokens are partly noise, and a uniform ±25% on high-influence neurons
+  knocks the residual stream off its distribution.
+* **None of the eleven was a clean improvement.**
+
+### Training the targeted neurons instead (`experiments/math_gain_tune.py`)
+
+Every trained arm is set up the same way:
+
+* *Data*: 100 Adam steps. Each step has one 12-problem arithmetic sequence (new seed) and one GSM8K *train* sequence;
+  the loss is on calculation results and final answers.
+* *Guard*: KL(base ‖ edited) on a Wikipedia article, so general behaviour is pinned rather than co-optimised.
+* *Checkpoint*: the final one (step 100), chosen by rule, not by peeking.
+
+Each arm ends as a plain edit of `w_down` columns, so it is comparable with the manual edits. The arms differ only in
+the parameterisation and in which neurons:
+
+| arm (test split, vs unedited) | trained params | 2-digit unseen (base 3.4%) | 1-digit facts | GSM8K calc EN | GSM8K calc TR | GSM8K solution NLL EN / TR | Wikipedia NLL EN | Wikipedia NLL TR |
+|---|---|---|---|---|---|---|---|---|
+| manual: MathNeuro ×1.1 | 0 | −0.1 ± 0.1 | +1.9 ± 0.8 | −0.4 ± 0.6 | −0.1 ± 0.6 | −0.002 / +0.001 | +0.000 | +0.000 |
+| learned gains on the 4,096 targeted neurons (IA³-style column scales) | 4,096 | +3.3 ± 0.6 | +11.7 ± 1.9 | +3.6 ± 1.4 | +3.4 ± 1.2 | **+0.031 / +0.077** | +0.008 ± 0.001 | +0.009 ± 0.001 |
+| LoRA r=8 on 4,096 **random** neurons' columns | 376,832 | +3.6 ± 0.6 | +10.0 ± 2.0 | +5.1 ± 1.4 | +3.9 ± 1.3 | +0.053 / +0.096 | +0.006 ± 0.001 | +0.007 ± 0.001 |
+| **LoRA r=8 on the 4,096 targeted neurons' columns** | 376,832 | **+4.7 ± 0.7** | +11.9 ± 2.2 | **+7.3 ± 1.6** | +2.8 ± 1.3 | +0.104 / +0.140 | +0.011 ± 0.001 | +0.008 ± 0.001 |
+| LoRA r=8 on every `w_down` (untargeted) | 1,376,256 | **+5.7 ± 0.8** | +22.3 ± 2.5 | **+9.3 ± 1.8** | +4.6 ± 1.6 | +0.392 / +0.477 | +0.014 ± 0.002 | +0.019 ± 0.002 |
+
+(Accuracy in points ± paired SE over 1,281 unseen 2-digit problems, 462 1-digit problems, 150 GSM8K test problems per
+language and 60 articles per language. "Targeted" = the 4,096 neurons with the largest projected gain gradient from
+the scan.)
+
+* **Training beats every manual edit.** Targeted LoRA lifts unseen two-digit arithmetic from 3.4% to 8.1% and English
+  GSM8K calculation by +7.3 points. No hand edit improved either.
+* **Targeting adds a little on top of training.** On the same items:
+  * targeted minus random LoRA: +1.1 ± 0.6 points on unseen two-digit problems and +2.3 ± 1.3 on English GSM8K;
+  * −1.1 ± 1.3 on Turkish GSM8K;
+  * +0.005 ± 0.001 more Wikipedia NLL (EN).
+
+  Most of the gain comes from training at all. 4,096 random neurons get about three quarters of it.
+* **Restricting to neurons buys cleanliness, not more math.** Untargeted LoRA gains the most but costs 4× more on
+  GSM8K solution text (+0.39 nats) and 1.3-2.4× more on Wikipedia. Learned gains (4,096 numbers, the purest
+  "surgery") keep the least collateral on solution text (+0.03 EN) for about 70% of targeted LoRA's arithmetic gain.
+* What this model lacks is not a dimmed math circuit that can be turned up. Its arithmetic gets better when a few
+  hundred thousand parameters are trained on arithmetic.
+
+**Wall time** (4-core CPU, no GPU):
+
+| step | wall time |
+|---|---|
+| Find the neurons: gain-gradient + activation scan of all 129,024 neurons (4 threads) | 30 min |
+| Make and screen one manual edit (no training; 4 threads) | 5.2 min each; 11 screened, none usable |
+| Train 100 steps, any parameterisation (2 threads, sharing the CPU): gains 4k params / LoRA 377k / LoRA 1.38M | 27 / 28-29 / 29 min (16-17 s per step) |
+| Score one arm on the held-out test (2 threads) | 16-17 min |
+
+The cost of a training step is the full forward and backward pass. That is why 4k, 377k and 1.38M trainable
+parameters take the same time. Backprop reaches layer 0, because the targeted neurons start there; a neuron set
+confined to upper layers would also stop backprop early (§3). So:
+
+* The manual route spent about 1.5 h (scan plus eleven screens) and found nothing usable.
+* Training any neuron set cost about 30 min and helped.
+* Targeting added the 30-minute scan for +1-2 points over random neurons.
+
+On this model, for this goal, **training targeted neurons beats editing them by hand**. If wall time is the
+constraint, random-neuron or learned-gain training gives most of the benefit without the scan.
+
+Caveats:
+
+* One seed per arm, and 100 steps. The targeted vs random differences are paired within one run, not across seeds.
+* Teacher-forced scoring, not free generation. The model is too weak for GSM8K chain-of-thought accuracy to mean much.
+* Final-answer NLL on GSM8K drops from 8.6 to 0.4 nats in every trained arm. That is format learning (the number after
+  `####` repeats the last result), not arithmetic, so it is not counted above.
+
+**Using the edit.** Both trained edits are a few MB:
+
+* `results/math/patch_lora_targeted.safetensors`: rank-8 factors per layer, 1.55 MB.
+* `results/math/patch_gains_targeted.safetensors`: 4,096 column scales.
+
+`python experiments/math_apply_edit.py apply <patch> <Ba2han/step-17k dir> <out dir>` writes a `model.safetensors`
+with the edit baked into the `w_down` columns. Everything else (config, `patch.py`, tokenizer, n-gram table) is
+copied or linked, so the result loads exactly like the original with
+`AutoModelForCausalLM.from_pretrained(out_dir, trust_remote_code=True)`.
+
+## 5. Training-run dashboard, rebuilt offline
+
+The training run behind this checkpoint (`packed1-500m-deep`) lost its online W&B sync partway through.
+`experiments/plot_training_run.py` rebuilds the dashboard from the local logs: trainer stdout, the per-step metrics
+file, and the `.wandb` protobuf transaction log. It writes 12 panels plus a summary to `results/training_run/`
+(`index.html` shows them all). What the logs show:
+
+* The run did not crash mid-training. Three launches crashed before step 1 with the same GQA head-count `ValueError`;
+  the fourth trained all 17,542 steps without a restart.
+* W&B online sync was refused with HTTP 403 after step 9,434; the local log is complete.
+* 20 of the 21 Hub checkpoint uploads failed on the private-storage limit.
+* Final eval loss 2.392 (perplexity 10.94); 3.003 without the n-gram memory.
+
 ## Related work
 
 Links checked by a Haiku scout agent; the claims are from each paper's abstract or README.
@@ -456,6 +659,8 @@ Links checked by a Haiku scout agent; the claims are from each paper's abstract 
 | [A Mathematical Framework for Transformer Circuits](https://transformer-circuits.pub/2021/framework/index.html), Elhage et al. 2021 | QK / OV circuits and composition scores, the basis of our Exp 3 tool. |
 | [Massive Activations](https://arxiv.org/abs/2402.17762), Sun et al., COLM 2024 | A few fixed dimensions carry activations ~10⁵× larger than the rest. This is the likely reason layers 2, 3 and 21 of Qwen2.5-0.5B carry most of the gradient energy for any loss (§3). |
 | [WeightWatcher](https://github.com/CalculatedContent/WeightWatcher), Martin & Mahoney | Power-law fits of each layer's eigenvalue spectrum as a training-free, data-free diagnostic. |
+| [Math Neurosurgery (MathNeuro)](https://arxiv.org/abs/2410.16930) ([code](https://github.com/bryanchrist/MathNeuro)), Christ et al. 2024 | Finds math-specific parameters with weight × activation importance (math minus general text) and reports GSM8K gains of 4-17% from scaling them by a small factor on 1-8B models. Our `mathneuro` arms are a neuron-level re-implementation; on Ba2han/step-17k they were neutral (§4). |
+| [IA³](https://arxiv.org/abs/2205.05638), Liu et al. 2022 | Learns per-channel scales on activations, including the FFN intermediate. Our "learned gains" arm is IA³ restricted to the targeted `w_down` columns. |
 
 ## Repository layout
 
@@ -467,6 +672,9 @@ Links checked by a Haiku scout agent; the claims are from each paper's abstract 
 | `wsp/neuron_scan.py`, `experiments/h2_blind_neuron_scan.py`, `h2_scan_then_screen.py`, `h2_scan_ablate.py` | H2, blind: a one-pass scan of every MLP neuron (over/under-activation and push), a 6-candidate causal screen, and the layer-vs-neuron ablation. |
 | `experiments/h1_*.py`, `experiments/h1_sweep.sh` | H1: tool-based placement and LoRA arms on Qwen2.5-0.5B-Instruct. |
 | `wsp/` | Shared code: model helpers, tasks and retention probes (`tasks.py`), placement tools (`locate.py`), LoRA and neuron-sparse training with cost accounting (`train.py`). |
+| `wsp/hybrid_cpu.py`, `wsp/math_eval.py`, `wsp/neuron_edit.py` | §4: CPU port of the exp_train hybrid LM, teacher-forced math / text probes, `w_down` column edits. |
+| `experiments/math_*.py` | §4: data build, neuron scan and analysis, manual-edit screen and test (`math_surgery.py`), trained arms (`math_gain_tune.py`), report, patch packing / applying. Results in `results/math/`. |
+| `experiments/plot_training_run.py`, `results/training_run/` | §5: offline rebuild of the training run's W&B dashboard. |
 | `results/` | Every number in this README, as JSON (`verify/`, `h1/`, `h2/`). |
 
 ## Reproduce
@@ -498,3 +706,18 @@ python experiments/h1_report.py && python experiments/make_figures.py
 
 The arms that ran after the host change used `experiments/h1_fp32_queue.sh`, which keeps two float32 runs under the
 session's ~15 GB memory limit.
+
+§4 needs the checkpoint in `/home/user/models/step-17k` (all files of `Ba2han/step-17k`). Keep the total thread count
+at or below the core count: oversubscribed OpenMP threads made one screen arm 6× slower here.
+
+```bash
+python experiments/math_data.py                          # GSM8K EN/TR + Wikipedia EN/TR samples -> results/math/data/
+python experiments/math_neuron_scan.py                   # ~30 min: all 129,024 neurons, gain gradients + activations
+python experiments/math_neuron_analyze.py                # rankings, EN/TR overlap, layer profiles
+python experiments/math_surgery.py --stage screen --arms base mathneuro5x1.1 gain1024x0.25 ablate_d1024 ablate_rand1024
+python experiments/math_gain_tune.py --mode lora --set grad4096 --threads 2   # also: --set rand4096, --set all, --mode gain
+python experiments/math_surgery.py --stage test --arms base tune_lora-grad4096_step100 tune_lora-rand4096_step100
+python experiments/math_report.py                        # results/math/report_tables.md and figures
+python experiments/math_apply_edit.py apply results/math/patch_lora_targeted.safetensors /home/user/models/step-17k /home/user/models/step-17k-math
+```
+
