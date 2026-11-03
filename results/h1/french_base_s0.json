@@ -1,0 +1,23 @@
+{
+ "purpose": "french",
+ "arm": "base",
+ "seed": 0,
+ "cache_prefix": true,
+ "dtype": "float32",
+ "eval": {
+  "french_rate": 0.0,
+  "french_score_mean": 0.0011574074074074073,
+  "examples": [
+   "In American football, a touchdown is worth 6 points. This is the standard scoring system used in the sport.",
+   "The first iPhone was released in 2007.",
+   "To convert Fahrenheit to Celsius, you can use the formula:\n\n\\[ C = \\frac{5}{9} \\times (F - 32) \\]\n\nwhere \\( C \\) is the temperature in Celsius and \\( F \\)",
+   "In the southern hemisphere, the season is winter."
+  ],
+  "capitals_acc": 1.0,
+  "capitals_french_rate": 0.0,
+  "kl_wiki": 0.0,
+  "mmlu": 0.42,
+  "eval_s": 429.9637708810001
+ },
+ "mmlu_base": 0.42
+}
