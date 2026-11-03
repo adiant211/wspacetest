@@ -160,7 +160,7 @@ def _pad(chunk):
 
 
 @torch.no_grad()
-def kl_to_base(model, base, ids_list, masks, bs=8):
+def kl_to_base(model, base, ids_list, masks, bs=2):
     """Mean over scored positions of KL(base || model), computed batch by batch (exact, full vocabulary).
     Right padding + causal attention, so pads never influence real positions."""
     tot, cnt = 0.0, 0
@@ -208,7 +208,7 @@ def mmlu_eval(model, tok, items, bs=8):
     tok.padding_side = "left"
     for b in range(0, len(prompts), bs):
         enc = tok(prompts[b:b + bs], return_tensors="pt", padding=True, add_special_tokens=False)
-        logits = model(**enc).logits[:, -1, :].float()
+        logits = model(**enc, logits_to_keep=1).logits[:, -1, :].float()   # last position only: same values, far less memory
         pred = logits[:, letter_ids].argmax(-1)
         correct += sum(int(p) == it["answer"] for p, it in zip(pred.tolist(), items[b:b + bs]))
     return correct / len(items)
