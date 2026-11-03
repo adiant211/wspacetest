@@ -7,6 +7,18 @@
     14,
     15
    ],
+   "grad_rel_top4": [
+    9,
+    13,
+    14,
+    15
+   ],
+   "grad_top4_upper": [
+    12,
+    13,
+    14,
+    15
+   ],
    "grad_bottom4": [
     19,
     20,
@@ -73,94 +85,97 @@
     "arm": "base",
     "label": "no fine-tune",
     "layers": "-",
+    "dtype": "bfloat16",
     "acc_5digit": 0.5333333333333333,
     "acc_6digit_ood": 0.2,
     "kl_wiki": 0.0,
-    "mmlu": 0.435,
-    "kl_chat": 0.0
+    "kl_chat": 0.0,
+    "mmlu": 0.435
    },
    {
     "arm": "full",
     "label": "LoRA, all 24 layers",
-    "layers": "0-23",
+    "layers": "all",
+    "dtype": "bfloat16",
     "acc_5digit": 0.8866666666666667,
     "acc_6digit_ood": 0.805,
     "kl_wiki": 0.158786961187919,
-    "mmlu": 0.345,
     "kl_chat": 0.44284140645140013,
-    "trainable_params": 4399104,
-    "total_train_s": 641.9315418420001,
-    "s_per_step": 4.2795140759,
-    "peak_rss_mb": 4485.69921875,
+    "mmlu": 0.345,
     "final_loss": 0.04322504517622292,
-    "prefix_cache_s": 3.300001480965875e-07,
-    "lowest_trainable_layer": 0
+    "trainable_params": 4399104
    },
    {
     "arm": "pick4",
-    "label": "LoRA, 4 tool-picked layers",
+    "label": "LoRA, 4 layers: task-gradient tool",
     "layers": [
      2,
      9,
      14,
      15
     ],
+    "dtype": "bfloat16",
     "acc_5digit": 0.8966666666666666,
     "acc_6digit_ood": 0.87,
     "kl_wiki": 0.03382465949592491,
-    "mmlu": 0.39,
     "kl_chat": 0.06630138078188555,
-    "trainable_params": 733184,
-    "total_train_s": 445.5095281919994,
-    "s_per_step": 2.8460952601733336,
-    "peak_rss_mb": 3381.26171875,
+    "mmlu": 0.39,
     "final_loss": 0.035908205132000146,
-    "prefix_cache_s": 18.59355239099932,
-    "lowest_trainable_layer": 2
+    "trainable_params": 733184
    },
    {
     "arm": "pick4r",
-    "label": "LoRA, 4 tool-picked layers (relative)",
+    "label": "LoRA, 4 layers: task / generic gradient",
     "layers": [
      9,
      13,
      14,
      15
     ],
+    "dtype": "bfloat16",
     "acc_5digit": 0.9,
     "acc_6digit_ood": 0.835,
     "kl_wiki": 0.012868071595827738,
-    "mmlu": 0.415,
     "kl_chat": 0.04331582645135986,
-    "trainable_params": 733184,
-    "total_train_s": 402.93621028799953,
-    "s_per_step": 2.100928894520002,
-    "peak_rss_mb": 3079.76171875,
+    "mmlu": 0.415,
     "final_loss": 0.047000636579468846,
-    "prefix_cache_s": 87.79509340200002,
-    "lowest_trainable_layer": 9
+    "trainable_params": 733184
    },
    {
     "arm": "pick4u",
-    "label": "LoRA, 4 tool-picked upper layers",
+    "label": "LoRA, 4 layers: tool, upper half only",
     "layers": [
      12,
      13,
      14,
      15
     ],
+    "dtype": "bfloat16",
     "acc_5digit": 0.8733333333333333,
     "acc_6digit_ood": 0.835,
     "kl_wiki": 0.016209121017406385,
-    "mmlu": 0.35,
     "kl_chat": 0.046151732398567645,
-    "trainable_params": 733184,
-    "total_train_s": 398.81788186800077,
-    "s_per_step": 1.8646643556600004,
-    "peak_rss_mb": 2861.75390625,
+    "mmlu": 0.35,
     "final_loss": 0.04498513108119369,
-    "prefix_cache_s": 119.11639766200096,
-    "lowest_trainable_layer": 12
+    "trainable_params": 733184
+   },
+   {
+    "arm": "spectrum4",
+    "label": "LoRA, 4 layers: Spectrum SNR (weights only)",
+    "layers": [
+     1,
+     3,
+     4,
+     7
+    ],
+    "dtype": "float32",
+    "acc_5digit": 0.9,
+    "acc_6digit_ood": 0.895,
+    "kl_wiki": 0.06850862130522728,
+    "kl_chat": 0.16455024783105937,
+    "mmlu": 0.395,
+    "final_loss": 0.03556986155454069,
+    "trainable_params": 733184
    },
    {
     "arm": "arb4",
@@ -171,18 +186,14 @@
      22,
      23
     ],
+    "dtype": "bfloat16",
     "acc_5digit": 0.8833333333333333,
     "acc_6digit_ood": 0.785,
     "kl_wiki": 0.025043882041548688,
-    "mmlu": 0.415,
     "kl_chat": 0.06485553130371828,
-    "trainable_params": 733184,
-    "total_train_s": 439.65670545800094,
-    "s_per_step": 1.7007721755666716,
-    "peak_rss_mb": 2938.6171875,
+    "mmlu": 0.415,
     "final_loss": 0.04545817784965038,
-    "prefix_cache_s": 184.53887843600023,
-    "lowest_trainable_layer": 12
+    "trainable_params": 733184
    },
    {
     "arm": "rand4a",
@@ -193,18 +204,14 @@
      12,
      20
     ],
+    "dtype": "bfloat16",
     "acc_5digit": 0.8833333333333333,
     "acc_6digit_ood": 0.875,
     "kl_wiki": 0.05227790431429943,
-    "mmlu": 0.4,
     "kl_chat": 0.15212209296009477,
-    "trainable_params": 733184,
-    "total_train_s": 482.0781323150004,
-    "s_per_step": 2.9249415592733325,
-    "peak_rss_mb": 3302.984375,
+    "mmlu": 0.4,
     "final_loss": 0.038919139513745905,
-    "prefix_cache_s": 43.33501321800031,
-    "lowest_trainable_layer": 4
+    "trainable_params": 733184
    },
    {
     "arm": "rand4b",
@@ -215,80 +222,80 @@
      3,
      17
     ],
+    "dtype": "bfloat16",
     "acc_5digit": 0.91,
     "acc_6digit_ood": 0.885,
     "kl_wiki": 0.11290998260180156,
-    "mmlu": 0.425,
     "kl_chat": 0.10539177056251793,
-    "trainable_params": 733184,
-    "total_train_s": 524.6479823129994,
-    "s_per_step": 3.423556849366675,
-    "peak_rss_mb": 3386.4296875,
+    "mmlu": 0.425,
     "final_loss": 0.033490564790554345,
-    "prefix_cache_s": 11.111839387000146,
-    "lowest_trainable_layer": 1
+    "trainable_params": 733184
    },
    {
     "arm": "anti4",
-    "label": "LoRA, 4 anti-picked layers",
+    "label": "LoRA, 4 layers the tool ranks lowest",
     "layers": [
      19,
      20,
      22,
      23
     ],
+    "dtype": "bfloat16",
     "acc_5digit": 0.64,
     "acc_6digit_ood": 0.31,
     "kl_wiki": 0.019766832042175036,
-    "mmlu": 0.425,
     "kl_chat": 0.012529938289185959,
-    "trainable_params": 733184,
-    "total_train_s": 352.17703500100106,
-    "s_per_step": 1.071198104553332,
-    "peak_rss_mb": 2618.875,
+    "mmlu": 0.425,
     "final_loss": 0.19451011754572392,
-    "prefix_cache_s": 191.49550048000128,
-    "lowest_trainable_layer": 19
+    "trainable_params": 733184
    },
    {
     "arm": "neur",
-    "label": "64+64 tool-picked neurons",
+    "label": "64 + 64 neurons: task-gradient tool",
     "layers": [
      2,
      3
     ],
+    "dtype": "float32",
     "acc_5digit": 0.91,
     "acc_6digit_ood": 0.865,
     "kl_wiki": 0.17773101789255938,
-    "mmlu": 0.415,
     "kl_chat": 0.14756838878512538,
-    "trainable_params": 114688,
-    "total_train_s": 1005.9342750070009,
-    "s_per_step": 6.316754090299995,
-    "peak_rss_mb": 5013.15234375,
+    "mmlu": 0.415,
     "final_loss": 0.04009730610996485,
-    "prefix_cache_s": 58.42000774799999,
-    "lowest_trainable_layer": 2
+    "trainable_params": 114688
    },
    {
     "arm": "neur_rand",
-    "label": "64+64 random neurons",
+    "label": "64 + 64 random neurons",
     "layers": [
      2,
      3
     ],
+    "dtype": "float32",
     "acc_5digit": 0.8166666666666667,
     "acc_6digit_ood": 0.67,
     "kl_wiki": 0.00037138504194444977,
-    "mmlu": 0.45,
     "kl_chat": 0.013605155447989663,
-    "trainable_params": 114688,
-    "total_train_s": 1006.7515282199993,
-    "s_per_step": 6.321700554759997,
-    "peak_rss_mb": 4997.0,
+    "mmlu": 0.45,
     "final_loss": 0.0932445821352303,
-    "prefix_cache_s": 58.49535443900004,
-    "lowest_trainable_layer": 2
+    "trainable_params": 114688
+   }
+  ],
+  "cost": [
+   {
+    "purpose": "add",
+    "arm": "full",
+    "trainable_params": 4399104,
+    "adam_state_mb": 33.5625,
+    "lowest_trainable_layer": 0,
+    "s_per_step": 4.835217243500665,
+    "prefix_cache_s": 0.0,
+    "est_total_s": 725.2825865250998,
+    "peak_rss_mb": 6818.7265625,
+    "timed_steps": 8,
+    "threads": 4,
+    "dtype": "float32"
    }
   ]
  },
@@ -299,6 +306,18 @@
     2,
     3,
     4
+   ],
+   "grad_rel_top4": [
+    5,
+    10,
+    11,
+    12
+   ],
+   "grad_top4_upper": [
+    12,
+    16,
+    21,
+    23
    ],
    "grad_bottom4": [
     18,
@@ -366,73 +385,74 @@
     "arm": "base",
     "label": "no fine-tune",
     "layers": "-",
+    "dtype": "float32",
     "french_rate": 0.0,
     "capitals_acc": 1.0,
     "kl_wiki": 0.0,
     "mmlu": 0.42
    },
    {
+    "arm": "full",
+    "label": "LoRA, all 24 layers",
+    "layers": "all",
+    "dtype": "float32",
+    "french_rate": 1.0,
+    "capitals_acc": 0.7708333333333334,
+    "kl_wiki": 0.19620586559176445,
+    "mmlu": 0.385,
+    "final_loss": 0.30147767886519433,
+    "trainable_params": 4399104
+   },
+   {
     "arm": "pick4",
-    "label": "LoRA, 4 tool-picked layers",
+    "label": "LoRA, 4 layers: task-gradient tool",
     "layers": [
      0,
      2,
      3,
      4
     ],
+    "dtype": "float32",
     "french_rate": 0.9791666666666666,
     "capitals_acc": 0.75,
     "kl_wiki": 0.4596436321735382,
     "mmlu": 0.275,
-    "trainable_params": 733184,
-    "total_train_s": 911.4806570440005,
-    "s_per_step": 7.595658824725001,
-    "peak_rss_mb": 6222.59765625,
     "final_loss": 1.0710546642541885,
-    "prefix_cache_s": 5.030005922890268e-07,
-    "lowest_trainable_layer": 0
+    "trainable_params": 733184
    },
    {
     "arm": "pick4r",
-    "label": "LoRA, 4 tool-picked layers (relative)",
+    "label": "LoRA, 4 layers: task / generic gradient",
     "layers": [
      5,
      10,
      11,
      12
     ],
+    "dtype": "float32",
     "french_rate": 0.9895833333333334,
     "capitals_acc": 0.5208333333333334,
     "kl_wiki": 0.03984985485052069,
     "mmlu": 0.345,
-    "trainable_params": 733184,
-    "total_train_s": 787.7475400149997,
-    "s_per_step": 6.214309233050002,
-    "peak_rss_mb": 5795.57421875,
     "final_loss": 0.6776836425065994,
-    "prefix_cache_s": 42.02805118699962,
-    "lowest_trainable_layer": 5
+    "trainable_params": 733184
    },
    {
     "arm": "spectrum4",
-    "label": "LoRA, 4 Spectrum layers",
+    "label": "LoRA, 4 layers: Spectrum SNR (weights only)",
     "layers": [
      1,
      3,
      4,
      7
     ],
+    "dtype": "float32",
     "french_rate": 0.9895833333333334,
     "capitals_acc": 0.4375,
     "kl_wiki": 0.252715278416872,
     "mmlu": 0.405,
-    "trainable_params": 733184,
-    "total_train_s": 924.8625556759998,
-    "s_per_step": 7.63501210123333,
-    "peak_rss_mb": 6197.46484375,
     "final_loss": 0.7309243530035019,
-    "prefix_cache_s": 8.658142152000437,
-    "lowest_trainable_layer": 1
+    "trainable_params": 733184
    },
    {
     "arm": "rand4a",
@@ -443,39 +463,32 @@
      12,
      20
     ],
+    "dtype": "float32",
     "french_rate": 0.9895833333333334,
     "capitals_acc": 0.5416666666666666,
     "kl_wiki": 0.06070823284486929,
     "mmlu": 0.37,
-    "trainable_params": 733184,
-    "total_train_s": 821.2689210519993,
-    "s_per_step": 6.55269139640834,
-    "peak_rss_mb": 5927.5390625,
     "final_loss": 0.5964247539639473,
-    "prefix_cache_s": 34.944000739999865,
-    "lowest_trainable_layer": 4
+    "trainable_params": 733184
    },
    {
     "arm": "anti4",
-    "label": "LoRA, 4 anti-picked layers",
+    "label": "LoRA, 4 layers the tool ranks lowest",
     "layers": [
      18,
      19,
      20,
      22
     ],
+    "dtype": "float32",
     "french_rate": 1.0,
     "capitals_acc": 0.8958333333333334,
     "kl_wiki": 0.09948522876948118,
     "mmlu": 0.44,
-    "trainable_params": 733184,
-    "total_train_s": 533.1683577570002,
-    "s_per_step": 3.098200218424995,
-    "peak_rss_mb": 4086.47265625,
     "final_loss": 0.5348816737532616,
-    "prefix_cache_s": 161.38152070100023,
-    "lowest_trainable_layer": 18
+    "trainable_params": 733184
    }
-  ]
+  ],
+  "cost": []
  }
 }

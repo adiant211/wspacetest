@@ -1,0 +1,30 @@
+[
+ {
+  "purpose": "add",
+  "arm": "full",
+  "trainable_params": 4399104,
+  "adam_state_mb": 33.5625,
+  "lowest_trainable_layer": 0,
+  "s_per_step": 4.835217243500665,
+  "prefix_cache_s": 0.0,
+  "est_total_s": 725.2825865250998,
+  "peak_rss_mb": 6818.7265625,
+  "timed_steps": 8,
+  "threads": 4,
+  "dtype": "float32"
+ },
+ {
+  "purpose": "add",
+  "arm": "pick4",
+  "trainable_params": 733184,
+  "adam_state_mb": 5.59375,
+  "lowest_trainable_layer": 2,
+  "s_per_step": 4.15501904499979,
+  "prefix_cache_s": 43.08269001562337,
+  "est_total_s": 666.3355467655919,
+  "peak_rss_mb": 5469.64453125,
+  "timed_steps": 8,
+  "threads": 4,
+  "dtype": "float32"
+ }
+]

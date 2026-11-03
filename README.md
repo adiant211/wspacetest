@@ -13,6 +13,32 @@ weights directly. The repo asks three things:
 
 Everything ran on a 4-core x86 CPU with AMX-bf16 and no GPU (PyTorch 2.15, transformers 5.22, PEFT 0.21).
 
+## TL;DR
+
+* **The blog's claims hold up wherever they can be re-run on a CPU.**
+  * Astra's MinAtar networks (Exp 5) and Go networks (Exp 6) score what the post says, within 1.4 and 1.7 standard
+    errors over 1,000 episodes and 2,000 games.
+  * Its weight edits (Exps 4 and 8) rebuild bit for bit from the public weights.
+  * The Qwen3.5-0.8B loop edit really does keep the model out of loops: restarted just before the point where the
+    unedited model loops, repetition falls from 50.7% to 27.7% (14 / 16). It hits loop text about 2× harder than
+    normal reasoning, but less cleanly than Astra's own probe claimed.
+  * Two claims could not be re-run here: the MATH-500 jump (~60M generated tokens) and Kinetix (needs a JAX
+    simulator).
+* **H2 (read weight space with ordinary tools instead of a frontier LLM): mostly yes.**
+  * Short deterministic scripts recover Astra's readings: 3 / 3 diffusion shapes, 2 / 3 networks' copying heads
+    exactly, 3 / 4 games.
+  * A mean-difference pipeline **rediscovers Astra's Exp 8 edit in 6 minutes of CPU**: the same direction (|cos|
+    0.71 / 0.72), 39 / 64 and 29 / 64 of the same neurons (chance ≈ 1), and 77% of its loop selectivity. Astra took
+    20 hours and ≥ 11M tokens.
+  * The tools still needed someone to say what to look for, and they missed a few things Astra caught.
+* **H1 (hand-pick layers or neurons for LoRA for a specific purpose): yes for cost and collateral damage, with a big
+  caveat on how to pick.**
+  * Four well-chosen layers match all-layer LoRA on the target with 6× fewer trainable weights, and 2-12× less
+    collateral damage. The cost benchmark below gives the per-step savings.
+  * Neuron-level picks (114,688 weights, Astra's footprint) match all-layer accuracy for addition.
+  * Placement is purpose-specific. The same cheap gradient tool that picked the best layers for addition (middle)
+    picked the worst for "answer in French", where the last layers were best by far.
+
 <!-- RESULTS -->
 
 ## 1. Do the blog's claims hold up?
@@ -161,7 +187,20 @@ French. The bf16 and float32 base models score within 1.5 points of each other o
 
 ### Results: addition (base 53.3%, 6-digit 20.0%)
 
-<!-- H1_ADD_TABLE -->
+| arm | layers | 5-digit | 6-digit (unseen) | KL Wikipedia | KL chat | MMLU-200 | final train loss | trainable weights | precision |
+|---|---|---|---|---|---|---|---|---|---|
+| no fine-tune | - | 53.3% | 20.0% | 0.0000 | 0.0000 | 43.5% | - | - | bfloat16 |
+| LoRA, all 24 layers | all | 88.7% | 80.5% | 0.1588 | 0.4428 | 34.5% | 0.043 | 4,399,104 | bfloat16 |
+| LoRA, 4 layers: task-gradient tool | 2, 9, 14, 15 | 89.7% | 87.0% | 0.0338 | 0.0663 | 39.0% | 0.036 | 733,184 | bfloat16 |
+| LoRA, 4 layers: task / generic gradient | 9, 13, 14, 15 | 90.0% | 83.5% | 0.0129 | 0.0433 | 41.5% | 0.047 | 733,184 | bfloat16 |
+| LoRA, 4 layers: tool, upper half only | 12, 13, 14, 15 | 87.3% | 83.5% | 0.0162 | 0.0462 | 35.0% | 0.045 | 733,184 | bfloat16 |
+| LoRA, 4 layers: Spectrum SNR (weights only) | 1, 3, 4, 7 | 90.0% | 89.5% | 0.0685 | 0.1646 | 39.5% | 0.036 | 733,184 | float32 |
+| LoRA, 4 arbitrary layers | 12, 21, 22, 23 | 88.3% | 78.5% | 0.0250 | 0.0649 | 41.5% | 0.045 | 733,184 | bfloat16 |
+| LoRA, 4 random layers (a) | 4, 10, 12, 20 | 88.3% | 87.5% | 0.0523 | 0.1521 | 40.0% | 0.039 | 733,184 | bfloat16 |
+| LoRA, 4 random layers (b) | 1, 2, 3, 17 | 91.0% | 88.5% | 0.1129 | 0.1054 | 42.5% | 0.033 | 733,184 | bfloat16 |
+| LoRA, 4 layers the tool ranks lowest | 19, 20, 22, 23 | 64.0% | 31.0% | 0.0198 | 0.0125 | 42.5% | 0.195 | 733,184 | bfloat16 |
+| 64 + 64 neurons: task-gradient tool | 2, 3 | 91.0% | 86.5% | 0.1777 | 0.1476 | 41.5% | 0.040 | 114,688 | float32 |
+| 64 + 64 random neurons | 2, 3 | 81.7% | 67.0% | 0.0004 | 0.0136 | 45.0% | 0.093 | 114,688 | float32 |
 
 * **Placement decides whether the skill is learned at all.** On the 4 layers the tool ranks lowest (19, 20, 22, 23),
   LoRA reaches only 64.0%, with training loss stuck at 0.195. Every 4-layer placement that touches the middle of the
@@ -171,6 +210,10 @@ French. The bf16 and float32 base models score within 1.5 points of each other o
 * **The tool's picks do the least collateral damage** among the arms that learn the task. The relative pick's KL on
   Wikipedia is 0.013 vs 0.159 for all-layer LoRA (12× less) and 0.052-0.113 for random 4-layer placements. KL on chat
   replies is 0.043 vs 0.443, and MMLU-200 is 41.5% vs 34.5% (base 43.5%).
+* **Weight-only picks work, but are not the cleanest.** The Spectrum SNR pick (1, 3, 4, 7) learns the task (90.0% /
+  89.5%, the best unseen-length score) with 5× the relative tool pick's KL on Wikipedia (0.069). An earlier version of
+  our Spectrum score had a NaN bug and picked layers 12, 21, 22, 23 arbitrarily; that run is kept as the
+  "4 arbitrary layers" control.
 * **Neurons.** Training only the down_proj columns of 64 + 64 tool-picked neurons (114,688 weights, Astra's footprint,
   38× fewer than all-layer LoRA) reaches 91.0% / 86.5%, as good as any arm. 64 + 64 random neurons in the same two
   layers reach 81.7% / 67.0%. But the tool's neurons sit in layers 2-3, which carry most of the gradient for *any* loss.
@@ -178,7 +221,15 @@ French. The bf16 and float32 base models score within 1.5 points of each other o
 
 ### Results: answer in French (base: 0% French, capitals 100%, MMLU-200 42.0%)
 
-<!-- H1_FR_TABLE -->
+| arm | layers | in French | capitals right | KL Wikipedia | MMLU-200 | final train loss | trainable weights | precision |
+|---|---|---|---|---|---|---|---|---|
+| no fine-tune | - | 0.0% | 100.0% | 0.0000 | 42.0% | - | - | float32 |
+| LoRA, all 24 layers | all | 100.0% | 77.1% | 0.1962 | 38.5% | 0.301 | 4,399,104 | float32 |
+| LoRA, 4 layers: task-gradient tool | 0, 2, 3, 4 | 97.9% | 75.0% | 0.4596 | 27.5% | 1.071 | 733,184 | float32 |
+| LoRA, 4 layers: task / generic gradient | 5, 10, 11, 12 | 99.0% | 52.1% | 0.0398 | 34.5% | 0.678 | 733,184 | float32 |
+| LoRA, 4 layers: Spectrum SNR (weights only) | 1, 3, 4, 7 | 99.0% | 43.8% | 0.2527 | 40.5% | 0.731 | 733,184 | float32 |
+| LoRA, 4 random layers (a) | 4, 10, 12, 20 | 99.0% | 54.2% | 0.0607 | 37.0% | 0.596 | 733,184 | float32 |
+| LoRA, 4 layers the tool ranks lowest | 18, 19, 20, 22 | 100.0% | 89.6% | 0.0995 | 44.0% | 0.535 | 733,184 | float32 |
 
 * **The target cannot tell placements apart; the side effects can.** Every placement makes the model answer in French
   (98-100%). Knowledge survives very differently: capitals 43.8-89.6%, MMLU-200 27.5-44.0%.
