@@ -500,7 +500,7 @@ split: GSM8K *test* problems, held-out articles, new arithmetic. Two caveats on 
 
 **Baseline (test split).** The model is weak at arithmetic:
 
-* 4-shot single-digit sums and products: 45-58% in bare symbols, about 20% in English or Turkish sentences.
+* 4-shot single-digit sums and products: 59.7% as bare symbols, 11.0% in English sentences, 22.1% in Turkish ones.
 * Unseen two-digit problems: 3.4%.
 * Calculation results inside GSM8K solutions: 19.8% EN / 19.6% TR.
 
