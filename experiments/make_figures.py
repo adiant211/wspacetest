@@ -168,8 +168,49 @@ def fig_tradeoff():
     plt.close(fig)
 
 
+def fig_scan():
+    """Blind neuron scan: which layers each score points to, and where Astra's neurons sit on activation vs push."""
+    b = load("h2/blind_neuron_scan.json")
+    if not b:
+        return
+    fig, ax = plt.subplots(1, 3, figsize=(13.5, 3.9), gridspec_kw={"width_ratios": [1.25, 1, 1]})
+    L = np.arange(24)
+    a = ax[0]
+    for key, col, name in (("push", BLUE, "push: activation change × write along the repeat direction"),
+                           ("d", ORANGE, "over/under-activation only (Cohen's d)")):
+        v = np.array(b["layer_scores"][key])
+        a.plot(L, v / v.max(), color=col, lw=2, marker="o", ms=4, label=name)
+    for l in (15, 19):
+        a.axvline(l, color=GRAY, lw=1, ls="--", zorder=0)
+        a.annotate(f"Astra L{l}", (l, 1.04), ha="center", fontsize=8, color=INK2, annotation_clip=False)
+    a.set_ylim(0, 1.1)
+    a.set_xticks(range(0, 24, 2))
+    a.set_xlabel("layer")
+    a.set_ylabel("layer score (top-64 neurons), share of max")
+    a.set_title("Which layers the scan points to, no hints", loc="left", fontsize=10, color=INK, pad=14)
+    a.legend(fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.17), ncol=1)
+    for a, l in zip(ax[1:], (15, 19)):
+        d = np.array(b["per_layer_neuron_scores"]["d"][l])
+        p = np.array(b["per_layer_neuron_scores"]["push"][l])
+        cols = b["astra_cols"][str(l)]
+        a.scatter(d, p, s=4, color=GRAY, alpha=0.5, linewidth=0, label="all 3,584 neurons", rasterized=True)
+        a.scatter(d[cols], p[cols], s=18, color=BLUE, edgecolor="white", linewidth=0.6, label="Astra's 64 neurons", zorder=3)
+        a.set_yscale("symlog", linthresh=1e-3)
+        a.axvline(0, color=GRAY, lw=1)
+        a.axhline(0, color=GRAY, lw=1)
+        a.set_xlabel("Cohen's d, repeating vs not (← under | over-active →)")
+        a.set_ylabel("push toward repeating (symlog)")
+        a.set_title(f"Layer {l}: Astra's neurons, activation vs push", loc="left", fontsize=10, color=INK, pad=14)
+        a.legend(fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.17), ncol=2, markerscale=1.5)
+    fig.tight_layout()
+    fig.subplots_adjust(bottom=0.3)
+    fig.savefig(os.path.join(FIG, "neuron_scan.png"), dpi=150)
+    plt.close(fig)
+
+
 if __name__ == "__main__":
     fig_verify()
     fig_where()
     fig_tradeoff()
+    fig_scan()
     print(sorted(os.listdir(FIG)))
