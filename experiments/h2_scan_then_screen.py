@@ -16,7 +16,10 @@ distribution. So we add one cheap causal step, still without hints and still nev
 
 Also saves the scan's per-layer directions u (results/h2/scan_u.pt) so later runs can skip step 1.
 
-Usage: python experiments/h2_scan_then_screen.py [--shortlist 6] [--n-screen 4] [--keep 2]
+--labels ngram (default) marks a token "repeating" if the 12-gram ending there already occurred earlier in the answer;
+--labels window marks the 768 tokens after the loop starts as 1 and the 768 before as 0 (the contrast the test scores).
+
+Usage: python experiments/h2_scan_then_screen.py [--labels ngram|window] [--shortlist 6] [--n-screen 4] [--keep 2]
 """
 import argparse
 import json
@@ -68,7 +71,9 @@ def main():
     ap.add_argument("--keep", type=int, default=2)
     ap.add_argument("--seg", type=int, default=768)
     ap.add_argument("--dtype", default="float32", choices=["bfloat16", "float32"])
+    ap.add_argument("--labels", default="ngram", choices=["ngram", "window"])
     a = ap.parse_args()
+    tag = "" if a.labels == "ngram" else "_" + a.labels
     torch.manual_seed(0)
     tok = AutoTokenizer.from_pretrained(MODEL, revision=REV)
     model = AutoModelForCausalLM.from_pretrained(MODEL, revision=REV, dtype=getattr(torch, a.dtype)).eval()
@@ -82,11 +87,13 @@ def main():
     examples = []
     for c in scans:
         s0, e = c["onset"] - a.seg, c["onset"] + a.seg
-        examples.append((c["ids"][:e], repeat_labels(c["ids"], c["plen"], s0, e)))
+        lab = (repeat_labels(c["ids"], c["plen"], s0, e) if a.labels == "ngram" else
+               [-1] * s0 + [0] * (c["onset"] - s0) + [1] * (e - c["onset"]))
+        examples.append((c["ids"][:e], lab))
     res, timing["scan_s"] = scan(model, layers, examples)
     torch.save({"u": torch.stack([r["u"] for r in res]), "push": [torch.from_numpy(r["push"]) for r in res],
                 "d": [torch.from_numpy(r["d"]) for r in res], "scan_ids": [c["id"] for c in scans]},
-               os.path.join(OUT, "scan_u.pt"))
+               os.path.join(OUT, f"scan_u{tag}.pt"))
     ls = layer_scores(res)
     # 2. shortlist
     shortlist = np.argsort(-ls["push"])[:a.shortlist].tolist()
@@ -139,11 +146,11 @@ def main():
     summ = {nm: summarize([r[f"{nm}_prod"] - r["base_prod"] for r in rows], [r[f"{nm}_loop"] - r["base_loop"] for r in rows])
             for nm in ("astra", "blind_push", *edits)}
     print(json.dumps(summ, indent=1), flush=True)
-    json.dump({"dtype": a.dtype, "timing": timing, "shortlist": shortlist,
+    json.dump({"dtype": a.dtype, "labels": a.labels, "timing": timing, "shortlist": shortlist,
                "shortlist_push_scores": [float(ls["push"][l]) for l in shortlist],
                "screen_ids": [c["id"] for c in screen_set], "screen": {str(k): v for k, v in screen.items()},
                "kept": kept, "picks": picks, "summary": summ, "per_sample": rows},
-              open(os.path.join(OUT, "scan_screen.json"), "w"), indent=1)
+              open(os.path.join(OUT, f"scan_screen{tag}.json"), "w"), indent=1)
 
 
 if __name__ == "__main__":
