@@ -156,7 +156,7 @@ layers or neurons:
    before and after the loop starts is labelled *repeating* if the 12 tokens ending there already appeared earlier in
    the answer (16,406 tokens), otherwise *not repeating* (8,170 tokens).
 2. **Scan.** Hooks on all 24 `down_proj` inputs keep running sums, so all 24 × 3,584 = 86,016 neurons are scored in
-   16 forward passes: **7.3 minutes on 4 CPU cores**, with flat memory.
+   16 forward passes: **6-7 minutes on 4 CPU cores** (440 s and 378 s in two runs), with flat memory.
 3. **Two ways to score a neuron.**
    * *Over/under-activation*: Cohen's d of its activation, repeating vs not. This is the plain benchmark.
    * *Push*: its change in activation × (u · W_down[:, j]), where u is the unit direction from the mean
@@ -182,7 +182,7 @@ So there *is* a pattern, and it is not brute force. But plain over- or under-act
   quieter layer-15 neurons still push toward repeating, because they normally write against the repeat direction.
 * What singles Astra's neurons out is the product of the two: the activation change times the direction the neuron
   writes in. 89-91% of them have positive push.
-* Ranked by push, the scan puts Astra's layer 19 first and layer 15 fourth, with no hints, in 7.3 CPU-minutes.
+* Ranked by push, the scan puts Astra's layer 19 first and layer 15 fourth, with no hints, in 6-7 CPU-minutes.
 
 **Does the scan's own edit work?** We edited the scan's top-2 layers by push (19 and 22), top-64 push neurons each,
 with Astra's formula. The test used the same 12 held-out answers and float32 scoring as above. Arms: the activation-only
@@ -198,7 +198,36 @@ pipeline (layers 10 and 14, top-64 by d) and a random edit of the same size.
 The push pipeline's edit works: it is cleaner than Astra's on the reasoning (−0.011 vs −0.039), but reaches only 44%
 of its selectivity. The activation-only edit does nothing.
 
-<!-- SCREEN -->
+**Adding one cheap causal check finds Astra's exact layers** (`experiments/h2_scan_then_screen.py`). The push score says
+which neurons push toward repeating, not whether removing that push helps. So: take the scan's top-6 layers, edit each
+one *alone*, and score it on 4 of the scan's own answers (never the 12 test answers). That is 6 candidate edits, not a
+search over 86,016 neurons.
+
+| Layer (scan rank) | 19 (1) | 22 (2) | 23 (3) | 15 (4) | 21 (5) | 18 (6) |
+|---|---|---|---|---|---|---|
+| Selectivity, edited alone, 4 scan answers | **−0.028** | −0.004 | +0.022 | **−0.021** | −0.004 | −0.003 |
+
+Layer 23 hurts reasoning more than loops, and 22, 21 and 18 barely matter. The two kept are **15 and 19, Astra's
+layers, found without hints**, and their top-64 push neurons include 38 / 64 and 29 / 64 of Astra's. On the 12 held-out
+answers:
+
+| Edit | Reasoning before the loop | Loop text | Selectivity | Loop hit harder |
+|---|---|---|---|---|
+| Astra's (15 + 19) | −0.039 | −0.082 | −0.042 ± 0.010 | 10 / 12 |
+| Hinted tool (told 15 + 19, window labels; above) | −0.028 | −0.061 | −0.033 ± 0.008 | 11 / 12 |
+| **Scan + screen (blind, 15 + 19)** | −0.026 | −0.047 | **−0.021 ± 0.006** | 9 / 12 |
+| Random, same size, same layers | −0.000 | −0.000 | +0.000 ± 0.000 | 6 / 12 |
+
+Total discovery cost: **6.3 CPU-minutes of scan + 11.4 of screen**, with no LLM and no hint. Astra took 20 hours and
+≥ 11M tokens.
+
+The blind edit uses the same layers as the hinted tool, almost the same direction (|cos| 0.98 in both layers) and
+almost the same neurons (59 / 64 and 51 / 64 shared). It costs the reasoning the same on every answer, but its loop
+effect is ~20% weaker. The 18 neurons that differ come from the labels. The scan calls a token "repeating" if its
+12-gram occurred earlier. The hinted tool contrasts the 768 tokens after the loop starts with the 768 before, which is
+exactly what the test scores.
+
+<!-- WINDOW -->
 
 **H2 verdict.** Yes, with caveats. For every reading we tried, a few dozen lines of ordinary linear algebra or
 activation statistics recover most of what Astra read, in seconds to minutes of CPU instead of hundreds of thousands to
@@ -391,6 +420,7 @@ Links checked by a Haiku scout agent; the claims are from each paper's abstract 
 | `third_party/lm_understand-logs/` | The blog's released logs ([RikiyaT/lm_understand-logs](https://github.com/RikiyaT/lm_understand-logs) @ `4d09ba6`, MIT / CC BY 4.0): every script, README, evaluation JSON and small network (7 MB). `third_party/fetch_lm_understand_logs.sh` fetches the full 370 MB (Exp 3's blocks, Exp 6's networks, Exp 8's generations) into `third_party/lm_understand-logs-full/`. |
 | `verify/` | One script per blog experiment that re-checks its claims. |
 | `experiments/h2_rediscover_loop_edit.py` | H2: a scripted pipeline that tries to rediscover Astra's Qwen3.5-0.8B loop edit. |
+| `wsp/neuron_scan.py`, `experiments/h2_blind_neuron_scan.py`, `h2_scan_then_screen.py`, `h2_scan_ablate.py` | H2, blind: a one-pass scan of every MLP neuron (over/under-activation and push), a 6-candidate causal screen, and the layer-vs-neuron ablation. |
 | `experiments/h1_*.py`, `experiments/h1_sweep.sh` | H1: tool-based placement and LoRA arms on Qwen2.5-0.5B-Instruct. |
 | `wsp/` | Shared code: model helpers, tasks and retention probes (`tasks.py`), placement tools (`locate.py`), LoRA and neuron-sparse training with cost accounting (`train.py`). |
 | `results/` | Every number in this README, as JSON (`verify/`, `h1/`, `h2/`). |
@@ -412,6 +442,9 @@ python verify/exp6_go_h2h.py             # ~5 min
 python third_party/lm_understand-logs/exp8_math/code/apply_edit.py <Qwen3.5-0.8B model.safetensors> third_party/lm_understand-logs-full/exp8_math/runs/p50c/edit /home/user/edits/p50c
 python verify/exp8_qwen35_edit.py        # ~60 min on CPU
 python experiments/h2_rediscover_loop_edit.py
+python experiments/h2_blind_neuron_scan.py      # ~30 min: scan all 86,016 neurons, no hints
+python experiments/h2_scan_then_screen.py       # ~30 min: scan + 6-candidate screen (--labels window for the window-label variant)
+python experiments/h2_scan_ablate.py            # ~15 min: |d| vs push neurons, reuses the saved scan
 python verify/exp8_released_generations.py
 python experiments/h1_locate.py --purpose add && python experiments/h1_locate.py --purpose french
 experiments/h1_sweep.sh                  # bf16; on a CPU without AMX use: H1_DTYPE=float32 experiments/h1_sweep.sh
