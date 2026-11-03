@@ -46,7 +46,7 @@ def fig_verify():
         a.set_yticks(y, [g.capitalize() for g in games])
         a.set_xlabel("mean score over 1,000 episodes (log scale)")
         a.set_title("Exp 5: MinAtar networks written from scratch", loc="left", fontsize=10, color=INK)
-        a.legend(loc="lower right", fontsize=8)
+        a.legend(loc="upper center", bbox_to_anchor=(0.5, -0.2), ncol=3, fontsize=8)
     if e6:
         keys = list(e6)
         y = np.arange(len(keys))
@@ -71,11 +71,12 @@ def fig_verify():
         a.scatter(x, yv, color=BLUE, s=36, edgecolor="white", linewidth=1, label="one looping answer", zorder=3)
         a.set_xlim(lo, 0.01)
         a.set_ylim(lo, 0.01)
-        a.set_xlabel("change on reasoning before the loop (nats/token)")
-        a.set_ylabel("change on the loop (nats/token)")
+        a.set_xlabel("Δ log-prob, reasoning before loop")
+        a.set_ylabel("Δ log-prob, loop (nats/token)")
         a.set_title("Exp 8: the edit hits loops ~2x harder", loc="left", fontsize=10, color=INK)
         a.legend(loc="upper left", fontsize=8)
     fig.tight_layout()
+    fig.subplots_adjust(bottom=0.24)
     fig.savefig(os.path.join(FIG, "verify.png"), dpi=150)
     plt.close(fig)
 
@@ -96,9 +97,9 @@ def fig_where():
     a.legend(fontsize=8)
     a = ax[1]
     if sp:
-        a.bar(L, sp["layer"], color=AQUA, width=0.7, label="Spectrum-style SNR (z-score)")
+        a.bar(L, sp["layer"], color=AQUA, width=0.7, label="Spectrum-style SNR rank")
     a.set_xlabel("layer")
-    a.set_ylabel("mean z-score over 7 module types")
+    a.set_ylabel("mean SNR percentile, 7 module types")
     a.set_title("Weight-only, task-agnostic: Spectrum-style SNR", loc="left", fontsize=10, color=INK)
     a.set_xticks(range(0, 24, 2))
     fig.tight_layout()
