@@ -50,7 +50,9 @@ def arith_set(kind, lang, n, seed, shots=4):
     seen = {(a, b) for a, b, _ in shots_}
     rng = random.Random(seed)
     probs = []
-    while len(probs) < n:
+    tries = 0
+    while len(probs) < n and tries < 50_000:     # 1-digit kinds have only 81 problems: stop when they run out
+        tries += 1
         a, b, c = make_problem(rng, op, da, db)
         if (a, b) in seen:
             continue
