@@ -40,5 +40,19 @@
   "timed_steps": 8,
   "threads": 4,
   "dtype": "float32"
+ },
+ {
+  "purpose": "add",
+  "arm": "pick4u",
+  "trainable_params": 733184,
+  "adam_state_mb": 5.59375,
+  "lowest_trainable_layer": 12,
+  "s_per_step": 2.2589441814989186,
+  "prefix_cache_s": 214.93895719923017,
+  "est_total_s": 553.7805844240679,
+  "peak_rss_mb": 4225.921875,
+  "timed_steps": 8,
+  "threads": 4,
+  "dtype": "float32"
  }
 ]
