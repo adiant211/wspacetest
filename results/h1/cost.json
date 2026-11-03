@@ -180,5 +180,19 @@
   "timed_steps": 8,
   "threads": 4,
   "dtype": "float32"
+ },
+ {
+  "purpose": "french",
+  "arm": "pick4r",
+  "trainable_params": 733184,
+  "adam_state_mb": 5.59375,
+  "lowest_trainable_layer": 5,
+  "s_per_step": 3.9325439615004143,
+  "prefix_cache_s": 26.382574762496915,
+  "est_total_s": 498.28785014254663,
+  "peak_rss_mb": 5712.8984375,
+  "timed_steps": 8,
+  "threads": 4,
+  "dtype": "float32"
  }
 ]
