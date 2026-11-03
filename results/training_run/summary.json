@@ -1,0 +1,970 @@
+{
+  "generated_by": "experiments/plot_training_run.py (offline; no network, no W&B sync)",
+  "data_dir": "/home/user/wandb_upload/wandb",
+  "run": {
+    "name": "packed1-500m-deep-a0",
+    "gpu": "NVIDIA CMP 170HX",
+    "gpu_memory_total_gib": 64.0,
+    "python": "CPython 3.12.15",
+    "cuda": "13.3",
+    "torch": "2.14.1+cu132",
+    "preset": "700m",
+    "dense_params": 546153464,
+    "non_embedding_params": 499459064,
+    "ngram_table_entries": 1000000000,
+    "total_params": 1546153464,
+    "update_tokens_per_step": 589824.0,
+    "grad_accum": 32,
+    "warmup_steps": 88,
+    "decay_fraction": 0.295,
+    "eval_every": 3508,
+    "ckpt_every": 877,
+    "args": {
+      "preset": "700m",
+      "ngram-params": "1000000000",
+      "layer-drop": "0.25",
+      "layer-drop-dist": "ild",
+      "layer-drop-schedule": "decreasing",
+      "layer-drop-final": "0.05",
+      "layer-drop-end": "0.705",
+      "depth-attn": "off",
+      "delta-block": true,
+      "delta-blocks": "4",
+      "delta-variant": "repo",
+      "micro-tokens": "18432",
+      "grad-accum": "32",
+      "seq-len": "900",
+      "steps": "17542",
+      "warmup-steps": "88",
+      "decay-frac": "0.295",
+      "min-lr-frac": "0.0",
+      "stop-at": "0",
+      "max-minutes": "0",
+      "optimizer": "dion3",
+      "dion-lr": "0.02",
+      "dion-fraction": "0.5",
+      "dion-mu": "0.95",
+      "dion-weight-decay": "0.01",
+      "scalar-lr": "0.003",
+      "adamw-lr": "0.0003",
+      "grad-clip": "1.0",
+      "dion-triton": true,
+      "dion-compile": true,
+      "compile": "tail",
+      "compile-mode": "default",
+      "loss-chunks": "4",
+      "fast-ce": true,
+      "fla-nosync": true,
+      "residual-dtype": "float32",
+      "gpu-mem-cap-gib": "59",
+      "eval-every": "3508",
+      "eval-tokens": "20000000",
+      "eval-max-minutes": "30",
+      "eval-exit-at": "42",
+      "eval-ngram-ablation": true,
+      "ckpt-minutes": "0",
+      "ckpt-every": "877",
+      "keep": "2",
+      "resume": "auto",
+      "max-skips": "3",
+      "wandb-mode": "online",
+      "table-probe-rows": "65536",
+      "hub-keep": "2",
+      "hub-private": true,
+      "hub-squash": true,
+      "model_override": [
+        "d_model=768",
+        "n_layers=56",
+        "n_heads=6",
+        "n_kv_heads=2",
+        "head_dim=128",
+        "gdn_heads=6",
+        "gdn_head_dim=128",
+        "ffn_dim=2304",
+        "ngram.heads_per_order=4",
+        "ngram.dim=32",
+        "ngram.inject_layers=1,27",
+        "ngram.canonical_tokens=True",
+        "ngram.stochastic_round=True",
+        "ngram.sign_pool=8192",
+        "tie_embeddings=False"
+      ],
+      "seed": "1234"
+    },
+    "started_at_utc": "2026-10-27T14:05:05.305098Z",
+    "wandb_extract_note": null
+  },
+  "final": {
+    "steps": 17542,
+    "tokens": 10346692608.0,
+    "train_hours": 152.16553366670317,
+    "train_loss_last_step": 2.4881558418273926,
+    "train_loss_mean_last_100_steps": 2.413792095184326,
+    "eval_loss": 2.392240872336862,
+    "eval_ppl": 10.937977111299478,
+    "eval_loss_no_ngram": 3.0031655727439404,
+    "ngram_gain_nats": 0.6109247004070784,
+    "eval_loss_early_exit": 4.070164986480521,
+    "mean_mfu_excl_step1": 0.27621884950804393,
+    "tokens_per_second_mean_excl_step1": 18905.764486277298,
+    "median_update_s_excl_step1": 30.946396671497496,
+    "final_lr": 1.932460463649477e-06
+  },
+  "evals": [
+    {
+      "step": 3508,
+      "kind": "scheduled",
+      "eval_loss": 2.8268992904274564,
+      "eval_ppl": 16.89299924803963,
+      "eval_loss_no_ngram": 3.3927795425662968,
+      "eval_ngram_gain": 0.5658802521388404,
+      "eval_loss_early_exit": 3.7063953985542444,
+      "ngram_table_rms": 0.4169308504406879,
+      "eval_s": 993.4236183319881,
+      "source": "metrics(1).jsonl",
+      "log_line": 3508
+    },
+    {
+      "step": 7016,
+      "kind": "scheduled",
+      "eval_loss": 2.6795683423262413,
+      "eval_ppl": 14.578798887049809,
+      "eval_loss_no_ngram": 3.2712054992716713,
+      "eval_ngram_gain": 0.59163715694543,
+      "eval_loss_early_exit": 3.6986198782217126,
+      "ngram_table_rms": 0.5149006633394042,
+      "eval_s": 982.6296373849618,
+      "source": "metrics(1).jsonl",
+      "log_line": 7016
+    },
+    {
+      "step": 10524,
+      "kind": "scheduled",
+      "eval_loss": 2.6107382579273097,
+      "eval_ppl": 13.60909416574808,
+      "eval_loss_no_ngram": 3.212316178632925,
+      "eval_ngram_gain": 0.6015779207056151,
+      "eval_loss_early_exit": 3.781873676107963,
+      "ngram_table_rms": 0.5941494261368924,
+      "eval_s": 994.7052974319668,
+      "source": "metrics(1).jsonl",
+      "log_line": 10524
+    },
+    {
+      "step": 14032,
+      "kind": "scheduled",
+      "eval_loss": 2.4824331286298436,
+      "eval_ppl": 11.970354425694822,
+      "eval_loss_no_ngram": 3.098234691218629,
+      "eval_ngram_gain": 0.6158015625887856,
+      "eval_loss_early_exit": 3.930056521916253,
+      "ngram_table_rms": 0.6437153090645119,
+      "eval_s": 1014.0895511590061,
+      "source": "metrics(1).jsonl",
+      "log_line": 14032
+    },
+    {
+      "step": 17540,
+      "kind": "scheduled",
+      "eval_loss": 2.3922444888362016,
+      "eval_ppl": 10.938016668558006,
+      "eval_loss_no_ngram": 3.0031665502742757,
+      "eval_ngram_gain": 0.6109220614380741,
+      "eval_loss_early_exit": 4.07015729168438,
+      "ngram_table_rms": 0.6476508955508232,
+      "eval_s": 1011.5835525309667,
+      "source": "metrics(1).jsonl",
+      "log_line": 17540
+    },
+    {
+      "step": 17542,
+      "kind": "final",
+      "eval_loss": 2.392240872336862,
+      "eval_ppl": 10.937977111299478,
+      "eval_loss_no_ngram": 3.0031655727439404,
+      "eval_ngram_gain": 0.6109247004070784,
+      "eval_loss_early_exit": 4.070164986480521,
+      "ngram_table_rms": 0.6476508979238118,
+      "eval_s": 1013.5455415979959,
+      "source": "wandb-summary.json (matches train(1).log final EVAL line to 4 decimals)",
+      "log_line": 22289
+    }
+  ],
+  "restarts_and_failures": [
+    {
+      "attempt": 0,
+      "supervisor_label": 0,
+      "start_time": "2026-10-27 13:07:56",
+      "start_line": 1,
+      "exit_code": 1,
+      "exit_line": 55,
+      "traceback_line": 19,
+      "error_line": 51,
+      "error": "ValueError: Expect query and key/value to have the same number of heads but got Hq=6 and Hkv=2. Try setting enable_gqa=True for GQA.",
+      "steps_logged": 0,
+      "step_range": null,
+      "resumed_from_checkpoint": false,
+      "wandb_run_resumed": false,
+      "outcome": "crashed before any step"
+    },
+    {
+      "attempt": 1,
+      "supervisor_label": 1,
+      "start_time": "2026-10-27 13:10:13",
+      "start_line": 56,
+      "exit_code": 1,
+      "exit_line": 110,
+      "traceback_line": 74,
+      "error_line": 106,
+      "error": "ValueError: Expect query and key/value to have the same number of heads but got Hq=6 and Hkv=2. Try setting enable_gqa=True for GQA.",
+      "steps_logged": 0,
+      "step_range": null,
+      "resumed_from_checkpoint": false,
+      "wandb_run_resumed": true,
+      "outcome": "crashed before any step"
+    },
+    {
+      "attempt": 2,
+      "supervisor_label": 2,
+      "start_time": "2026-10-27 13:11:12",
+      "start_line": 111,
+      "exit_code": null,
+      "exit_line": null,
+      "traceback_line": 129,
+      "error_line": 161,
+      "error": "ValueError: Expect query and key/value to have the same number of heads but got Hq=6 and Hkv=2. Try setting enable_gqa=True for GQA.",
+      "steps_logged": 0,
+      "step_range": null,
+      "resumed_from_checkpoint": false,
+      "wandb_run_resumed": true,
+      "outcome": "crashed before any step"
+    },
+    {
+      "attempt": 3,
+      "supervisor_label": 0,
+      "start_time": "2026-10-27 14:04:43",
+      "start_line": 166,
+      "exit_code": null,
+      "exit_line": null,
+      "traceback_line": null,
+      "error_line": null,
+      "error": null,
+      "steps_logged": 17542,
+      "step_range": [
+        1,
+        17542
+      ],
+      "resumed_from_checkpoint": false,
+      "wandb_run_resumed": true,
+      "outcome": "completed all steps"
+    }
+  ],
+  "startup_crashes": [
+    {
+      "x": 0,
+      "attempt": 0,
+      "time": "2026-10-27 13:07:56",
+      "traceback_line": 19,
+      "error_line": 51,
+      "error": "ValueError: Expect query and key/value to have the same number of heads but got Hq=6 and Hkv=2. Try setting enable_gqa=True for GQA.",
+      "exit_code": 1
+    },
+    {
+      "x": 0,
+      "attempt": 1,
+      "time": "2026-10-27 13:10:13",
+      "traceback_line": 74,
+      "error_line": 106,
+      "error": "ValueError: Expect query and key/value to have the same number of heads but got Hq=6 and Hkv=2. Try setting enable_gqa=True for GQA.",
+      "exit_code": 1
+    },
+    {
+      "x": 0,
+      "attempt": 2,
+      "time": "2026-10-27 13:11:12",
+      "traceback_line": 129,
+      "error_line": 161,
+      "error": "ValueError: Expect query and key/value to have the same number of heads but got Hq=6 and Hkv=2. Try setting enable_gqa=True for GQA.",
+      "exit_code": null
+    }
+  ],
+  "wandb_sync": {
+    "decoded": true,
+    "note": null,
+    "checks": {
+      "history_rows_total": 17607,
+      "history_rows_with_train_step": 17542,
+      "history_distinct_train_steps": 17542,
+      "history_first_last_train_step": [
+        1,
+        17542
+      ],
+      "history_steps_missing_from_1_to_N": 0,
+      "history_steps_duplicated": 0,
+      "history_loss_max_abs_diff_vs_metrics": 0.0,
+      "history_eval_rows": [
+        {
+          "step": 3508,
+          "eval_loss": 2.8268992904274564
+        },
+        {
+          "step": 7016,
+          "eval_loss": 2.6795683423262413
+        },
+        {
+          "step": 10524,
+          "eval_loss": 2.6107382579273097
+        },
+        {
+          "step": 14032,
+          "eval_loss": 2.4824331286298436
+        },
+        {
+          "step": 17540,
+          "eval_loss": 2.3922444888362016
+        },
+        {
+          "step": 17542,
+          "eval_loss": 2.392240872336862
+        }
+      ],
+      "step_time_gaps_top": [
+        {
+          "to_step": 14032,
+          "gap_s": 1046.3
+        },
+        {
+          "to_step": 17540,
+          "gap_s": 1045.1
+        },
+        {
+          "to_step": 10524,
+          "gap_s": 1027.1
+        },
+        {
+          "to_step": 3508,
+          "gap_s": 1023.6
+        },
+        {
+          "to_step": 7016,
+          "gap_s": 1012.4
+        },
+        {
+          "to_step": 16776,
+          "gap_s": 82.1
+        },
+        {
+          "to_step": 16777,
+          "gap_s": 80.9
+        },
+        {
+          "to_step": 16744,
+          "gap_s": 80.5
+        }
+      ],
+      "step_time_monotonic": true,
+      "local_history_complete_through_last_step": true,
+      "trainer_step_at_first_403": 9434.9,
+      "stats_samples": 37143,
+      "stats_span_hours": 154.76,
+      "stats_max_sampling_gap_s": 16.8,
+      "record_counts": {
+        "header": 1,
+        "run": 1,
+        "summary": 35221,
+        "environment": 2,
+        "stats": 37143,
+        "files": 1,
+        "telemetry": 3,
+        "metric": 2,
+        "history": 17607,
+        "config": 1,
+        "output_raw": 75269,
+        "exit": 1
+      },
+      "parse_errors": 0
+    },
+    "fatal_log_line": 9721,
+    "fatal_after_step": 9434,
+    "debug_internal_first_fatal": {
+      "time": "2026-10-30T21:16:07.278750023Z",
+      "msg": "filestream: fatal error: filestream: failed to upload: 403 Forbidden"
+    },
+    "debug_internal_403_first_utc": "2026-10-30T21:16:07.27854482Z",
+    "debug_internal_403_last_utc": "2026-11-03T00:50:43.215619191Z",
+    "debug_internal_403_count": 3,
+    "debug_internal_retry_by_status": {
+      "error": 4,
+      "500": 5
+    },
+    "export_403_lines_in_train_log": 4373,
+    "export_timeout_lines": 7,
+    "transient_unavailable_lines": 15,
+    "http_500_lines": 5,
+    "synced_line": {
+      "line": 22331,
+      "files": 2
+    },
+    "gpu_summary": {
+      "util_mean_pct": 88.46323667985892,
+      "temp_max_c": 74.0,
+      "temp_mean_c": 67.93479255849016,
+      "power_mean_w": 217.8297900008077,
+      "power_max_w": 337.01,
+      "smclock_min_mhz": 1110.0,
+      "smclock_mean_mhz": 1274.0089653501332,
+      "corrected_mem_errors_max": 0.0,
+      "uncorrected_mem_errors_max": 0.0,
+      "oom_kills_max": 0.0
+    },
+    "slow_window_gpu": {
+      "steps": [
+        15887,
+        16824
+      ],
+      "bins_inside": 56,
+      "bins_outside": 873,
+      "gpu_util_pct_mean": {
+        "inside": 81.85,
+        "outside": 88.84
+      },
+      "gpu_temp_c_mean": {
+        "inside": 62.94,
+        "outside": 68.24
+      },
+      "sm_clock_mhz_mean": {
+        "inside": 1270.04,
+        "outside": 1274.19
+      },
+      "power_w_mean": {
+        "inside": 196.89,
+        "outside": 219.09
+      }
+    }
+  },
+  "hub": {
+    "checkpoints": 21,
+    "uploaded": 1,
+    "failed": 20,
+    "uploaded_steps": [
+      5262
+    ],
+    "failed_steps": [
+      877,
+      1754,
+      2631,
+      3508,
+      4385,
+      6139,
+      7016,
+      7893,
+      8770,
+      9647,
+      10524,
+      11401,
+      12278,
+      13155,
+      14032,
+      14909,
+      15786,
+      16663,
+      17540,
+      17542
+    ],
+    "uploaded_detail": {
+      "5262": {
+        "gb": 4.32,
+        "seconds": 342.6,
+        "attempts": 3,
+        "verified": true,
+        "line": 5522
+      }
+    },
+    "error_classes": {
+      "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)": 20
+    }
+  },
+  "checkpoints": [
+    {
+      "step": 877,
+      "write_s": 10.7,
+      "gb": 6.88,
+      "stall_s": 4.08,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 1065
+    },
+    {
+      "step": 1754,
+      "write_s": 11.2,
+      "gb": 6.88,
+      "stall_s": 4.32,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 1950
+    },
+    {
+      "step": 2631,
+      "write_s": 11.7,
+      "gb": 6.88,
+      "stall_s": 4.3,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 2837
+    },
+    {
+      "step": 3508,
+      "write_s": 11.9,
+      "gb": 6.88,
+      "stall_s": 4.33,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 3726
+    },
+    {
+      "step": 4385,
+      "write_s": 11.6,
+      "gb": 6.88,
+      "stall_s": 4.23,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 4617
+    },
+    {
+      "step": 5262,
+      "write_s": 11.9,
+      "gb": 6.88,
+      "stall_s": 4.7,
+      "blocking": false,
+      "hub": "uploaded",
+      "hub_attempts": 3,
+      "hub_error": null,
+      "log_line": 5508
+    },
+    {
+      "step": 6139,
+      "write_s": 11.5,
+      "gb": 6.88,
+      "stall_s": 4.24,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 6392
+    },
+    {
+      "step": 7016,
+      "write_s": 12.4,
+      "gb": 6.88,
+      "stall_s": 3.8,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 7278
+    },
+    {
+      "step": 7893,
+      "write_s": 11.1,
+      "gb": 6.88,
+      "stall_s": 4.18,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 8165
+    },
+    {
+      "step": 8770,
+      "write_s": 14.2,
+      "gb": 6.88,
+      "stall_s": 6.2,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 9050
+    },
+    {
+      "step": 9647,
+      "write_s": 11.9,
+      "gb": 6.88,
+      "stall_s": 4.3,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 10047
+    },
+    {
+      "step": 10524,
+      "write_s": 10.8,
+      "gb": 6.88,
+      "stall_s": 3.46,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 11389
+    },
+    {
+      "step": 11401,
+      "write_s": 12.0,
+      "gb": 6.88,
+      "stall_s": 4.38,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 12732
+    },
+    {
+      "step": 12278,
+      "write_s": 10.8,
+      "gb": 6.88,
+      "stall_s": 4.3,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 14090
+    },
+    {
+      "step": 13155,
+      "write_s": 11.3,
+      "gb": 6.88,
+      "stall_s": 4.38,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 15444
+    },
+    {
+      "step": 14032,
+      "write_s": 11.6,
+      "gb": 6.88,
+      "stall_s": 4.31,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 16799
+    },
+    {
+      "step": 14909,
+      "write_s": 12.0,
+      "gb": 6.88,
+      "stall_s": 4.61,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 18153
+    },
+    {
+      "step": 15786,
+      "write_s": 11.1,
+      "gb": 6.88,
+      "stall_s": 4.42,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 19516
+    },
+    {
+      "step": 16663,
+      "write_s": 11.4,
+      "gb": 6.88,
+      "stall_s": 4.74,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 20897
+    },
+    {
+      "step": 17540,
+      "write_s": 11.3,
+      "gb": 6.88,
+      "stall_s": 4.0,
+      "blocking": false,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 22278
+    },
+    {
+      "step": 17542,
+      "write_s": 11.2,
+      "gb": 6.88,
+      "stall_s": 14.62,
+      "blocking": true,
+      "hub": "failed",
+      "hub_attempts": 6,
+      "hub_error": "Hugging Face hub: private storage limit reached (BadRequestError on the commit endpoint)",
+      "log_line": 22282
+    }
+  ],
+  "data_quality": {
+    "metrics_path_records": 17542,
+    "metrics_unique_steps": 17542,
+    "step_range": [
+      1,
+      17542
+    ],
+    "duplicate_steps": 0,
+    "regressions": 0,
+    "missing_steps": 0,
+    "nonfinite_values": 0,
+    "bad_lines": 0,
+    "trainer_launches_with_steps": 1,
+    "trainer_launches_total": 4,
+    "resume_from_checkpoint_seen": false,
+    "checks": {
+      "output_log_structured_lines_identical": true,
+      "output_log_structured_line_count": 17716,
+      "text_vs_metrics_loss_max_abs_diff": 4.999923706172638e-06,
+      "text_steps_matched": 17542,
+      "results_losses_len": 17542,
+      "results_losses_max_abs_diff": 0.0,
+      "results_mean_mfu_excl_step1": 0.2762201239115029,
+      "results_mean_mfu": 0.27621884950804393,
+      "summary_train_loss_matches_last_step": true,
+      "summary_last_step": 17542,
+      "summary_eval_loss_full_precision": 2.392240872336862,
+      "final_eval_matches_text_to_4dp": true,
+      "final_minus_step17540_eval_loss": -3.6164993395537692e-06,
+      "eval_ppl_equals_exp_loss_max_rel_err": 0.0,
+      "eval_gain_equals_no_ngram_minus_loss_max_abs_err": 0.0
+    }
+  },
+  "lr_schedule": {
+    "warmup_max_abs_err": 0.0,
+    "decay_fit_s0": 12368.0,
+    "decay_fit_max_abs_err": 9.662302549240387e-05,
+    "peak": {
+      "dion_group": 0.019999999552965164,
+      "adamw_groups": 0.003000000026077032
+    },
+    "group_identity_max_rel": {
+      "lr_vs_nordion2_max_rel": 0.0,
+      "lr_vs_ngram_lr_max_rel": 8.057765885513225e-08,
+      "adamw_vs_adamw2_max_rel": 0.0,
+      "adamw_vs_adamw3_max_rel": 0.0
+    }
+  },
+  "throughput": {
+    "slow_step_runs": [
+      {
+        "start": 15887,
+        "end": 15899,
+        "steps": 11,
+        "max_update_s": 69.17887681198772
+      },
+      {
+        "start": 15983,
+        "end": 15987,
+        "steps": 5,
+        "max_update_s": 65.17172481503803
+      },
+      {
+        "start": 16039,
+        "end": 16047,
+        "steps": 9,
+        "max_update_s": 69.48737346206326
+      },
+      {
+        "start": 16217,
+        "end": 16218,
+        "steps": 2,
+        "max_update_s": 58.85459660203196
+      },
+      {
+        "start": 16573,
+        "end": 16573,
+        "steps": 1,
+        "max_update_s": 47.11257441190537
+      },
+      {
+        "start": 16735,
+        "end": 16747,
+        "steps": 13,
+        "max_update_s": 80.5155798230553
+      },
+      {
+        "start": 16771,
+        "end": 16779,
+        "steps": 9,
+        "max_update_s": 82.08908129297197
+      },
+      {
+        "start": 16805,
+        "end": 16824,
+        "steps": 20,
+        "max_update_s": 79.89399967598729
+      }
+    ],
+    "update_median_s_excl_step1": 30.945949414977804,
+    "post_eval_spikes": [
+      {
+        "key": "ngram_ms/cpu_hash",
+        "eval_step": 3508,
+        "step": 3509,
+        "value_ms": 31587.3,
+        "median_ms": 376.175
+      },
+      {
+        "key": "ngram_ms/cpu_hash",
+        "eval_step": 7016,
+        "step": 7017,
+        "value_ms": 31846.4,
+        "median_ms": 376.175
+      },
+      {
+        "key": "ngram_ms/cpu_hash",
+        "eval_step": 10524,
+        "step": 10525,
+        "value_ms": 31194.3,
+        "median_ms": 376.175
+      },
+      {
+        "key": "ngram_ms/cpu_hash",
+        "eval_step": 14032,
+        "step": 14033,
+        "value_ms": 34793.7,
+        "median_ms": 376.175
+      },
+      {
+        "key": "ngram_ms/cpu_hash",
+        "eval_step": 17540,
+        "step": 17541,
+        "value_ms": 31970.7,
+        "median_ms": 376.175
+      },
+      {
+        "key": "ngram_ms/input_d2h_wall",
+        "eval_step": 3508,
+        "step": 3509,
+        "value_ms": 1042.3,
+        "median_ms": 10.712
+      },
+      {
+        "key": "ngram_ms/input_d2h_wall",
+        "eval_step": 7016,
+        "step": 7017,
+        "value_ms": 1009.3,
+        "median_ms": 10.712
+      },
+      {
+        "key": "ngram_ms/input_d2h_wall",
+        "eval_step": 10524,
+        "step": 10525,
+        "value_ms": 1038.7,
+        "median_ms": 10.712
+      },
+      {
+        "key": "ngram_ms/input_d2h_wall",
+        "eval_step": 14032,
+        "step": 14033,
+        "value_ms": 1001.1,
+        "median_ms": 10.712
+      },
+      {
+        "key": "ngram_ms/input_d2h_wall",
+        "eval_step": 17540,
+        "step": 17541,
+        "value_ms": 1172.5,
+        "median_ms": 10.712
+      }
+    ]
+  },
+  "observations": [
+    "update_s exceeds 1.5x the median (46.4 s) on 70 steps in 8 runs, all between steps 15,887 and 16,824 (max 82.1 s). The text logs give no cause for this window.",
+    "Inside that window GPU utilization averaged 81.8% vs 88.8% outside, power 197 W vs 219 W, and SM clock 1270 MHz vs 1274 MHz (10-minute bins). The clock barely moved, so the data do not point to clock throttling; the GPU looks idle more often.",
+    "ngram_ms/cpu_hash exceeds 10x its median on the step right after 5 of 5 scheduled eval passes (e.g. step 3,509: 31.6 s vs median 0.38 s); input_d2h_wall shows the same pattern after 5 of them. See 07_ngram_timings.png.",
+    "lr/adamw* groups peak at 0.003; config has --adamw-lr 0.0003 and --scalar-lr 0.003. The logs do not say which is intended.",
+    "The W&B _step counter (summary: 17,609) runs ahead of the trainer step (17,542), so W&B's own x-axis is not the trainer step; these figures use trainer step."
+  ],
+  "figures": [
+    {
+      "file": "00_run_timeline.png",
+      "title": "Run timeline by optimizer step",
+      "caption": "Trainer launches, W&B online sync, hub uploads and eval passes on one step axis. Three startups crashed before any step ran; the sync was rejected after step 9,434; only the step-5,262 checkpoint reached the hub."
+    },
+    {
+      "file": "01_loss.png",
+      "title": "Train loss and eval loss",
+      "caption": "Train loss per step (faint raw, solid EMA) with the five scheduled eval passes plus the final pass, with and without the n-gram memory (the gap is the n-gram gain). Top axis: tokens seen. Vertical lines: startup crashes (step 0) and the W&B sync failure (step 9,434)."
+    },
+    {
+      "file": "02_eval_panels.png",
+      "title": "Eval perplexity, n-gram gain, early-exit loss, table RMS",
+      "caption": "Each eval pass (five scheduled, one final). The early-exit loss rises across training while the full-model eval loss falls; the n-gram gain grows and dips slightly at the last scheduled pass."
+    },
+    {
+      "file": "03_lr_schedule.png",
+      "title": "Learning-rate schedule",
+      "caption": "Learning rate per parameter group (log scale) and the logged schedule multiplier with its fit (max error 9.7e-05). Warmup ends at step 88; decay starts near step 12,368."
+    },
+    {
+      "file": "04_grad_norm.png",
+      "title": "Gradient norm",
+      "caption": "Gradient norm per step on a log scale (raw faint, EMA solid). The grad-clip value of 1.0 from the run config is drawn for reference."
+    },
+    {
+      "file": "05_throughput.png",
+      "title": "Throughput and step timing",
+      "caption": "Tokens/s, MFU and seconds per step (step 1 excluded: 552 s first update). Shaded: steps with update_s above 1.5x the median (30.9 s)."
+    },
+    {
+      "file": "06_ngram_memory.png",
+      "title": "n-gram memory table",
+      "caption": "Table RMS grows from 0.020 to 0.648. Update RMS and update-to-weight ratio follow the learning-rate decay after step 12,368; gradient RMS falls from its early peak."
+    },
+    {
+      "file": "07_ngram_timings.png",
+      "title": "n-gram timings",
+      "caption": "All nine ngram_ms timers, one panel each. Spikes in the CPU hash and input-transfer timers fall on the step right after each eval pass."
+    },
+    {
+      "file": "08_memory.png",
+      "title": "GPU memory",
+      "caption": "Peak allocated 45.3 to 47.3 GiB, device used 49.8 GiB at most, against the device total in the run metadata."
+    },
+    {
+      "file": "09_progress_layerdrop.png",
+      "title": "Progress and layer drop",
+      "caption": "Tokens seen against training hours (152.2 h total), ETA, layer-drop fraction (decreasing schedule) and data epochs."
+    },
+    {
+      "file": "10_checkpoints_hub.png",
+      "title": "Checkpoints and hub uploads",
+      "caption": "Write and stall time per checkpoint (21 checkpoints, every 877 steps plus the final one). Hub: 1 uploaded, 20 failed with the private-storage limit error."
+    },
+    {
+      "file": "11_system_gpu.png",
+      "title": "GPU and host system metrics",
+      "caption": "GPU utilization, temperature, power, memory, SM clock and host CPU from the local .wandb file, 37,143 samples over 154.8 h, mapped to trainer steps."
+    }
+  ],
+  "not_rebuilt": [
+    "The online W&B dashboard after the 403 cannot be inspected offline; only the local copies were read.",
+    "W&B's internal _step axis is not used (trainer step is used everywhere).",
+    "Hub upload durations are only logged for the successful upload (342.6 s); failed attempts have no timing.",
+    "The three failed startups logged no steps, so there is no per-step data for them.",
+    "The tst field is 0 at every step and is not plotted."
+  ],
+  "supervisor_gave_up_line": 165
+}
