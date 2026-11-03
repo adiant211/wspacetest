@@ -1,0 +1,19 @@
+{
+ "seconds": 1808.1592967510223,
+ "tokens": {
+  "math_en": 6897,
+  "math_tr": 6597,
+  "calc": 679,
+  "gen_en": 12750,
+  "gen_tr": 12750,
+  "arith": 417
+ },
+ "args": {
+  "n_gsm": 100,
+  "n_wiki": 50,
+  "n_arith": 2,
+  "maxlen": 320,
+  "wiki_len": 256,
+  "threads": 4
+ }
+}
