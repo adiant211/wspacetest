@@ -10,6 +10,7 @@ Arms
   anti4        LoRA r=8 on the 4 layers it ranks lowest                            (control)
   rand4a/b     LoRA r=8 on 4 random layers                                         (controls)
   spectrum4    LoRA r=8 on the 4 layers with the highest weight-only SNR            (Spectrum-style, task-agnostic)
+  arb4         LoRA r=8 on layers 12, 21, 22, 23: what a NaN bug in the first Spectrum score picked     (control)
   neur         train only the down_proj columns of 64 tool-picked neurons in each of 2 layers (114,688 weights)
   neur_rand    the same, 64 random neurons in the same 2 layers                     (control)
 
@@ -50,6 +51,8 @@ def build(model, arm, picks):
         return add_lora(model, picks["grad_bottom4"]), "lora"
     if arm in ("rand4a", "rand4b"):
         return add_lora(model, picks["rand4"][0 if arm == "rand4a" else 1]), "lora"
+    if arm == "arb4":
+        return add_lora(model, picks["arb4"]), "lora"
     if arm == "spectrum4":
         return add_lora(model, picks["spectrum_top4"]), "lora"
     if arm == "neur":

@@ -59,14 +59,21 @@ def _snr(W: torch.Tensor) -> float:
 
 
 def spectrum_scores(model=None):
+    """Spectrum-style layer score. Spectrum ranks layers by SNR *within each module type* and unfreezes the top ones;
+    we aggregate those per-type ranks into one score per layer (mean percentile, 1 = highest SNR). Ranks keep the
+    infinite SNRs Spectrum's formula gives when no singular value falls below the Marchenko-Pastur edge (it happens
+    for 15 of the 24 small GQA v_proj matrices here) instead of turning them into NaN."""
     m = model or load_model()
     n_layers = len(core(m).layers)
     snr = np.zeros((n_layers, len(LINEAR_MODULES)))
     for l in range(n_layers):
         for j, mod in enumerate(LINEAR_MODULES):
             snr[l, j] = _snr(get_linear(m, l, mod).weight.detach())
-    z = (snr - snr.mean(0)) / (snr.std(0) + 1e-12)
-    return {"layer": z.mean(1), "module_snr": snr}
+    pct = np.zeros_like(snr)
+    for j in range(snr.shape[1]):
+        order = np.argsort(snr[:, j], kind="stable")          # inf sorts last = highest
+        pct[order, j] = np.arange(n_layers) / (n_layers - 1)
+    return {"layer": pct.mean(1), "module_snr": snr}
 
 
 def instruct_delta(base=None, inst=None):

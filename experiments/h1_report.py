@@ -9,9 +9,9 @@ import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 H1 = os.path.join(REPO, "results", "h1")
-ARMS = ["base", "full", "full_r1", "pick4", "pick4r", "pick4u", "spectrum4", "rand4a", "rand4b", "anti4", "neur", "neur_rand"]
+ARMS = ["base", "full", "full_r1", "pick4", "pick4r", "pick4u", "spectrum4", "arb4", "rand4a", "rand4b", "anti4", "neur", "neur_rand"]
 LABEL = {"base": "no fine-tune", "full": "LoRA, all 24 layers", "full_r1": "LoRA r=1, all 24 layers",
-         "pick4": "LoRA, 4 tool-picked layers", "pick4u": "LoRA, 4 tool-picked upper layers", "pick4r": "LoRA, 4 tool-picked layers (relative)", "spectrum4": "LoRA, 4 Spectrum layers", "rand4a": "LoRA, 4 random layers (a)",
+         "pick4": "LoRA, 4 tool-picked layers", "pick4u": "LoRA, 4 tool-picked upper layers", "pick4r": "LoRA, 4 tool-picked layers (relative)", "spectrum4": "LoRA, 4 Spectrum layers", "arb4": "LoRA, 4 arbitrary layers", "rand4a": "LoRA, 4 random layers (a)",
          "rand4b": "LoRA, 4 random layers (b)", "anti4": "LoRA, 4 anti-picked layers",
          "neur": "64+64 tool-picked neurons", "neur_rand": "64+64 random neurons"}
 
@@ -24,7 +24,7 @@ def main():
     out = {}
     for purpose, arms in rows.items():
         picks = json.load(open(os.path.join(H1, f"picks_{purpose}.json")))
-        layers = {"pick4": picks["grad_top4"], "pick4u": picks.get("grad_top4_upper"), "pick4r": picks.get("grad_rel_top4"), "anti4": picks["grad_bottom4"], "spectrum4": picks["spectrum_top4"],
+        layers = {"pick4": picks["grad_top4"], "pick4u": picks.get("grad_top4_upper"), "pick4r": picks.get("grad_rel_top4"), "anti4": picks["grad_bottom4"], "spectrum4": picks["spectrum_top4"], "arb4": picks.get("arb4"),
                   "rand4a": picks["rand4"][0], "rand4b": picks["rand4"][1], "neur": picks["top_mlp_layers"],
                   "neur_rand": picks["top_mlp_layers"], "full": "0-23", "full_r1": "0-23", "base": "-"}
         if purpose == "add":

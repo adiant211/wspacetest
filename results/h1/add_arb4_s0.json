@@ -1,6 +1,6 @@
 {
  "purpose": "add",
- "arm": "spectrum4",
+ "arm": "arb4",
  "seed": 0,
  "cache_prefix": true,
  "kind": "lora",
@@ -60,5 +60,6 @@
   "mmlu": 0.415,
   "eval_s": 144.7505237559999
  },
- "mmlu_base": 0.435
+ "mmlu_base": 0.435,
+ "note": "Originally run as 'spectrum4', but the Spectrum score had a NaN bug (inf SNRs z-scored), so its layers [12, 21, 22, 23] were arbitrary rather than SNR-chosen. Kept as a fixed-layer control."
 }
