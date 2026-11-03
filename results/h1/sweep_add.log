@@ -1,0 +1,36 @@
+skip add_base
+    step 125/150 loss 0.0675
+    step 150/150 loss 0.0514
+add_full_s0 {"acc_5digit": 0.8867, "acc_6digit_ood": 0.805, "kl_wiki": 0.1588, "kl_chat": 0.4428, "mmlu": 0.345, "eval_s": 204.1963} {"trainable_params": 4399104, "lowest_trainable_layer": 0, "prefix_start": 0, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 0.0, "train_loop_s": 641.927, "total_train_s": 641.932, "s_per_step": 4.28, "final_loss": 0.043, "peak_rss_mb": 4485.699, "epochs": 1, "rss_after_model_load_mb": 522.32}
+    step 125/150 loss 0.0510
+    step 150/150 loss 0.0380
+add_pick4_s0 {"acc_5digit": 0.8967, "acc_6digit_ood": 0.87, "kl_wiki": 0.0338, "kl_chat": 0.0663, "mmlu": 0.39, "eval_s": 170.2666} {"trainable_params": 733184, "lowest_trainable_layer": 2, "prefix_start": 2, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 18.594, "train_loop_s": 426.914, "total_train_s": 445.51, "s_per_step": 2.846, "final_loss": 0.036, "peak_rss_mb": 3381.262, "epochs": 1, "rss_after_model_load_mb": 503.105}
+    step 125/150 loss 0.0544
+    step 150/150 loss 0.0560
+add_pick4r_s0 {"acc_5digit": 0.9, "acc_6digit_ood": 0.835, "kl_wiki": 0.0129, "kl_chat": 0.0433, "mmlu": 0.415, "eval_s": 163.6027} {"trainable_params": 733184, "lowest_trainable_layer": 9, "prefix_start": 9, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 87.795, "train_loop_s": 315.139, "total_train_s": 402.936, "s_per_step": 2.101, "final_loss": 0.047, "peak_rss_mb": 3079.762, "epochs": 1, "rss_after_model_load_mb": 502.926}
+    step 125/150 loss 0.0633
+    step 150/150 loss 0.0490
+add_pick4u_s0 {"acc_5digit": 0.8733, "acc_6digit_ood": 0.835, "kl_wiki": 0.0162, "kl_chat": 0.0462, "mmlu": 0.35, "eval_s": 176.0691} {"trainable_params": 733184, "lowest_trainable_layer": 12, "prefix_start": 12, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 119.116, "train_loop_s": 279.7, "total_train_s": 398.818, "s_per_step": 1.865, "final_loss": 0.045, "peak_rss_mb": 2861.754, "epochs": 1, "rss_after_model_load_mb": 502.84}
+    step 125/150 loss 0.2207
+    step 150/150 loss 0.1961
+add_anti4_s0 {"acc_5digit": 0.64, "acc_6digit_ood": 0.31, "kl_wiki": 0.0198, "kl_chat": 0.0125, "mmlu": 0.425, "eval_s": 172.8617} {"trainable_params": 733184, "lowest_trainable_layer": 19, "prefix_start": 19, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 191.496, "train_loop_s": 160.68, "total_train_s": 352.177, "s_per_step": 1.071, "final_loss": 0.195, "peak_rss_mb": 2618.875, "epochs": 1, "rss_after_model_load_mb": 503.133}
+    step 125/150 loss 0.0518
+    step 150/150 loss 0.0407
+add_rand4a_s0 {"acc_5digit": 0.8833, "acc_6digit_ood": 0.875, "kl_wiki": 0.0523, "kl_chat": 0.1521, "mmlu": 0.4, "eval_s": 181.5523} {"trainable_params": 733184, "lowest_trainable_layer": 4, "prefix_start": 4, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 43.335, "train_loop_s": 438.741, "total_train_s": 482.078, "s_per_step": 2.925, "final_loss": 0.039, "peak_rss_mb": 3302.984, "epochs": 1, "rss_after_model_load_mb": 502.941}
+    step 125/150 loss 0.0466
+    step 150/150 loss 0.0352
+add_rand4b_s0 {"acc_5digit": 0.91, "acc_6digit_ood": 0.885, "kl_wiki": 0.1129, "kl_chat": 0.1054, "mmlu": 0.425, "eval_s": 181.3157} {"trainable_params": 733184, "lowest_trainable_layer": 1, "prefix_start": 1, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 11.112, "train_loop_s": 513.534, "total_train_s": 524.648, "s_per_step": 3.424, "final_loss": 0.033, "peak_rss_mb": 3386.43, "epochs": 1, "rss_after_model_load_mb": 503.125}
+    step 125/150 loss 0.0618
+    step 150/150 loss 0.0487
+add_spectrum4_s0 {"acc_5digit": 0.8833, "acc_6digit_ood": 0.785, "kl_wiki": 0.025, "kl_chat": 0.0649, "mmlu": 0.415, "eval_s": 144.7505} {"trainable_params": 733184, "lowest_trainable_layer": 12, "prefix_start": 12, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 184.539, "train_loop_s": 255.116, "total_train_s": 439.657, "s_per_step": 1.701, "final_loss": 0.045, "peak_rss_mb": 2938.617, "epochs": 1, "rss_after_model_load_mb": 503.047}
+skip add_base
+skip add_full
+skip add_pick4
+skip add_pick4r
+skip add_pick4u
+skip add_anti4
+skip add_rand4a
+skip add_rand4b
+skip add_spectrum4
+    step 25/150 loss 0.1683
+    step 50/150 loss 0.0811

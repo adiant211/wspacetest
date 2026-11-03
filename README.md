@@ -11,7 +11,8 @@ weights directly. The repo asks three things:
 3. **H1.** Can hand-picking *where* LoRA goes (layers or neurons, chosen by such tools for one purpose) cut the cost
    of fine-tuning without hurting, or while improving, the result?
 
-Everything ran on a 4-core x86 CPU with AMX-bf16 and no GPU (PyTorch 2.15, transformers 5.22, PEFT 0.21).
+Everything ran on 4-core x86 CPUs with no GPU (PyTorch 2.15, transformers 5.22, PEFT 0.21). The first host had
+AMX-bf16; after a container restart the session moved to one without bf16 units (see *Precision* in §3).
 
 ## TL;DR
 
@@ -33,13 +34,14 @@ Everything ran on a 4-core x86 CPU with AMX-bf16 and no GPU (PyTorch 2.15, trans
   * The tools still needed someone to say what to look for, and they missed a few things Astra caught.
 * **H1 (hand-pick layers or neurons for LoRA for a specific purpose): yes for cost and collateral damage, with a big
   caveat on how to pick.**
-  * Four well-chosen layers match all-layer LoRA on the target with 6× fewer trainable weights, and 2-12× less
-    collateral damage. The cost benchmark below gives the per-step savings.
-  * Neuron-level picks (114,688 weights, Astra's footprint) match all-layer accuracy for addition.
+  * Four well-chosen layers match all-layer LoRA on the target with 6× fewer trainable weights, 1.6-2.7× less
+    compute per step, and 2-12× less collateral damage.
+  * Neuron-level picks (114,688 weights, Astra's footprint) match all-layer accuracy for addition, but picking
+    high-gradient "hub" neurons also brings all-layer-sized side effects.
   * Placement is purpose-specific. The same cheap gradient tool that picked the best layers for addition (middle)
-    picked the worst for "answer in French", where the last layers were best by far.
+    picked the worst for "answer in French". There the last layers were best by far: 2.7× faster per step than
+    all-layer LoRA, and they kept the most knowledge (capitals 89.6% vs 77.1%).
 
-<!-- RESULTS -->
 
 ## 1. Do the blog's claims hold up?
 
@@ -74,6 +76,8 @@ measured how much of the continuation repeats 12-grams already in the context:
 The paired difference is −23.0 ± 5.5 points, and the edited model repeats less in 14 / 16 restarts. Independently of
 the blog's own evaluation, the edit really does keep the model from walking into the loop at the point where the
 unedited model does.
+
+![Verification at a glance](results/figures/verify.png)
 
 ## 2. H2: can ordinary tools read weight space instead of a frontier LLM?
 
@@ -114,7 +118,7 @@ inputs Astra never saw, and problems disjoint from the ones the edits are tested
 
 | | Astra (158 turns, ~20 h, 50 forward passes) | Tool pipeline (no LLM) |
 |---|---|---|
-| Time to find the edit | ~20 hours | **5 min of CPU** (16 forward passes) |
+| Time to find the edit | ~20 hours | **5-6 min of CPU** (16 forward passes) |
 | Direction, layer 15 / 19 | – | \|cos\| with Astra's direction **0.71 / 0.72** (two random directions in 1,024 dims: ~0.03) |
 | The 64 neurons, layer 15 / 19 | – | **39 / 64 and 29 / 64** are the same neurons Astra picked (chance: ~1) |
 
@@ -152,7 +156,7 @@ real division of labour: a cheap model or a person picks the question and the re
 **Setup** (`experiments/h1_*.py`, `wsp/train.py`). Model: Qwen2.5-0.5B-Instruct, frozen in bfloat16, adapters in
 float32. Every arm uses the same data, steps, batch and learning rate (LoRA 1e-3, neuron deltas 3e-4). Purposes:
 
-* **add**: 5-digit + 5-digit addition with the answer only (base model: 28%). 3,000 training sums, 150 steps of
+* **add**: 5-digit + 5-digit addition with the answer only (base model: 53.3% with plain greedy decoding). 3,000 training sums, 150 steps of
   16. Scored on 300 held-out sums, plus 200 6-digit sums, a length never trained on.
 * **french**: answer English questions in French by default. The training data is context distillation from the model
   itself: the teacher sees "...\nAnswer in French only." and the student does not. Scored as the share of 96 held-out
@@ -168,13 +172,17 @@ LLM.
 | Arm | Trainable weights |
 |---|---|
 | `full` | LoRA r=8 on q, k, v, o, gate, up and down of all 24 layers (the usual default) |
-| `full_r1` | LoRA r=1 everywhere: about the parameter count of a 4-layer r=8 LoRA, spread thin |
 | `pick4` | LoRA r=8 on the 4 layers with the most task-gradient energy |
+| `pick4r` | the 4 layers with the highest ratio of task to generic gradient energy (generic = language-modelling loss on WikiText). This divides out the depth profile every loss shares (`results/h1/generic_grad.json`) |
 | `pick4u` | the 4 upper-half layers with the most energy: a cost-aware pick, since backprop stops and the frozen-layer cache starts at the lowest trainable layer |
 | `spectrum4` | the 4 layers with the highest weight-only SNR (Spectrum-style: singular values above the Marchenko-Pastur edge), so not task-specific |
-| `rand4a`, `rand4b`, `anti4` | controls: two random draws, and the 4 layers with the *least* energy |
+| `rand4a`, `rand4b`, `anti4`, `arb4` | controls: two random draws, the 4 layers with the *least* energy, and layers 12, 21, 22, 23 (picked arbitrarily by a NaN bug in our first Spectrum score) |
 | `neur` | only the down_proj columns of the 64 neurons with the most gradient energy in each of the 2 MLPs with the most energy: 114,688 weights, the footprint of Astra's Exp 8 edit |
 | `neur_rand` | 64 random neurons in the same 2 layers |
+
+A rank-1 all-layer arm (`full_r1`) was planned but did not finish before the host change, so it is not reported.
+
+![Where each tool points](results/figures/where.png)
 
 Two cost savers come for free once the trainable weights sit at layer L and above. Autograd never backpropagates below
 L. And the hidden states entering L never change, so they are computed once per example (frozen-prefix cache)
@@ -239,7 +247,54 @@ French. The bf16 and float32 base models score within 1.5 points of each other o
   0.46); the 4 it ranks lowest are the best. The relative variant (middle layers, capitals 52%) and the weight-only
   Spectrum pick (early layers, capitals 44%) do no better.
 
-<!-- H1_COST -->
+### Cost: clean benchmark (`experiments/h1_cost.py`, `results/h1/cost.json`)
+
+Every arm was timed alone, one after another, on the same idle 4-core CPU, in float32 (the post-restart host): 3
+warm-up steps, then the median of 8 timed training steps on identical batches. "Est. full run" = one-off prefix cache
+for all training examples + seconds per step × the sweep's step count.
+
+**Addition**
+
+| arm | backprop stops at layer | trainable weights | Adam state (MB) | s / step | vs all-layer | one-off prefix cache (s) | est. full run (s) | peak RSS (MB) |
+|---|---|---|---|---|---|---|---|---|
+| LoRA, all 24 layers | 0 | 4,399,104 | 33.6 | 4.84 | - | 0 | 725 | 6819 |
+| LoRA, 4 layers: task-gradient tool | 2 | 733,184 | 5.6 | 4.16 | 1.2x faster | 43 | 666 | 5470 |
+| LoRA, 4 layers: task / generic gradient | 9 | 733,184 | 5.6 | 3.03 | 1.6x faster | 165 | 620 | 4536 |
+| LoRA, 4 layers: tool, upper half only | 12 | 733,184 | 5.6 | 2.26 | 2.1x faster | 215 | 554 | 4226 |
+| LoRA, 4 layers: Spectrum SNR (weights only) | 1 | 733,184 | 5.6 | 4.12 | 1.2x faster | 18 | 635 | 5514 |
+| LoRA, 4 arbitrary layers | 12 | 733,184 | 5.6 | 2.33 | 2.1x faster | 215 | 565 | 4347 |
+| LoRA, 4 random layers (a) | 4 | 733,184 | 5.6 | 3.70 | 1.3x faster | 75 | 630 | 5221 |
+| LoRA, 4 random layers (b) | 1 | 733,184 | 5.6 | 3.96 | 1.2x faster | 18 | 612 | 5413 |
+| LoRA, 4 layers the tool ranks lowest | 19 | 733,184 | 5.6 | 1.10 | 4.4x faster | 334 | 499 | 3429 |
+| 64 + 64 neurons: task-gradient tool | 2 | 114,688 | 0.9 | 3.71 | 1.3x faster | 38 | 595 | 5073 |
+| 64 + 64 random neurons | 2 | 114,688 | 0.9 | 3.57 | 1.4x faster | 33 | 568 | 5144 |
+
+**French**
+
+| arm | backprop stops at layer | trainable weights | Adam state (MB) | s / step | vs all-layer | one-off prefix cache (s) | est. full run (s) | peak RSS (MB) |
+|---|---|---|---|---|---|---|---|---|
+| LoRA, all 24 layers | 0 | 4,399,104 | 33.6 | 5.09 | - | 0 | 611 | 7388 |
+| LoRA, 4 layers: task-gradient tool | 0 | 733,184 | 5.6 | 4.75 | 1.1x faster | 0 | 570 | 5959 |
+| LoRA, 4 layers: task / generic gradient | 5 | 733,184 | 5.6 | 3.93 | 1.3x faster | 26 | 498 | 5713 |
+| LoRA, 4 layers: tool, upper half only | 12 | 733,184 | 5.6 | 2.92 | 1.7x faster | 62 | 412 | 4791 |
+| LoRA, 4 layers: Spectrum SNR (weights only) | 1 | 733,184 | 5.6 | 4.70 | 1.1x faster | 6 | 570 | 5955 |
+| LoRA, 4 random layers (a) | 4 | 733,184 | 5.6 | 4.13 | 1.2x faster | 22 | 517 | 5710 |
+| LoRA, 4 layers the tool ranks lowest | 18 | 733,184 | 5.6 | 1.91 | 2.7x faster | 93 | 323 | 4180 |
+
+* **What saves compute is how high the lowest trainable layer sits, not how few weights train.** Backprop stops at the
+  lowest trainable layer, so 4 layers starting at layer 0-2 save only 10-20% per step, while 4 layers starting at
+  layer 12 save 2×, and at layer 18-19, 2.7-4.4×. The neuron arms train 38× fewer weights than all-layer LoRA, yet
+  per step they save only as much as their lowest layer (2) allows.
+* **Memory and optimizer state shrink with the trainable set.** Adam state drops from 33.6 MB to 5.6 MB (4 layers) or
+  0.9 MB (neurons), and peak memory drops by up to 43% (7.4 → 4.2 GB for French).
+* **The frozen-prefix cache pays off only across epochs.** For addition (2,400 example-visits over 3,000 examples)
+  caching every example costs more than it saves: end-to-end gains are 1.1-1.5×. For French (2 epochs) the late-layer
+  arm finishes in 323 s vs 611 s (1.9× faster).
+* **For French, the best placement is also nearly the cheapest:** the last 4 layers are 2.7× faster per step, use 43%
+  less memory, and give the best retention (capitals 89.6% vs 77.1%, MMLU 44.0% vs 38.5%). For addition, the
+  lowest-damage tool pick (task / generic gradient) is 1.6× faster per step at the same accuracy and 12× less KL.
+
+![Quality vs cost per arm](results/figures/h1_tradeoff.png)
 
 ### H1 verdict
 
@@ -302,6 +357,12 @@ python verify/exp6_go_h2h.py             # ~5 min
 python third_party/lm_understand-logs/exp8_math/code/apply_edit.py <Qwen3.5-0.8B model.safetensors> third_party/lm_understand-logs-full/exp8_math/runs/p50c/edit /home/user/edits/p50c
 python verify/exp8_qwen35_edit.py        # ~60 min on CPU
 python experiments/h2_rediscover_loop_edit.py
+python verify/exp8_released_generations.py
 python experiments/h1_locate.py --purpose add && python experiments/h1_locate.py --purpose french
-experiments/h1_sweep.sh                  # ~1.5 h on CPU
+experiments/h1_sweep.sh                  # bf16; on a CPU without AMX use: H1_DTYPE=float32 experiments/h1_sweep.sh
+python experiments/h1_cost.py --dtype float32 --steps 8   # clean per-step cost, run on an otherwise idle machine
+python experiments/h1_report.py && python experiments/make_figures.py
 ```
+
+The arms that ran after the host change used `experiments/h1_fp32_queue.sh`, which keeps two float32 runs under the
+session's ~15 GB memory limit.

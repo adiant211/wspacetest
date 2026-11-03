@@ -1,0 +1,67 @@
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:  63%|██████▎   | 202/320 [00:00<00:00, 2016.22it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 2523.31it/s]
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:  66%|██████▌   | 211/320 [00:00<00:00, 2105.34it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 2356.73it/s]
+{
+ "run": "p50c",
+ "tensors": [
+  "model.layers.15.mlp.down_proj.weight",
+  "model.layers.19.mlp.down_proj.weight"
+ ],
+ "weights_touched": 131072,
+ "structure": {
+  "model.layers.15.mlp.down_proj.weight": {
+   "changed_columns": 64,
+   "rows": 1024,
+   "weights_touched": 65536,
+   "sv_ratio_1_over_2": 1771.2015380859375,
+   "frac_change_energy_along_u": 0.9999945163726807,
+   "u_component_scale_after_over_before_median": -5.000442028045654,
+   "relative_change_fro": 0.10635697096586227
+  },
+  "model.layers.19.mlp.down_proj.weight": {
+   "changed_columns": 64,
+   "rows": 1024,
+   "weights_touched": 65536,
+   "sv_ratio_1_over_2": 1552.0238037109375,
+   "frac_change_energy_along_u": 0.9999913573265076,
+   "u_component_scale_after_over_before_median": -5.0000901222229,
+   "relative_change_fro": 0.08105870336294174
+  }
+ },
+ "share_of_text_model": 0.00017420682518183475
+}
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+200 base samples, 65 usable looping samples
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  test/algebra/1072.json           onset@ 4638  productive Δ=-0.0209  loop Δ=-0.0156 nats/tok  [46s]
+  test/algebra/1098.json           onset@ 4560  productive Δ=-0.0508  loop Δ=-0.0475 nats/tok  [45s]
+  test/algebra/1275.json           onset@ 4934  productive Δ=-0.0545  loop Δ=-0.1159 nats/tok  [47s]
+  test/algebra/1837.json           onset@ 4915  productive Δ=-0.0802  loop Δ=-0.1603 nats/tok  [49s]
+  test/algebra/1937.json           onset@ 3650  productive Δ=-0.0206  loop Δ=-0.0617 nats/tok  [39s]
+  test/algebra/2046.json           onset@ 4682  productive Δ=-0.0383  loop Δ=-0.0796 nats/tok  [45s]
+  test/algebra/2199.json           onset@ 3319  productive Δ=-0.0545  loop Δ=-0.0592 nats/tok  [32s]
+  test/algebra/2427.json           onset@ 2952  productive Δ=-0.0343  loop Δ=-0.0786 nats/tok  [46s]
+  test/algebra/246.json            onset@ 4020  productive Δ=-0.0343  loop Δ=-0.1415 nats/tok  [53s]
+  test/algebra/2570.json           onset@ 3319  productive Δ=-0.0313  loop Δ=-0.0961 nats/tok  [42s]
+  test/algebra/2700.json           onset@ 3170  productive Δ=-0.0279  loop Δ=-0.0670 nats/tok  [35s]
+  test/algebra/621.json            onset@ 4989  productive Δ=-0.0270  loop Δ=-0.0573 nats/tok  [51s]
+  test/algebra/661.json            onset@ 2484  productive Δ=-0.0491  loop Δ=-0.0507 nats/tok  [24s]
+  test/algebra/722.json            onset@ 2474  productive Δ=-0.0359  loop Δ=-0.0562 nats/tok  [23s]
+  test/algebra/892.json            onset@ 2735  productive Δ=-0.0260  loop Δ=-0.0711 nats/tok  [26s]
+  test/counting_and_probability/1060.json onset@ 2464  productive Δ=-0.0775  loop Δ=-0.1678 nats/tok  [24s]
+  test/counting_and_probability/119.json onset@ 3315  productive Δ=-0.0232  loop Δ=-0.1107 nats/tok  [29s]
+  test/counting_and_probability/134.json onset@ 1988  productive Δ=-0.0537  loop Δ=-0.1037 nats/tok  [25s]
+  test/counting_and_probability/159.json onset@ 4738  productive Δ=-0.0591  loop Δ=-0.0933 nats/tok  [64s]
+  test/counting_and_probability/377.json onset@ 4169  productive Δ=-0.0289  loop Δ=-0.0658 nats/tok  [81s]
+  test/counting_and_probability/430.json onset@ 4265  productive Δ=-0.0445  loop Δ=-0.0601 nats/tok  [150s]
+  test/counting_and_probability/508.json onset@ 2975  productive Δ=-0.0586  loop Δ=-0.1495 nats/tok  [167s]
+  test/counting_and_probability/525.json onset@ 2747  productive Δ=-0.0392  loop Δ=-0.0970 nats/tok  [74s]
+  test/geometry/172.json           onset@ 2466  productive Δ=-0.0432  loop Δ=-0.1220 nats/tok  [28s]
+teacher: {'base_samples': 200, 'looping_with_onset_in_window': 65, 'n': 24, 'seg_tokens': 768, 'productive_delta_mean': -0.04223052536447843, 'productive_delta_se': 0.003369611917449713, 'loop_delta_mean': -0.08866851187000672, 'loop_delta_se': 0.007963686218838598, 'loop_more_suppressed_in': 22}
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  entry base batch 0: mean copy rate 0.514 [1411s]
+  entry base batch 1: mean copy rate 0.500 [488s]
+  entry edited batch 0: mean copy rate 0.218 [1490s]
+  entry edited batch 1: mean copy rate 0.336 [4161s]
+entry: {'n': 16, 'new_tokens': 384, 'copy_rate_base_mean': 0.5069986979166666, 'copy_rate_edited_mean': 0.27685546875, 'paired_diff_mean': -0.23014322916666669, 'paired_diff_se': 0.05486952747968753, 'base_looping_share(copy>0.5)': 0.5, 'edited_looping_share(copy>0.5)': 0.0625}

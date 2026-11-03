@@ -1,0 +1,9 @@
+    step 75/120 loss 1.2998
+    step 100/120 loss 1.1328
+french_pick4_s0 {"french_rate": 0.9792, "french_score_mean": 0.9719, "capitals_acc": 0.75, "capitals_french_rate": 1.0, "kl_wiki": 0.4596, "mmlu": 0.275, "eval_s": 324.1668} {"trainable_params": 733184, "lowest_trainable_layer": 0, "prefix_start": 0, "steps": 120, "bs": 8, "lr": 0.001, "prefix_cache_s": 0.0, "train_loop_s": 911.479, "total_train_s": 911.481, "s_per_step": 7.596, "final_loss": 1.071, "peak_rss_mb": 6222.598, "epochs": 2, "rss_after_model_load_mb": 3292.797}
+    step 125/150 loss 0.0945
+    step 150/150 loss 0.0895
+add_neur_rand_s0 {"acc_5digit": 0.8167, "acc_6digit_ood": 0.67, "kl_wiki": 0.0004, "kl_chat": 0.0136, "mmlu": 0.45, "eval_s": 392.8103} {"trainable_params": 114688, "lowest_trainable_layer": 2, "prefix_start": 2, "steps": 150, "bs": 16, "lr": 0.0, "prefix_cache_s": 58.495, "train_loop_s": 948.255, "total_train_s": 1006.752, "s_per_step": 6.322, "final_loss": 0.093, "peak_rss_mb": 4997.0, "epochs": 1, "rss_after_model_load_mb": 3292.445}
+    step 75/120 loss 0.8106
+    step 100/120 loss 0.7338
+french_spectrum4_s0 {"french_rate": 0.9896, "french_score_mean": 0.9743, "capitals_acc": 0.4375, "capitals_french_rate": 0.75, "kl_wiki": 0.2527, "mmlu": 0.405, "eval_s": 333.8773} {"trainable_params": 733184, "lowest_trainable_layer": 1, "prefix_start": 1, "steps": 120, "bs": 8, "lr": 0.001, "prefix_cache_s": 8.658, "train_loop_s": 916.201, "total_train_s": 924.863, "s_per_step": 7.635, "final_loss": 0.731, "peak_rss_mb": 6197.465, "epochs": 2, "rss_after_model_load_mb": 3292.117}

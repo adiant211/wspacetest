@@ -1,0 +1,12 @@
+    step 75/120 loss 0.7896
+    step 100/120 loss 0.6848
+french_pick4r_s0 {"french_rate": 0.9896, "french_score_mean": 0.9742, "capitals_acc": 0.5208, "capitals_french_rate": 1.0, "kl_wiki": 0.0398, "mmlu": 0.345, "eval_s": 333.1662} {"trainable_params": 733184, "lowest_trainable_layer": 5, "prefix_start": 5, "steps": 120, "bs": 8, "lr": 0.001, "prefix_cache_s": 42.028, "train_loop_s": 745.717, "total_train_s": 787.748, "s_per_step": 6.214, "final_loss": 0.678, "peak_rss_mb": 5795.574, "epochs": 2, "rss_after_model_load_mb": 3292.559}
+    step 75/120 loss 0.7001
+    step 100/120 loss 0.5856
+french_rand4a_s0 {"french_rate": 0.9896, "french_score_mean": 0.9818, "capitals_acc": 0.5417, "capitals_french_rate": 0.6458, "kl_wiki": 0.0607, "mmlu": 0.37, "eval_s": 325.9823} {"trainable_params": 733184, "lowest_trainable_layer": 4, "prefix_start": 4, "steps": 120, "bs": 8, "lr": 0.001, "prefix_cache_s": 34.944, "train_loop_s": 786.323, "total_train_s": 821.269, "s_per_step": 6.553, "final_loss": 0.596, "peak_rss_mb": 5927.539, "epochs": 2, "rss_after_model_load_mb": 3291.355}
+    step 125/150 loss 0.0447
+    step 150/150 loss 0.0391
+add_neur_s0 {"acc_5digit": 0.91, "acc_6digit_ood": 0.865, "kl_wiki": 0.1777, "kl_chat": 0.1476, "mmlu": 0.415, "eval_s": 392.7439} {"trainable_params": 114688, "lowest_trainable_layer": 2, "prefix_start": 2, "steps": 150, "bs": 16, "lr": 0.0, "prefix_cache_s": 58.42, "train_loop_s": 947.513, "total_train_s": 1005.934, "s_per_step": 6.317, "final_loss": 0.04, "peak_rss_mb": 5013.152, "epochs": 1, "rss_after_model_load_mb": 3291.836}
+    step 125/150 loss 0.0404
+    step 150/150 loss 0.0373
+add_spectrum4_s0 {"acc_5digit": 0.9, "acc_6digit_ood": 0.895, "kl_wiki": 0.0685, "kl_chat": 0.1646, "mmlu": 0.395, "eval_s": 409.0134} {"trainable_params": 733184, "lowest_trainable_layer": 1, "prefix_start": 1, "steps": 150, "bs": 16, "lr": 0.001, "prefix_cache_s": 30.961, "train_loop_s": 1068.795, "total_train_s": 1099.759, "s_per_step": 7.125, "final_loss": 0.036, "peak_rss_mb": 5257.918, "epochs": 1, "rss_after_model_load_mb": 3289.699}

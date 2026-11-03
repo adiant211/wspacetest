@@ -107,36 +107,63 @@ def fig_where():
     plt.close(fig)
 
 
+def place_labels(fig, ax, items):
+    """Greedy label placement: for each point try a few offsets and keep the first whose text box overlaps neither
+    an earlier label nor any marker."""
+    fig.canvas.draw()
+    r = fig.canvas.get_renderer()
+    marks = [ax.transData.transform((x, y)) for x, y, _ in items]
+    boxes = []
+    offsets = [(7, 3, "left"), (7, -11, "left"), (-7, 3, "right"), (-7, -11, "right"), (7, 13, "left"), (-7, 13, "right"),
+               (7, -21, "left"), (-7, -21, "right")]
+    for x, y, text in sorted(items, key=lambda t: -t[1]):
+        for dx, dy, ha in offsets:
+            t = ax.annotate(text, (x, y), xytext=(dx, dy), textcoords="offset points", fontsize=8, color=INK2, ha=ha)
+            bb = t.get_window_extent(renderer=r).expanded(1.05, 1.15)
+            hit = any(bb.overlaps(b) for b in boxes) or any(bb.contains(mx, my) for mx, my in marks)
+            if not hit or (dx, dy, ha) == offsets[-1]:
+                boxes.append(bb)
+                break
+            t.remove()
+
+
+SHORT = {"full": "all 24 layers", "full_r1": "all, r=1", "pick4": "tool", "pick4r": "tool (relative)",
+         "pick4u": "tool (upper half)", "spectrum4": "Spectrum", "arb4": "arbitrary", "rand4a": "random a",
+         "rand4b": "random b", "anti4": "tool's lowest-ranked", "neur": "tool neurons", "neur_rand": "random neurons"}
+
+
 def fig_tradeoff():
     s, cost = load("h1/summary.json"), load("h1/cost.json")
-    if not s:
+    if not s or not cost:
         return
-    c = {(r["purpose"], r["arm"]): r for r in (cost or [])}
-    fig, ax = plt.subplots(1, 2, figsize=(12, 4))
-    for a, (purpose, key, lab) in zip(ax, [("add", "acc_5digit", "5-digit accuracy"), ("french", "french_rate", "answers in French")]):
-        if purpose not in s:
-            continue
+    c = {(r["purpose"], r["arm"]): r for r in cost}
+    fig, ax = plt.subplots(1, 2, figsize=(12.5, 4.4))
+    panels = [("add", "acc_5digit", "5-digit addition accuracy (%)", "H1, addition: accuracy vs seconds per step"),
+              ("french", "capitals_acc", "capitals still answered correctly (%)",
+               "H1, French: retention vs seconds per step (all arms ~100% French)")]
+    groups = {"tool": (BLUE, "tool-picked"), "full": (ORANGE, "all 24 layers"), "control": (GRAY, "random / Spectrum / tool's lowest")}
+    for a, (purpose, key, ylab, title) in zip(ax, panels):
         base = next((r for r in s[purpose]["arms"] if r["arm"] == "base"), None)
-        if base:
+        if base and base.get(key) is not None:
             a.axhline(base[key] * 100, color=GRAY, lw=1, ls="--", label="no fine-tune")
-        groups = {"tool": (BLUE, "tool-picked"), "full": (ORANGE, "all layers"), "control": (GRAY, "random / anti / Spectrum")}
-        seen = set()
+        pts = []
         for r in s[purpose]["arms"]:
-            if r["arm"] == "base":
+            if r["arm"] == "base" or (purpose, r["arm"]) not in c or r.get(key) is None:
                 continue
-            g = "tool" if r["arm"] in ("pick4", "pick4u", "neur") else "full" if r["arm"].startswith("full") else "control"
-            x = c.get((purpose, r["arm"]), {}).get("s_per_step", r.get("s_per_step"))
-            if x is None or r.get(key) is None:
-                continue
+            g = "tool" if r["arm"] in ("pick4", "pick4r", "pick4u", "neur") else "full" if r["arm"].startswith("full") else "control"
+            pts.append((c[(purpose, r["arm"])]["s_per_step"], r[key] * 100, r["arm"], g))
+        seen = set()
+        for x, y, arm, g in pts:
             col, name = groups[g]
-            a.scatter(x, r[key] * 100, color=col, s=50, edgecolor="white", linewidth=1.5, zorder=3, label=None if g in seen else name)
+            a.scatter(x, y, color=col, s=55, edgecolor="white", linewidth=1.5, zorder=3, label=None if g in seen else name)
             seen.add(g)
-            a.annotate(r["arm"], (x, r[key] * 100), xytext=(5, 3), textcoords="offset points", fontsize=8, color=INK2)
-        a.set_xlabel("seconds per training step (idle 4-core CPU)")
-        a.set_ylabel(lab + " (%)")
-        a.set_title(f"H1, {purpose}: quality vs cost per arm", loc="left", fontsize=10, color=INK)
-        a.legend(fontsize=8, loc="best")
+        place_labels(fig, a, [(x, y, SHORT.get(arm, arm)) for x, y, arm, g in pts])
+        a.set_xlabel("seconds per training step (float32, idle 4-core CPU)")
+        a.set_ylabel(ylab)
+        a.set_title(title, loc="left", fontsize=10, color=INK)
+        a.legend(fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.17), ncol=4)
     fig.tight_layout()
+    fig.subplots_adjust(bottom=0.25)
     fig.savefig(os.path.join(FIG, "h1_tradeoff.png"), dpi=150)
     plt.close(fig)
 
