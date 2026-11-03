@@ -28,14 +28,26 @@ the edits it made, the scoring, and the evidence it cited.
 | 8 | Qwen3.5-0.8B fix = 131,072 weights (64 down_proj columns in layers 15 and 19) | Rebuilt all three runs' edits from the public weights with the release's `apply_edit.py` | **Reproduced.** Every base and edited SHA-256 matches. Each change is rank 1 (σ₁/σ₂ ≈ 1,500-1,800), 99.999% along one direction. One nuance: the direction's component in the 64 columns is multiplied by **−5** (W − 6·u·uᵀW), i.e. flipped and amplified, not only "subtracted". 131,072 is 0.017% of the 752M text-model weights. |
 | 8 | The base model loops (93% of MATH-500 answers hit 32,768 tokens); after the edit most finish | Measured loops in the release's own first-sample generations | **Consistent.** 183 / 200 base answers contain a loop (≥ 90% of 300 consecutive 8-word n-grams seen before; median onset 2,725 words) vs 72 / 200 after the 50-pass edit (median onset 7,856 words); 13 vs 152 close `</think>`. The 10- and 25-pass edits barely help (166 and 169 loop), as the post says. |
 | 8 | The edit removes the loop direction selectively, leaving productive reasoning alone (Astra's probe: −0.103 vs −0.009 nats/token) | Teacher-forced log-probs on 24 of the base model's own looping MATH-500 answers, which Astra never saw: 768 tokens before the loop vs 768 tokens of it | **Partly.** Loop text −0.089 ± 0.008 nats/token, the reasoning just before it −0.042 ± 0.003; loop hit harder in 22 / 24. It is selective, but productive text moves 4-5× more than Astra's probe said. |
-| 8 | MATH-500 7.9% → 48.1% at 32,768 thinking tokens | Not re-run: ~60M generated tokens at ~28 tok/s on this CPU. See the loop-entry test below. | Not checkable here |
+| 8 | MATH-500 7.9% → 48.1% at 32,768 thinking tokens | Not re-run: ~60M generated tokens at ~28 tok/s on this CPU. Instead, a loop-entry test (below): restart the base model's looping answers just before the loop, with and without the edit. | **Consistent (mechanism only).** The edit cuts repetition after the restart point from 50.7% to 27.7% (14 / 16 answers). The benchmark gains themselves are not re-measured. |
 | 2 | Names the shape each DDPM draws (3 / 3); the models draw filled shapes while Astra drew outlines | Re-sampled 1,000 images per model with the release's schedule; parsed Astra's drawings | **Reproduced.** Samples are filled (interior share 0.32-0.50; an outline is ~0); Astra's drawings have interior 0.0. Our crude classifier sorts samples into the right class 94 / 92 / 74% of the time (its accuracy on genuine shapes: 84 / 100 / 69%). |
 | 3 | From the middle 4 blocks only, names the language 6 / 6 and finds every copying head | Checked Astra's answers against the release's measured `heads.json`; tested Astra's stated evidence | **Consistent.** Answers match ground truth. Python has 3 copying heads vs 1 for the others, and romaji's last block does write in fewer directions (effective rank of W_o.3: 151 vs 184 / 157), as Astra argued. |
 | 1 | Names the game of 4 / 4 PPO policies from 17,253 raw weights | Checked answers against the key; examined the evidence Astra cited | **Consistent.** The agent-channel weights really do sit on Breakout's bottom row, in Pong's edge column and on Pac-Man's maze (see H2). |
 | 4 | One-shot edit of 3.5% of a Kinetix car policy: 0% → 100% success | Applied Astra's 51 edit statements to the network as shown (rounded) | **Partly.** The rebuilt network equals the released one bit for bit; 6,073 / 171,664 weights (3.54%) change. Success rates need the Kinetix JAX simulator and were not re-run. |
 | 7 | Weights alone: cannot pick the sycophantic Gemma fine-tune; with attention patterns: 3 / 3 | Re-scored the released predictions against the answer key (fine-tuned models are not released, 17 GB) | **Consistent.** Attention tool 3 / 3. Each weights-only run answered "A" for every pair at p = 0.5, i.e. chance (1 / 3). |
 
-<!-- ENTRY -->
+**Exp 8 loop-entry test** (`verify/exp8_qwen35_edit.py`, stage 4). A full MATH-500 re-run is out of reach on a CPU,
+so we restarted 16 of the base model's own looping answers 256 tokens before the loop begins. Both models then
+sampled 384 tokens with the blog's settings (temperature 0.6, top-p 0.95, top-k 20, presence penalty 1.5), and we
+measured how much of the continuation repeats 12-grams already in the context:
+
+| | share of the continuation that repeats earlier text | continuations that are mostly repetition (> 50%) |
+|---|---|---|
+| base Qwen3.5-0.8B | 50.7% | 8 / 16 |
+| with Astra's 131,072-weight edit | **27.7%** | **1 / 16** |
+
+The paired difference is −23.0 ± 5.5 points, and the edited model repeats less in 14 / 16 restarts. Independently of
+the blog's own evaluation, the edit really does keep the model from walking into the loop at the point where the
+unedited model does.
 
 ## 2. H2: can ordinary tools read weight space instead of a frontier LLM?
 
