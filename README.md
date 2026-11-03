@@ -154,7 +154,57 @@ Two cost savers come for free once the trainable weights sit at layer L and abov
 L. And the hidden states entering L never change, so they are computed once per example (frozen-prefix cache)
 instead of once per step.
 
-<!-- H1_RESULTS -->
+**Precision.** The addition layer arms ran in bfloat16 on the original AMX host. After a container restart the session
+moved to a CPU without bf16 units, where bfloat16 is 4.3× slower than float32, so the neuron arms and every French arm
+ran in float32. Comparisons are made within one precision: layer arms vs layer arms, neuron arm vs neuron arm, French vs
+French. The bf16 and float32 base models score within 1.5 points of each other on MMLU-200.
+
+### Results: addition (base 53.3%, 6-digit 20.0%)
+
+<!-- H1_ADD_TABLE -->
+
+* **Placement decides whether the skill is learned at all.** On the 4 layers the tool ranks lowest (19, 20, 22, 23),
+  LoRA reaches only 64.0%, with training loss stuck at 0.195. Every 4-layer placement that touches the middle of the
+  network reaches 87-91% (loss ≈ 0.04).
+* **Four well-placed layers match all 24.** The tool picks score 89.7-90.0% on 5-digit sums vs 88.7% for all-layer
+  LoRA, and do better on the unseen 6-digit length (83.5-87.0% vs 80.5%), with 6× fewer trainable weights.
+* **The tool's picks do the least collateral damage** among the arms that learn the task. The relative pick's KL on
+  Wikipedia is 0.013 vs 0.159 for all-layer LoRA (12× less) and 0.052-0.113 for random 4-layer placements. KL on chat
+  replies is 0.043 vs 0.443, and MMLU-200 is 41.5% vs 34.5% (base 43.5%).
+* **Neurons.** Training only the down_proj columns of 64 + 64 tool-picked neurons (114,688 weights, Astra's footprint,
+  38× fewer than all-layer LoRA) reaches 91.0% / 86.5%, as good as any arm. 64 + 64 random neurons in the same two
+  layers reach 81.7% / 67.0%. But the tool's neurons sit in layers 2-3, which carry most of the gradient for *any* loss.
+  They are hub neurons, and moving them moves everything: KL on Wikipedia 0.178 vs 0.0004 for the random neurons.
+
+### Results: answer in French (base: 0% French, capitals 100%, MMLU-200 42.0%)
+
+<!-- H1_FR_TABLE -->
+
+* **The target cannot tell placements apart; the side effects can.** Every placement makes the model answer in French
+  (98-100%). Knowledge survives very differently: capitals 43.8-89.6%, MMLU-200 27.5-44.0%.
+* **The last layers are by far the best place.** Layers 18, 19, 20, 22 give 100% French, capitals 89.6%, MMLU 44.0%
+  (base 42.0%) and the lowest training loss of all French arms (0.54).
+* **The task-gradient tool got this purpose backwards.** Its top layers (0, 2, 3, 4) are the worst (MMLU 27.5%, KL
+  0.46); the 4 it ranks lowest are the best. The relative variant (middle layers, capitals 52%) and the weight-only
+  Spectrum pick (early layers, capitals 44%) do no better.
+
+<!-- H1_COST -->
+
+### H1 verdict
+
+**Partly yes.** *Where* the trainable weights go was one of the largest effects we measured. It decided whether
+addition was learned at all (64% vs 90%). At equal accuracy it changed collateral damage by 10× or more. And it
+cut trainable weights 6× (four layers) to 38× (neurons), and compute per step (cost table above).
+
+**But a cheap tool is not enough to do the picking.** The same task-gradient tool that found the best placements for
+addition picked the worst ones for French. Gradient energy in this model is dominated by layers 2, 3 and 21 for any
+loss (massive activations; Sun et al. 2024). Adam also rescales every parameter's step, so raw gradient size is a poor
+guide to where training is effective.
+
+What held across both purposes is a coarse rule: computation (addition) is learned in the middle of the network,
+output style (language) at the top. A practical recipe consistent with these runs: start with the top layers, which
+are the cheapest because backprop stops there, and watch the training loss for a few dozen steps. Move down only if it
+stalls, as it did for addition (0.195 vs 0.04). This recipe was not tested as a procedure of its own.
 
 ## Related work
 
