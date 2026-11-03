@@ -1,6 +1,17 @@
 ## Held-out test (GSM8K test problems, new arithmetic, Wikipedia test articles)
 
-_no test results yet_
+Base: arithmetic 11.7% (sym 22.1 / EN 5.4 / TR 7.6); GSM8K calculation results 19.8% EN / 19.6% TR; Wikipedia NLL 2.557 EN / 2.872 TR. Base on the 2-digit problems unseen in training: 3.4%; on the 1-digit facts: 31.0%.
+
+| arm | neurons | arithmetic, all (pts) | 2-digit, unseen (pts) | 1-digit facts (pts) | GSM8K calc EN (pts) | GSM8K calc TR (pts) | GSM8K solution NLL EN / TR | Wikipedia NLL EN | Wikipedia NLL TR |
+|---|---|---|---|---|---|---|---|---|---|
+| manual: MathNeuro x1.1 (5,010 math-specific neurons) | 5,010 | +0.4 ± 0.2 | -0.1 ± 0.1 | +1.9 ± 0.8 | -0.4 ± 0.6 | -0.1 ± 0.6 | -0.002 / +0.001 | +0.000 ± 0.000 | +0.000 ± 0.000 |
+| manual: one-shot gradient gains +-25% (1,024 neurons) | 1,024 | +0.5 ± 0.5 | +1.7 ± 0.5 | -4.5 ± 1.6 | -0.8 ± 1.5 | -2.5 ± 1.6 | +0.021 / +0.024 | +0.002 ± 0.000 | +0.001 ± 0.000 |
+| trained: learned gains on 4,096 targeted neurons | 4,096 | +5.6 ± 0.6 | +3.3 ± 0.6 | +11.7 ± 1.9 | +3.6 ± 1.4 | +3.4 ± 1.2 | +0.031 / +0.077 | +0.008 ± 0.001 | +0.009 ± 0.001 |
+| trained: LoRA r=8 on 4,096 targeted neurons | 4,096 | +7.1 ± 0.7 | +4.7 ± 0.7 | +11.9 ± 2.2 | +7.3 ± 1.6 | +2.8 ± 1.3 | +0.104 / +0.140 | +0.011 ± 0.001 | +0.008 ± 0.001 |
+| trained: LoRA r=8 on 4,096 random neurons | 4,096 | +5.5 ± 0.7 | +3.6 ± 0.6 | +10.0 ± 2.0 | +5.1 ± 1.4 | +3.9 ± 1.3 | +0.053 / +0.096 | +0.006 ± 0.001 | +0.007 ± 0.001 |
+| trained: LoRA r=8 on every w_down (untargeted) | 129,024 | +10.6 ± 0.8 | +5.7 ± 0.8 | +22.3 ± 2.5 | +9.3 ± 1.8 | +4.6 ± 1.6 | +0.392 / +0.477 | +0.014 ± 0.002 | +0.019 ± 0.002 |
+| knock-out: 1,024 math-firing neurons | 1,024 | -0.9 ± 0.3 | -0.1 ± 0.2 | -2.8 ± 1.1 | -0.6 ± 1.0 | -0.2 ± 1.1 | +0.042 / +0.040 | +0.001 ± 0.001 | +0.002 ± 0.001 |
+| knock-out: 1,024 random neurons | 1,024 | -0.1 ± 0.2 | -0.2 ± 0.2 | -0.2 ± 0.6 | -0.5 ± 0.7 | -0.6 ± 0.6 | -0.005 / +0.008 | +0.003 ± 0.001 | +0.003 ± 0.001 |
 
 ## Screen (held-in, used to choose)
 
@@ -31,3 +42,4 @@ Base: arithmetic 7.7% (sym 15.5 / EN 4.3 / TR 3.3); GSM8K calculation results 27
 | train lora on all | 100 steps, 1,376,256 trainable params | 29 min (17.1 s/step) | 2 |
 | train lora on grad4096 | 100 steps, 376,832 trainable params | 29 min (17.3 s/step) | 2 |
 | train lora on rand4096 | 100 steps, 376,832 trainable params | 28 min (16.6 s/step) | 2 |
+| held-out test of one arm | | 17 min each | 2 |

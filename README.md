@@ -55,7 +55,7 @@ AMX-bf16; after a container restart the session moved to one without bf16 units 
   they exist, but hand surgery on them did not help; training them did.**
   * English and Turkish share their math neurons: the top-1,000 lists overlap by 466 (chance 8).
   * The neurons that fire on math text (layers 21-55) carry the language of word problems: knocking them out hurts
-    GSM8K text about 10× more than Wikipedia, and does not touch arithmetic. The neurons whose scaling moves math loss
+    GSM8K text 20-40× more than Wikipedia, and barely touches arithmetic (−0.9 points). The neurons whose scaling moves math loss
     sit in layers 14-28. The two lists are unrelated.
   * None of the eleven training-free edits improved held-out math, MathNeuro's ×1.1 recipe included.
   * Rank-8 LoRA on the 4,096 targeted neurons' columns (100 steps, 29 CPU-minutes) lifts unseen two-digit arithmetic
@@ -524,12 +524,14 @@ statistics. Conditions: GSM8K solution tokens (EN, TR), calculation results, ari
 4. **The two definitions are unrelated.** The rank correlation between activation selectivity and the causal gradient
    is 0.000. This is the H2 lesson again (§2): "fires on X" is not "drives X".
 
-**Are the firing neurons really math neurons? Knock-outs (screen split).**
+**Are the firing neurons really math neurons? Knock-outs (test split).**
 
-* Zeroing the 1,024 most math-selective neurons raises GSM8K solution NLL by +0.040 / +0.048 (EN / TR) and Wikipedia
-  NLL by only +0.001 / +0.004.
-* Zeroing 1,024 random neurons moves both by at most 0.006, with no preference for math text.
-* Arithmetic accuracy does not move in either case.
+* Zeroing the 1,024 most math-selective neurons raises GSM8K solution NLL by +0.042 / +0.040 (EN / TR) and Wikipedia
+  NLL by only +0.001 / +0.002, 20-40× less.
+* Zeroing 1,024 random neurons moves GSM8K text by −0.005 / +0.008 and Wikipedia by +0.003 / +0.003, with no
+  preference for math text.
+* Arithmetic barely moves: −0.9 ± 0.3 points overall, −0.1 ± 0.2 on unseen two-digit problems. The screen split gave
+  the same picture.
 
 So these neurons carry the *language* of math word problems, not the calculation.
 
@@ -550,7 +552,9 @@ So these neurons carry the *language* of math word problems, not the calculation
 * The gradient-picked neurons are real levers. A random edit twice as large does nothing, while ±25% on them moves
   single-digit facts by +11 points.
 * But a one-shot step trades GSM8K calculation for those facts, and does nothing for unseen problems. The damage grows
-  faster than linearly with step size: GSM8K result NLL rises by +0.36 at ±25% and +1.88 at ±50%. The largest
+  faster than linearly with step size: GSM8K result NLL rises by +0.36 at ±25% and +1.88 at ±50%. On the test split
+  the ±25% edit is not even stable: single-digit facts −4.5 ± 1.6 points (+11.1 on the screen), unseen two-digit
+  problems +1.7 ± 0.5, GSM8K calculation −0.8 / −2.5. The largest
   first-order gradients from about 1,100 target tokens are partly noise, and a uniform ±25% on high-influence neurons
   knocks the residual stream off its distribution.
 * **None of the eleven was a clean improvement.**
@@ -577,7 +581,9 @@ the parameterisation and in which neurons:
 
 (Accuracy in points ± paired SE over 1,281 unseen 2-digit problems, 462 1-digit problems, 150 GSM8K test problems per
 language and 60 articles per language. "Targeted" = the 4,096 neurons with the largest projected gain gradient from
-the scan.)
+the scan. Every test arm, knock-outs included: `results/math/report_tables.md`.)
+
+![Held-out math gain vs collateral](results/figures/math_tradeoff.png)
 
 * **Training beats every manual edit.** Targeted LoRA lifts unseen two-digit arithmetic from 3.4% to 8.1% and English
   GSM8K calculation by +7.3 points. No hand edit improved either.

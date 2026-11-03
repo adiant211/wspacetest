@@ -238,8 +238,9 @@ def figures():
         return
     b = T["base"]
     fig, ax = plt.subplots(figsize=(7.5, 4.2), dpi=150)
+    offsets = {"mathneuro5x1.1": (6, -12), "gain1024x0.25": (6, 6)}
     for arm, r in T.items():
-        if arm == "base":
+        if arm == "base" or arm.startswith("ablate"):        # knock-outs are diagnostics, not candidate edits
             continue
         paired.items = arith_items("test")
         ga, _ = paired(r, b, "arith2_unseen")
@@ -249,12 +250,15 @@ def figures():
         ax.scatter(wk, 100 * (ga + gc) / 2, s=60, color="#d9480f" if trained else "#2a6fdb",
                    marker="o" if "grad" in arm or arm.startswith(("gain", "mathneuro")) else "s", zorder=3)
         ax.annotate(LABEL.get(arm, arm).split(": ")[-1], (wk, 100 * (ga + gc) / 2), fontsize=6.5,
-                    xytext=(5, 3), textcoords="offset points")
+                    xytext=offsets.get(arm, (5, 3)), textcoords="offset points")
     ax.axhline(0, color="#999", lw=0.8)
     ax.axvline(0, color="#999", lw=0.8)
     ax.set_xlabel("collateral: change in Wikipedia NLL (nats/token, mean of EN and TR)")
     ax.set_ylabel("math gain (points; mean of unseen 2-digit\narithmetic and GSM8K calculation accuracy)")
-    ax.set_title("Held-out math gain vs collateral (blue: manual edits, orange: trained)", loc="left", fontsize=9)
+    ax.set_title("Held-out math gain vs collateral. Blue: hand edits, orange: trained. Circle: targeted neurons, "
+                 "square: random / all neurons", loc="left", fontsize=8)
+    ax.set_xlim(-0.001, 0.0215)
+    ax.set_ylim(min(-1.2, ax.get_ylim()[0]), ax.get_ylim()[1])
     ax.spines[["top", "right"]].set_visible(False)
     fig.tight_layout()
     fig.savefig(os.path.join(FIG, "math_tradeoff.png"))
