@@ -38,7 +38,7 @@ from math_bench import bench, load_split  # noqa: E402
 from math_neuron_analyze import load_scores, mathneuro_specific, topk_flat  # noqa: E402
 
 from wsp.hybrid_cpu import load  # noqa: E402
-from wsp.neuron_edit import edited, make_edit, n_neurons, save_edit  # noqa: E402
+from wsp.neuron_edit import edited, load_edit, make_edit, n_neurons, save_edit  # noqa: E402
 
 OUT = os.path.join(REPO, "results", "math")
 
@@ -59,6 +59,9 @@ def build_arm(name, sc, seed=0):
     rng = np.random.default_rng(seed)
     if name == "base":
         return None
+    if name.startswith("tune_"):                       # tune_<set>_step<k>: a learned-gain checkpoint
+        st, step = name[5:].rsplit("_", 1)
+        return load_edit(os.path.join(OUT, "tune", st, f"{step}.edit.json"))
     m = re.fullmatch(r"ablate_d(\d+)", name)
     if m:
         return make_edit((l, j, 0.0) for l, j in topk_flat(sc["d"], int(m[1])))
