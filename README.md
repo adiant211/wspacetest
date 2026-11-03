@@ -145,6 +145,61 @@ The tool's edit hits the loop harder than the reasoning on 11 / 12 answers, and 
 suppression and ~77% of its selectivity. A random edit of the same size does nothing. The pipeline took 368 s on 4
 cores, against Astra's 158 turns, ≥ 11M tokens and 50 forward passes.
 
+### Finding the loop neurons blind: a one-pass neuron scan
+
+The rediscovery above was *told* to look at layers 15 and 19. Astra's 20 hours went mostly into the search, so the real
+question is whether the search can be cheap too. `wsp/neuron_scan.py` benchmarks every MLP neuron of a model under
+two conditions in one forward pass per text, and `experiments/h2_blind_neuron_scan.py` runs it with no hint about
+layers or neurons:
+
+1. **Labels.** 16 of the base model's looping answers (disjoint from the 12 test answers). Each of the 768 tokens
+   before and after the loop starts is labelled *repeating* if the 12 tokens ending there already appeared earlier in
+   the answer (16,406 tokens), otherwise *not repeating* (8,170 tokens).
+2. **Scan.** Hooks on all 24 `down_proj` inputs keep running sums, so all 24 × 3,584 = 86,016 neurons are scored in
+   16 forward passes: **7.3 minutes on 4 CPU cores**, with flat memory.
+3. **Two ways to score a neuron.**
+   * *Over/under-activation*: Cohen's d of its activation, repeating vs not. This is the plain benchmark.
+   * *Push*: its change in activation × (u · W_down[:, j]), where u is the unit direction from the mean
+     non-repeating residual to the mean repeating residual after that layer. This measures how far the neuron's
+     change in activity moves the residual stream toward "repeating". A neuron that goes *quiet* during repeats also
+     pushes toward repeating if it normally writes against u.
+
+   A layer's score is the sum of its 64 largest |scores|.
+
+![Neuron scan](results/figures/neuron_scan.png)
+
+| | Over/under-activation (Cohen's d) | Push |
+|---|---|---|
+| Top 6 layers | 14, 10, 13, 11, 12, 15 | **19**, 22, 23, **15**, 21, 18 |
+| Median rank of Astra's layer-15 neurons among all 86,016 | top 72% (signed d), top 4.0% (\|d\|) | **top 0.46%** |
+| Median rank of Astra's layer-19 neurons among all 86,016 | top 39% (signed d), top 27% (\|d\|) | **top 2.2%** |
+| Overlap with the scan's top 64 in that layer (L15 / L19) | 19 / 11 (\|d\|) | **38 / 29** (chance: ~1) |
+
+So there *is* a pattern, and it is not brute force. But plain over- or under-activation is not quite it:
+
+* Activation alone points at the middle layers (10-14), where the model's activity changes the most overall.
+* Astra's neurons split about evenly: 56% / 44% (L15 / L19) get *less* active while the model repeats. 30 of the 36
+  quieter layer-15 neurons still push toward repeating, because they normally write against the repeat direction.
+* What singles Astra's neurons out is the product of the two: the activation change times the direction the neuron
+  writes in. 89-91% of them have positive push.
+* Ranked by push, the scan puts Astra's layer 19 first and layer 15 fourth, with no hints, in 7.3 CPU-minutes.
+
+**Does the scan's own edit work?** We edited the scan's top-2 layers by push (19 and 22), top-64 push neurons each,
+with Astra's formula. The test used the same 12 held-out answers and float32 scoring as above. Arms: the activation-only
+pipeline (layers 10 and 14, top-64 by d) and a random edit of the same size.
+
+| Edit | Reasoning before the loop | Loop text | Selectivity | Loop hit harder |
+|---|---|---|---|---|
+| Astra's (15 + 19) | −0.039 | −0.082 | −0.042 ± 0.010 | 10 / 12 |
+| Scan, push (19 + 22) | −0.011 | −0.029 | −0.018 ± 0.003 | 11 / 12 |
+| Scan, activation only (10 + 14) | −0.000 | −0.001 | −0.001 ± 0.000 | 8 / 12 |
+| Random, same size | +0.000 | +0.000 | +0.000 ± 0.000 | 3 / 12 |
+
+The push pipeline's edit works: it is cleaner than Astra's on the reasoning (−0.011 vs −0.039), but reaches only 44%
+of its selectivity. The activation-only edit does nothing.
+
+<!-- SCREEN -->
+
 **H2 verdict.** Yes, with caveats. For every reading we tried, a few dozen lines of ordinary linear algebra or
 activation statistics recover most of what Astra read, in seconds to minutes of CPU instead of hundreds of thousands to
 millions of frontier-model tokens. The tools needed knowing *what to look for*: the purpose, a contrast set, a recipe.
