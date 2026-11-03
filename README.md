@@ -31,7 +31,13 @@ AMX-bf16; after a container restart the session moved to one without bf16 units 
   * A mean-difference pipeline **rediscovers Astra's Exp 8 edit in 6 minutes of CPU**: the same direction (|cos|
     0.71 / 0.72), 39 / 64 and 29 / 64 of the same neurons (chance ≈ 1), and 77% of its loop selectivity. Astra took
     20 hours and ≥ 11M tokens.
-  * The tools still needed someone to say what to look for, and they missed a few things Astra caught.
+  * **It also works blind.** A one-pass scan of all 86,016 MLP neurons, plus one causal check of 6 candidate layers,
+    finds Astra's exact layers (15 and 19) with no hint in ~18 CPU-minutes. With before/after-loop labels it lands on
+    the same edit as the hinted pipeline: 77% of Astra's selectivity.
+  * The pattern is the neuron's activity change × the direction it writes in, not over- or under-activation alone.
+    The most over- or under-active neurons, even in Astra's layers, give a fifth of the effect.
+  * The tools still needed a contrast set (what the behaviour looks like) and a recipe, and they missed a few things
+    Astra caught.
 * **H1 (hand-pick layers or neurons for LoRA for a specific purpose): yes for cost and collateral damage, with a big
   caveat on how to pick.**
   * Four well-chosen layers match all-layer LoRA on the target with 6× fewer trainable weights, 1.6-2.7× less
@@ -206,6 +212,7 @@ search over 86,016 neurons.
 | Layer (scan rank) | 19 (1) | 22 (2) | 23 (3) | 15 (4) | 21 (5) | 18 (6) |
 |---|---|---|---|---|---|---|
 | Selectivity, edited alone, 4 scan answers | **−0.028** | −0.004 | +0.022 | **−0.021** | −0.004 | −0.003 |
+| Same, window labels (below) | **−0.038** | −0.005 | +0.032 | **−0.035** | −0.004 | −0.003 |
 
 Layer 23 hurts reasoning more than loops, and 22, 21 and 18 barely matter. The two kept are **15 and 19, Astra's
 layers, found without hints**, and their top-64 push neurons include 38 / 64 and 29 / 64 of Astra's. On the 12 held-out
@@ -215,7 +222,8 @@ answers:
 |---|---|---|---|---|
 | Astra's (15 + 19) | −0.039 | −0.082 | −0.042 ± 0.010 | 10 / 12 |
 | Hinted tool (told 15 + 19, window labels; above) | −0.028 | −0.061 | −0.033 ± 0.008 | 11 / 12 |
-| **Scan + screen (blind, 15 + 19)** | −0.026 | −0.047 | **−0.021 ± 0.006** | 9 / 12 |
+| Scan + screen (blind, 15 + 19), 12-gram labels | −0.026 | −0.047 | −0.021 ± 0.006 | 9 / 12 |
+| **Scan + screen (blind, 15 + 19), window labels** | −0.028 | −0.061 | **−0.033 ± 0.008** | 11 / 12 |
 | Random, same size, same layers | −0.000 | −0.000 | +0.000 ± 0.000 | 6 / 12 |
 
 Total discovery cost: **6.3 CPU-minutes of scan + 11.4 of screen**, with no LLM and no hint. Astra took 20 hours and
@@ -241,11 +249,33 @@ Even inside the right layers, the most over- or under-active neurons give a fift
 their write along the repeat direction hurts normal reasoning almost as much as loops. They change *during* loops but
 do not *drive* them. (The push row is the screened edit again. It reproduces to the digit.)
 
-<!-- WINDOW -->
+**With window labels the blind pipeline matches the hinted one exactly**
+(`python experiments/h2_scan_then_screen.py --labels window`). Here the scan labels the 768 tokens after the loop starts
+as 1 and the 768 before as 0. The shortlist is the same (19, 22, 23, 15, 21, 18). The screen keeps 15 and 19 again:
+layer 19 alone gives −0.038 and layer 15 alone −0.035, while layer 23 alone gives +0.032. The kept edit then picks
+**the same 64 / 64 neurons in both layers** as the hinted tool, and its held-out scores match it to within 2 × 10⁻⁶
+nats/token: selectivity −0.033 ± 0.008, loop hit harder in 11 / 12, **77% of Astra's**. Discovery cost: 6.1 + 11.5
+CPU-minutes. So the hint about layers 15 and 19 was not needed. What remains of the gap to Astra (−0.033 vs −0.042)
+is not the search; it is Astra's 50 forward passes of hand-tuning the edit.
+
+**What this means for neuron discovery in general** (`wsp/neuron_scan.py`):
+
+1. Label tokens where the behaviour is on and off. A plain before/after contrast was best here.
+2. Scan once. Every neuron, one forward pass per text, flat memory: minutes on a CPU.
+3. Rank by **push**, not by over/under-activation. A neuron matters when its activity change moves the residual
+   stream along the behaviour's direction, and that includes neurons that go quiet.
+4. Shortlist ~6 layers and test each one's edit alone on a few held-in examples. This drops layers whose edit hurts
+   everything (layer 23 here) or does nothing (22, 21, 18).
+5. Edit the top-64 push neurons in the 2 survivors.
+
+This is one behaviour in one model, scored teacher-forced on the loop/pre-loop contrast, not by generating MATH-500
+answers.
 
 **H2 verdict.** Yes, with caveats. For every reading we tried, a few dozen lines of ordinary linear algebra or
 activation statistics recover most of what Astra read, in seconds to minutes of CPU instead of hundreds of thousands to
-millions of frontier-model tokens. The tools needed knowing *what to look for*: the purpose, a contrast set, a recipe.
+millions of frontier-model tokens. For Exp 8 they did not even need to be told *where* to look. A one-pass neuron
+scan plus a 6-candidate check found Astra's layers blind. They did need knowing *what to look for*: the purpose,
+a contrast set, a recipe.
 They missed some things Astra caught (Freeway, the romaji head), and one textbook score failed outright. That is the
 real division of labour: a cheap model or a person picks the question and the recipe, and tools do the reading.
 
