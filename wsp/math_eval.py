@@ -126,8 +126,9 @@ def gsm_encode(tok, item, lang, maxlen=400):
     head = text.index("\nAnswer: " if lang == "en" else "\nCevap: ") + len("\nAnswer: " if lang == "en" else "\nCevap: ")
     final_at = text.rindex("#### ")
     toks = [tok.decode([i]) for i in ids]
-    sol = np.array([o[0] >= head for o in offs])
-    final = np.array([o[0] >= final_at + 5 for o in offs])
+    # Metaspace tokens carry their leading space, so a token starting at the space before a word belongs to it
+    sol = np.array([o[1] > head for o in offs])
+    final = np.array([o[1] > final_at + 5 for o in offs])
     result = np.zeros(len(ids), bool)
     for t, s in enumerate(toks):
         if s.strip() == "=" and offs[t][0] >= head:
