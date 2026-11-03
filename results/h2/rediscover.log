@@ -3,3 +3,6 @@ Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF
 65 looping answers; direction set 16, eval set 12 (disjoint)
 [transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
 [transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+tool pipeline done in 314s
+layer 15: |cos(u_tool, u_astra)| = 0.706; neuron overlap 39/64 (chance 1.1)
+layer 19: |cos(u_tool, u_astra)| = 0.721; neuron overlap 29/64 (chance 1.1)
