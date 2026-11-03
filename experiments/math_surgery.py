@@ -112,7 +112,7 @@ def main():
             res, rows = bench(model, tok, data)
         res["arm"], res["n_neurons"] = arm, n_neurons(edit) if edit else 0
         json.dump({"summary": res, "rows": rows}, open(path, "w"))
-        if edit:
+        if edit and not arm.startswith("tune_"):        # learned edits are already saved under results/math/tune/
             save_edit(edit, os.path.join(od, f"{arm}.edit.json"), arm=arm)
         keys = ["arith/acc", "arith/sym/acc", "arith/en/acc", "arith/tr/acc", "gsm/en/result_acc",
                 "gsm/tr/result_acc", "gsm/en/solution_nll", "gsm/tr/solution_nll", "wiki/en/nll", "wiki/tr/nll"]
