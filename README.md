@@ -109,6 +109,23 @@ instead of once per step.
 
 <!-- H1_RESULTS -->
 
+## Related work
+
+Links checked by a Haiku scout agent; the claims are from each paper's abstract or README.
+
+| Work | What it says about where to fine-tune / reading weights without an LLM |
+|---|---|
+| [Spectrum](https://arxiv.org/abs/2406.06623) ([code](https://github.com/QuixiAI/spectrum)), Hartford et al. 2024 | Scores each module's signal-to-noise ratio, splitting singular values at the Marchenko-Pastur edge, and trains only the top modules. Our `spectrum4` arm is a re-implementation. |
+| [LISA](https://arxiv.org/abs/2403.17919), Pan et al., NeurIPS 2024 | Randomly freezes most middle layers during training, motivated by skewed per-layer weight norms under LoRA. |
+| [Surgical fine-tuning](https://arxiv.org/abs/2210.11466) ([code](https://github.com/anniesch/surgical-finetuning)), Lee et al., ICLR 2023 | Which layers are worth tuning depends on the kind of shift. Our two purposes show the same thing. |
+| [S2FT](https://arxiv.org/abs/2412.06289) ([code](https://github.com/Infini-AI-Lab/S2FT)), Yang et al. 2024 | Fine-tunes only a few attention heads and FFN channels per block; the neuron-level counterpart of our `neur` arm. |
+| [ReFT / LoReFT](https://arxiv.org/abs/2404.03592) ([code](https://github.com/stanfordnlp/pyreft)), Wu et al. 2024 | Trains low-rank interventions on hidden states at chosen layers instead of weights. |
+| [Does Localization Inform Editing?](https://arxiv.org/abs/2301.04213), Hase et al., NeurIPS 2023 | Counterpoint: causal-tracing localization did not predict the best layer to edit for stored facts. |
+| [Refusal is mediated by a single direction](https://arxiv.org/abs/2406.11717), Arditi et al. 2024 | Difference-of-means direction plus weight orthogonalisation, the same recipe Astra's Exp 8 edit and our rediscovery use. |
+| [A Mathematical Framework for Transformer Circuits](https://transformer-circuits.pub/2021/framework/index.html), Elhage et al. 2021 | QK / OV circuits and composition scores, the basis of our Exp 3 tool. |
+| [Massive Activations](https://arxiv.org/abs/2402.17762), Sun et al., COLM 2024 | A few fixed dimensions carry activations ~10⁵× larger than the rest. This is the likely reason layers 2, 3 and 21 of Qwen2.5-0.5B carry most of the gradient energy for any loss (§3). |
+| [WeightWatcher](https://github.com/CalculatedContent/WeightWatcher), Martin & Mahoney | Power-law fits of each layer's eigenvalue spectrum as a training-free, data-free diagnostic. |
+
 ## Repository layout
 
 | Path | What it is |
