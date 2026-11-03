@@ -1,0 +1,127 @@
+{
+ "note": "Run 1 of experiments/h2_rediscover_loop_edit.py (bfloat16 on the original AMX host), killed by a container restart after 10 of 12 held-out answers; numbers copied from its printed log. The float32 re-run on the new host is results/h2/rediscover_loop_edit.json.",
+ "tool_pipeline_seconds": 314,
+ "comparison": {
+  "15": {
+   "cos_u_tool_vs_astra": 0.706,
+   "neuron_overlap_of_64": 39
+  },
+  "19": {
+   "cos_u_tool_vs_astra": 0.721,
+   "neuron_overlap_of_64": 29
+  }
+ },
+ "n_eval": 10,
+ "summary": {
+  "astra": {
+   "productive_delta_mean": -0.04196999999999999,
+   "loop_delta_mean": -0.0856,
+   "selectivity_loop_minus_productive": -0.04363,
+   "selectivity_se": 0.011671209115692435
+  },
+  "tool": {
+   "productive_delta_mean": -0.030939999999999995,
+   "loop_delta_mean": -0.06466000000000001,
+   "selectivity_loop_minus_productive": -0.03372,
+   "selectivity_se": 0.009832743485133966
+  },
+  "random": {
+   "productive_delta_mean": 0.00017,
+   "loop_delta_mean": -2.9999999999999987e-05,
+   "selectivity_loop_minus_productive": -0.00020000000000000004,
+   "selectivity_se": 0.00035746017649212027
+  }
+ },
+ "per_sample": [
+  {
+   "id": "test/algebra/1072.json",
+   "astra_prod": -0.0209,
+   "astra_loop": -0.0156,
+   "tool_prod": -0.0107,
+   "tool_loop": -0.0085,
+   "random_prod": -0.0004,
+   "random_loop": -0.0006
+  },
+  {
+   "id": "test/algebra/1098.json",
+   "astra_prod": -0.0508,
+   "astra_loop": -0.0475,
+   "tool_prod": -0.0341,
+   "tool_loop": -0.0349,
+   "random_prod": -0.0018,
+   "random_loop": 0.001
+  },
+  {
+   "id": "test/algebra/1275.json",
+   "astra_prod": -0.0545,
+   "astra_loop": -0.1159,
+   "tool_prod": -0.0436,
+   "tool_loop": -0.1116,
+   "random_prod": 0.001,
+   "random_loop": 0.0001
+  },
+  {
+   "id": "test/algebra/1837.json",
+   "astra_prod": -0.0802,
+   "astra_loop": -0.1603,
+   "tool_prod": -0.0712,
+   "tool_loop": -0.0816,
+   "random_prod": 0.0003,
+   "random_loop": -0.0001
+  },
+  {
+   "id": "test/algebra/1937.json",
+   "astra_prod": -0.0206,
+   "astra_loop": -0.0617,
+   "tool_prod": -0.0102,
+   "tool_loop": -0.0373,
+   "random_prod": 0.001,
+   "random_loop": 0.0003
+  },
+  {
+   "id": "test/algebra/2046.json",
+   "astra_prod": -0.0383,
+   "astra_loop": -0.0796,
+   "tool_prod": -0.0312,
+   "tool_loop": -0.0689,
+   "random_prod": 0.0006,
+   "random_loop": -0.0001
+  },
+  {
+   "id": "test/algebra/2199.json",
+   "astra_prod": -0.0545,
+   "astra_loop": -0.0592,
+   "tool_prod": -0.0368,
+   "tool_loop": -0.0435,
+   "random_prod": 0.0005,
+   "random_loop": -0.0
+  },
+  {
+   "id": "test/algebra/2427.json",
+   "astra_prod": -0.0343,
+   "astra_loop": -0.0786,
+   "tool_prod": -0.0387,
+   "tool_loop": -0.0883,
+   "random_prod": 0.0016,
+   "random_loop": 0.0003
+  },
+  {
+   "id": "test/algebra/246.json",
+   "astra_prod": -0.0343,
+   "astra_loop": -0.1415,
+   "tool_prod": -0.0147,
+   "tool_loop": -0.1066,
+   "random_prod": -0.0006,
+   "random_loop": -0.0009
+  },
+  {
+   "id": "test/algebra/2570.json",
+   "astra_prod": -0.0313,
+   "astra_loop": -0.0961,
+   "tool_prod": -0.0182,
+   "tool_loop": -0.0654,
+   "random_prod": -0.0005,
+   "random_loop": -0.0003
+  }
+ ]
+}

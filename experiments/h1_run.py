@@ -86,6 +86,8 @@ def main():
     ap.add_argument("--arm", required=True)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--no-cache", action="store_true", help="disable frozen-prefix caching")
+    ap.add_argument("--dtype", default=os.environ.get("H1_DTYPE", "bfloat16"), choices=["bfloat16", "float32"],
+                    help="frozen-model precision; float32 on CPUs without bf16 units (AMX / AVX512-BF16)")
     a = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
     seed_all(a.seed)
@@ -93,8 +95,10 @@ def main():
     picks = json.load(open(os.path.join(OUT, f"picks_{a.purpose}.json")))
     data = french_data(None, tok) if a.purpose == "french" else None   # cached by h1_locate.py
     items = add_items(3000, seed=1) if a.purpose == "add" else data["train"]
-    model = load_model()
-    res = {"purpose": a.purpose, "arm": a.arm, "seed": a.seed, "cache_prefix": not a.no_cache}
+    import torch
+    dtype = getattr(torch, a.dtype)
+    model = load_model(dtype=dtype)
+    res = {"purpose": a.purpose, "arm": a.arm, "seed": a.seed, "cache_prefix": not a.no_cache, "dtype": a.dtype}
     if a.arm != "base":
         # train first, alone in the process, so peak memory is the training's own
         model, kind = build(model, a.arm, picks)
@@ -104,7 +108,7 @@ def main():
                       cache_prefix=not a.no_cache, seed=a.seed)
         stats["rss_after_model_load_mb"] = rss0
         res.update(kind=kind, train=stats)
-    base = load_model()
+    base = load_model(dtype=dtype)
     ret = Retention(tok, base_model=base, kinds=("kl_wiki", "kl_chat", "mmlu") if a.purpose == "add" else ("kl_wiki", "mmlu"))
     res["eval"] = evaluate(a.purpose, model, tok, ret, data)
     res["mmlu_base"] = ret.base_mmlu

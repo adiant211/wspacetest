@@ -72,7 +72,42 @@ lower bounds.
 | 3 | ≥ 1.6M / 116k, 54 turns | ~20 s |
 | 8 | ≥ 11.4M / 335k, 562 turns (with the Gemma follow-up), plus 85 forward passes | see below |
 
-<!-- H2_REDISCOVERY -->
+### Exp 8 without an LLM: a scripted rediscovery of Astra's loop edit
+
+`experiments/h2_rediscover_loop_edit.py` runs, as plain code, the recipe Astra's own final report describes. It uses
+inputs Astra never saw, and problems disjoint from the ones the edits are tested on:
+
+1. **Direction.** u = unit(mean residual after layer 15 / 19 on loop tokens − mean on the 768 tokens before the
+   loop), taken over 16 of the base model's looping MATH-500 answers.
+2. **Neurons.** Each neuron's push along u is E[activation] × (u · W_down[:, j]). Keep the 64 whose push grows most
+   from pre-loop text to loop text.
+3. **Edit.** W' = W − 6·u·(mask ⊙ uᵀW), the same formula and strength as Astra's final edit.
+4. **Test.** On 12 *other* looping answers, compare teacher-forced log-probs of the reasoning before the loop and of
+   the loop itself. Arms: base, Astra's edit, the tool's edit, and a random edit with the same Frobenius norm
+   (random unit direction, random 64 columns).
+
+| | Astra (158 turns, ~20 h, 50 forward passes) | Tool pipeline (no LLM) |
+|---|---|---|
+| Time to find the edit | ~20 hours | **5 min of CPU** (16 forward passes) |
+| Direction, layer 15 / 19 | – | \|cos\| with Astra's direction **0.71 / 0.72** (two random directions in 1,024 dims: ~0.03) |
+| The 64 neurons, layer 15 / 19 | – | **39 / 64 and 29 / 64** are the same neurons Astra picked (chance: ~1) |
+
+Teacher-forced change in log-probability on held-out looping answers (nats/token; first run, 10 of 12 answers before a
+container restart, `results/h2/rediscover_loop_edit_run1_partial.json`):
+
+| Edit | Reasoning before the loop | Loop text | Selectivity (loop − reasoning) |
+|---|---|---|---|
+| Astra's | −0.042 | −0.086 | −0.044 ± 0.012 |
+| Tool's | −0.031 | −0.065 | −0.034 ± 0.010 |
+| Random, same size | +0.000 | −0.000 | −0.000 ± 0.000 |
+
+<!-- H2_RUN2 -->
+
+**H2 verdict.** Yes, with caveats. For every reading we tried, a few dozen lines of ordinary linear algebra or
+activation statistics recover most of what Astra read, in seconds to minutes of CPU instead of hundreds of thousands to
+millions of frontier-model tokens. The tools needed knowing *what to look for*: the purpose, a contrast set, a recipe.
+They missed some things Astra caught (Freeway, the romaji head), and one textbook score failed outright. That is the
+real division of labour: a cheap model or a person picks the question and the recipe, and tools do the reading.
 
 ## 3. H1: does hand-picking where LoRA goes cut cost and keep (or improve) quality?
 

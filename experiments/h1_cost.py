@@ -23,7 +23,7 @@ ARMS = {"add": ["full", "full_r1", "pick4", "pick4r", "pick4u", "spectrum4", "ra
         "french": ["full", "pick4", "pick4r", "pick4u", "spectrum4", "rand4a", "anti4", "neur"]}
 
 
-def one(purpose, arm, steps):
+def one(purpose, arm, steps, dtype_name="bfloat16"):
     import torch
     from experiments.h1_run import CFG, build
     from wsp.common import load_model, load_tokenizer, peak_rss_mb, seed_all
@@ -34,7 +34,7 @@ def one(purpose, arm, steps):
     picks = json.load(open(os.path.join(OUT, f"picks_{purpose}.json")))
     items = add_items(3000, seed=1) if purpose == "add" else french_data(None, tok)["train"]
     cfg = CFG[purpose]
-    model, kind = build(load_model(), arm, picks)
+    model, kind = build(load_model(dtype=getattr(torch, dtype_name)), arm, picks)
     params = trainable(model)
     opt = torch.optim.AdamW(params, lr=cfg["lr"] if kind == "lora" else cfg["lr_neur"])
     data = tokenize(tok, items)
@@ -67,7 +67,7 @@ def one(purpose, arm, steps):
     res = {"purpose": purpose, "arm": arm, "trainable_params": n_par, "adam_state_mb": n_par * 2 * 4 / 2 ** 20,
            "lowest_trainable_layer": start, "s_per_step": s_step, "prefix_cache_s": cache_s,
            "est_total_s": cache_s + s_step * cfg["steps"], "peak_rss_mb": peak_rss_mb(), "timed_steps": len(times),
-           "threads": torch.get_num_threads()}
+           "threads": torch.get_num_threads(), "dtype": dtype_name}
     print(json.dumps(res), flush=True)
     return res
 
@@ -76,14 +76,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--steps", type=int, default=12)
     ap.add_argument("--one", nargs=2)
+    ap.add_argument("--dtype", default="bfloat16", choices=["bfloat16", "float32"])
     a = ap.parse_args()
     if a.one:
-        one(*a.one, a.steps)
+        one(*a.one, a.steps, a.dtype)
         return
     rows = []
     for purpose, arms in ARMS.items():
         for arm in arms:
-            p = subprocess.run([sys.executable, __file__, "--one", purpose, arm, "--steps", str(a.steps)],
+            p = subprocess.run([sys.executable, __file__, "--one", purpose, arm, "--steps", str(a.steps), "--dtype", a.dtype],
                                capture_output=True, text=True)
             line = [l for l in p.stdout.splitlines() if l.startswith("{")]
             if not line:

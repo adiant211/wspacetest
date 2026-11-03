@@ -116,7 +116,7 @@ def with_edit(base_sd, model, edit):
     for k, v in base_sd.items():
         sd[k].data.copy_(v)
     for k, v in edit.items():
-        sd[k].data.copy_(v)
+        sd[k].data.copy_(v.to(sd[k].dtype))   # edits are bf16-rounded, like the evaluated Astra edit
     return model
 
 
@@ -125,10 +125,13 @@ def main():
     ap.add_argument("--n-dir", type=int, default=16)
     ap.add_argument("--n-eval", type=int, default=12)
     ap.add_argument("--seg", type=int, default=768)
+    ap.add_argument("--dtype", default="bfloat16", choices=["bfloat16", "float32"],
+                    help="float32 on CPUs without bf16 units; then base and Astra are re-scored in float32 too")
     a = ap.parse_args()
+    dtype = getattr(torch, a.dtype)
     torch.manual_seed(0)
     tok = AutoTokenizer.from_pretrained(MODEL, revision=REV)
-    model = AutoModelForCausalLM.from_pretrained(MODEL, revision=REV, dtype=torch.bfloat16).eval()
+    model = AutoModelForCausalLM.from_pretrained(MODEL, revision=REV, dtype=dtype).eval()
     cands = candidates(tok, a.seg)
     evals, dirs = cands[:a.n_eval], cands[24:24 + a.n_dir]   # eval = first answers of the Exp 8 test; dirs disjoint
     assert not {c["id"] for c in evals} & {c["id"] for c in dirs}
@@ -137,7 +140,8 @@ def main():
     t = time.time()
     S = collect(model, dirs, a.seg)
     edit, info = tool_edit(model, S)
-    print(f"tool pipeline done in {time.time() - t:.0f}s", flush=True)
+    tool_seconds = time.time() - t
+    print(f"tool pipeline done in {tool_seconds:.0f}s", flush=True)
 
     _, astra = load_edit("p50c")
     base_sd = {k: dict(model.named_parameters())[k].detach().clone() for k in astra}
@@ -153,8 +157,10 @@ def main():
               f"{cmp[l]['neuron_overlap_of_64']}/64 (chance {cmp[l]['random_overlap_expected']:.1f})", flush=True)
 
     rand = random_edit(model, edit)
-    prev = json.load(open(os.path.join(REPO, "results", "verify", "exp8_qwen35_edit.json")))
-    prev = {r["id"]: r for r in prev.get("teacher", {}).get("per_sample", [])}
+    prev = {}
+    if a.dtype == "bfloat16":   # reuse the bf16 base / Astra scores of verify/exp8_qwen35_edit.py
+        prev = json.load(open(os.path.join(REPO, "results", "verify", "exp8_qwen35_edit.json")))
+        prev = {r["id"]: r for r in prev.get("teacher", {}).get("per_sample", [])}
     rows = []
     for c in evals:
         s0, on, e = c["onset"] - a.seg, c["onset"], c["onset"] + a.seg
@@ -181,7 +187,8 @@ def main():
                     "selectivity_loop_minus_productive": float((dl - dp).mean()),
                     "selectivity_se": float((dl - dp).std(ddof=1) / np.sqrt(len(rows)))}
     print(json.dumps(summ, indent=1), flush=True)
-    json.dump({"layers": list(LAYERS), "n_dir": len(dirs), "n_eval": len(evals), "comparison": cmp, "summary": summ,
+    json.dump({"dtype": a.dtype, "threads": torch.get_num_threads(), "layers": list(LAYERS), "n_dir": len(dirs), "n_eval": len(evals),
+               "tool_pipeline_seconds": tool_seconds, "comparison": cmp, "summary": summ,
                "per_sample": rows, "tool_cols": {l: sorted(info[l]["cols"]) for l in LAYERS}},
               open(os.path.join(OUT, "rediscover_loop_edit.json"), "w"), indent=1)
     torch.save({k: v for k, v in edit.items()}, os.path.join(OUT, "tool_edit_tensors.pt"))
