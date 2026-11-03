@@ -1,0 +1,60 @@
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [01:49<9:40:44, 109.23s/it]Loading weights: 100%|██████████| 320/320 [01:49<00:00,  2.93it/s] 
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+scan set: 16 answers, 16,406 repeating and 8,170 non-repeating tokens; 24 layers x 3584 neurons
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+    scanned 4/16 sequences [121s]
+    scanned 8/16 sequences [247s]
+    scanned 12/16 sequences [337s]
+    scanned 16/16 sequences [440s]
+scan done in 440s
+  layers ranked by d               : [14, 10, 13, 11, 12, 15]
+  layers ranked by write           : [23, 22, 14, 15, 19, 18]
+  layers ranked by push            : [19, 22, 23, 15, 21, 18]
+  layers ranked by residual_gap_rel: [14, 11, 13, 10, 12, 15]
+  Astra's neurons under 'd': L15: median global percentile 72.09%, 17% in global top 1%, overlap with scan top-64 12/64; L19: median global percentile 38.93%, 3% in global top 1%, overlap with scan top-64 6/64
+  Astra's neurons under 'write': L15: median global percentile 88.58%, 33% in global top 1%, overlap with scan top-64 19/64; L19: median global percentile 13.89%, 20% in global top 1%, overlap with scan top-64 15/64
+  Astra's neurons under 'push': L15: median global percentile 0.46%, 67% in global top 1%, overlap with scan top-64 38/64; L19: median global percentile 2.20%, 41% in global top 1%, overlap with scan top-64 29/64
+blind picks: push -> layers [19, 22]; activation-only -> layers [10, 14]
+  test/algebra/1072.json            astra: -0.0212/-0.0152  blind_push: -0.0018/-0.0012  blind_activation: +0.0001/-0.0002  random: +0.0002/+0.0000
+  test/algebra/1098.json            astra: -0.0501/-0.0477  blind_push: -0.0114/-0.0220  blind_activation: +0.0011/-0.0004  random: +0.0006/+0.0008
+  test/algebra/1275.json            astra: -0.0542/-0.1159  blind_push: -0.0311/-0.0725  blind_activation: -0.0003/+0.0002  random: -0.0006/-0.0003
+  test/algebra/1837.json            astra: -0.0804/-0.1612  blind_push: -0.0227/-0.0311  blind_activation: -0.0021/-0.0026  random: +0.0001/+0.0002
+  test/algebra/1937.json            astra: -0.0207/-0.0619  blind_push: -0.0001/-0.0201  blind_activation: -0.0010/-0.0017  random: +0.0000/+0.0003
+  test/algebra/2046.json            astra: -0.0377/-0.0795  blind_push: -0.0146/-0.0375  blind_activation: -0.0006/+0.0000  random: +0.0004/+0.0004
+  test/algebra/2199.json            astra: -0.0546/-0.0590  blind_push: -0.0117/-0.0177  blind_activation: -0.0009/-0.0015  random: +0.0004/+0.0005
+  test/algebra/2427.json            astra: -0.0346/-0.0780  blind_push: -0.0156/-0.0358  blind_activation: -0.0009/-0.0004  random: -0.0000/-0.0001
+  test/algebra/246.json             astra: -0.0358/-0.1411  blind_push: -0.0069/-0.0445  blind_activation: -0.0010/-0.0006  random: -0.0001/+0.0002
+  test/algebra/2570.json            astra: -0.0302/-0.0959  blind_push: -0.0018/-0.0186  blind_activation: -0.0011/-0.0014  random: +0.0002/+0.0000
+  test/algebra/2700.json            astra: -0.0282/-0.0666  blind_push: -0.0080/-0.0292  blind_activation: +0.0009/-0.0012  random: -0.0002/+0.0002
+  test/algebra/621.json             astra: -0.0255/-0.0577  blind_push: -0.0031/-0.0202  blind_activation: -0.0001/-0.0032  random: -0.0005/-0.0000
+{
+ "astra": {
+  "productive_delta_mean": -0.039440467953681946,
+  "loop_delta_mean": -0.08164851972833276,
+  "selectivity": -0.04220805177465081,
+  "selectivity_se": 0.009643126462693856,
+  "loop_hit_harder_in": 10
+ },
+ "blind_push": {
+  "productive_delta_mean": -0.010734178125858307,
+  "loop_delta_mean": -0.02920317913716038,
+  "selectivity": -0.018469001011302073,
+  "selectivity_se": 0.003490620462604815,
+  "loop_hit_harder_in": 11
+ },
+ "blind_activation": {
+  "productive_delta_mean": -0.0004896310468514761,
+  "loop_delta_mean": -0.0010874602012336254,
+  "selectivity": -0.0005978291543821493,
+  "selectivity_se": 0.00033018762812028806,
+  "loop_hit_harder_in": 8
+ },
+ "random": {
+  "productive_delta_mean": 3.0099103848139446e-05,
+  "loop_delta_mean": 0.0001944891797999541,
+  "selectivity": 0.00016439007595181465,
+  "selectivity_se": 5.7967307761072726e-05,
+  "loop_hit_harder_in": 3
+ }
+}
