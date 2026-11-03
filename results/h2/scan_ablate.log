@@ -1,0 +1,51 @@
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:00<01:10,  4.49it/s]Loading weights:  73%|███████▎  | 234/320 [00:00<00:00, 902.91it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 799.75it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+|d| pipeline layers: [10, 14]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  test/algebra/1072.json            astra: -0.0212/-0.0152  absd_in_astra_layers: -0.0081/-0.0059  push_in_astra_layers: -0.0116/-0.0097  absd_pipeline: -0.0012/-0.0018
+  test/algebra/1098.json            astra: -0.0501/-0.0477  absd_in_astra_layers: -0.0204/-0.0207  push_in_astra_layers: -0.0307/-0.0290  absd_pipeline: -0.0071/-0.0053
+  test/algebra/1275.json            astra: -0.0542/-0.1159  absd_in_astra_layers: -0.0289/-0.0435  push_in_astra_layers: -0.0419/-0.0908  absd_pipeline: -0.0067/-0.0096
+  test/algebra/1837.json            astra: -0.0804/-0.1612  absd_in_astra_layers: -0.0422/-0.0313  push_in_astra_layers: -0.0592/-0.0614  absd_pipeline: -0.0026/-0.0091
+  test/algebra/1937.json            astra: -0.0207/-0.0619  absd_in_astra_layers: -0.0095/-0.0218  push_in_astra_layers: -0.0119/-0.0337  absd_pipeline: -0.0026/-0.0089
+  test/algebra/2046.json            astra: -0.0377/-0.0795  absd_in_astra_layers: -0.0190/-0.0213  push_in_astra_layers: -0.0265/-0.0520  absd_pipeline: -0.0033/-0.0082
+  test/algebra/2199.json            astra: -0.0546/-0.0590  absd_in_astra_layers: -0.0210/-0.0161  push_in_astra_layers: -0.0335/-0.0321  absd_pipeline: -0.0039/-0.0008
+  test/algebra/2427.json            astra: -0.0346/-0.0780  absd_in_astra_layers: -0.0175/-0.0124  push_in_astra_layers: -0.0328/-0.0506  absd_pipeline: -0.0002/+0.0000
+  test/algebra/246.json             astra: -0.0358/-0.1411  absd_in_astra_layers: -0.0142/-0.0354  push_in_astra_layers: -0.0160/-0.0851  absd_pipeline: -0.0039/-0.0103
+  test/algebra/2570.json            astra: -0.0302/-0.0959  absd_in_astra_layers: -0.0120/-0.0222  push_in_astra_layers: -0.0176/-0.0519  absd_pipeline: -0.0007/-0.0051
+  test/algebra/2700.json            astra: -0.0282/-0.0666  absd_in_astra_layers: -0.0092/-0.0174  push_in_astra_layers: -0.0180/-0.0427  absd_pipeline: -0.0003/-0.0062
+  test/algebra/621.json             astra: -0.0255/-0.0577  absd_in_astra_layers: -0.0118/-0.0192  push_in_astra_layers: -0.0144/-0.0281  absd_pipeline: -0.0022/-0.0227
+{
+ "astra": {
+  "productive_delta_mean": -0.039440467953681946,
+  "loop_delta_mean": -0.08164851972833276,
+  "selectivity": -0.04220805177465081,
+  "selectivity_se": 0.009643126462693856,
+  "loop_hit_harder_in": 10,
+  "n": 12
+ },
+ "absd_in_astra_layers": {
+  "productive_delta_mean": -0.017815978576739628,
+  "loop_delta_mean": -0.022268978413194418,
+  "selectivity": -0.004452999836454789,
+  "selectivity_se": 0.002727630232188898,
+  "loop_hit_harder_in": 8,
+  "n": 12
+ },
+ "push_in_astra_layers": {
+  "productive_delta_mean": -0.026171958694855373,
+  "loop_delta_mean": -0.047259633895009756,
+  "selectivity": -0.021087675200154383,
+  "selectivity_se": 0.006316785936204439,
+  "loop_hit_harder_in": 9,
+  "n": 12
+ },
+ "absd_pipeline": {
+  "productive_delta_mean": -0.0029008549948533378,
+  "loop_delta_mean": -0.007337627311547597,
+  "selectivity": -0.00443677231669426,
+  "selectivity_se": 0.001752160290919356,
+  "loop_hit_harder_in": 9,
+  "n": 12
+ }
+}

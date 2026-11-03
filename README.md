@@ -227,6 +227,20 @@ effect is ~20% weaker. The 18 neurons that differ come from the labels. The scan
 12-gram occurred earlier. The hinted tool contrasts the 768 tokens after the loop starts with the 768 before, which is
 exactly what the test scores.
 
+**Is over/under-activation enough if the layers are right?** (`experiments/h2_scan_ablate.py`, same saved scan, same
+12 held-out answers.) The question here is neuron choice alone, so the layers are fixed to Astra's and only the 64
+neurons per layer change:
+
+| Edit | Reasoning before the loop | Loop text | Selectivity | Loop hit harder |
+|---|---|---|---|---|
+| Layers 15 + 19, top-64 by **push** | −0.026 | −0.047 | **−0.021 ± 0.006** | 9 / 12 |
+| Layers 15 + 19, top-64 by **\|d\|** (most over- or under-active) | −0.018 | −0.022 | −0.004 ± 0.003 | 8 / 12 |
+| \|d\| alone for layers and neurons (10 + 14) | −0.003 | −0.007 | −0.004 ± 0.002 | 9 / 12 |
+
+Even inside the right layers, the most over- or under-active neurons give a fifth of push's selectivity. Removing
+their write along the repeat direction hurts normal reasoning almost as much as loops. They change *during* loops but
+do not *drive* them. (The push row is the screened edit again. It reproduces to the digit.)
+
 <!-- WINDOW -->
 
 **H2 verdict.** Yes, with caveats. For every reading we tried, a few dozen lines of ordinary linear algebra or

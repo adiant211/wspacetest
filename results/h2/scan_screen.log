@@ -1,0 +1,62 @@
+Loading weights:   0%|          | 0/320 [00:00<?, ?it/s]Loading weights:   0%|          | 1/320 [00:00<01:09,  4.57it/s]Loading weights:  63%|██████▎   | 201/320 [00:00<00:00, 745.96it/s]Loading weights:  95%|█████████▍| 303/320 [00:00<00:00, 818.63it/s]Loading weights: 100%|██████████| 320/320 [00:00<00:00, 704.08it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+    scanned 4/16 sequences [97s]
+    scanned 8/16 sequences [204s]
+    scanned 12/16 sequences [284s]
+    scanned 16/16 sequences [378s]
+scan 378s; shortlist by push: [19, 22, 23, 15, 21, 18]
+  screen L19: prod -0.0155  loop -0.0431  selectivity -0.0275  [211s]
+  screen L22: prod +0.0022  loop -0.0014  selectivity -0.0036  [304s]
+  screen L23: prod -0.0271  loop -0.0047  selectivity +0.0224  [398s]
+  screen L15: prod -0.0142  loop -0.0347  selectivity -0.0205  [494s]
+  screen L21: prod +0.0015  loop -0.0021  selectivity -0.0036  [594s]
+  screen L18: prod -0.0031  loop -0.0056  selectivity -0.0026  [687s]
+kept layers [15, 19]
+  test/algebra/1072.json            astra: -0.0212/-0.0152  blind_push: -0.0018/-0.0012  screened: -0.0116/-0.0097  screened_random: +0.0000/-0.0001
+  test/algebra/1098.json            astra: -0.0501/-0.0477  blind_push: -0.0114/-0.0220  screened: -0.0307/-0.0290  screened_random: -0.0012/+0.0007
+  test/algebra/1275.json            astra: -0.0542/-0.1159  blind_push: -0.0311/-0.0725  screened: -0.0419/-0.0908  screened_random: +0.0008/-0.0000
+  test/algebra/1837.json            astra: -0.0804/-0.1612  blind_push: -0.0227/-0.0311  screened: -0.0592/-0.0614  screened_random: -0.0003/-0.0001
+  test/algebra/1937.json            astra: -0.0207/-0.0619  blind_push: -0.0001/-0.0201  screened: -0.0119/-0.0337  screened_random: -0.0004/-0.0001
+  test/algebra/2046.json            astra: -0.0377/-0.0795  blind_push: -0.0146/-0.0375  screened: -0.0265/-0.0520  screened_random: +0.0004/-0.0001
+  test/algebra/2199.json            astra: -0.0546/-0.0590  blind_push: -0.0117/-0.0177  screened: -0.0335/-0.0321  screened_random: +0.0007/+0.0005
+  test/algebra/2427.json            astra: -0.0346/-0.0780  blind_push: -0.0156/-0.0358  screened: -0.0328/-0.0506  screened_random: +0.0006/+0.0001
+  test/algebra/246.json             astra: -0.0358/-0.1411  blind_push: -0.0069/-0.0445  screened: -0.0160/-0.0851  screened_random: -0.0009/-0.0005
+  test/algebra/2570.json            astra: -0.0302/-0.0959  blind_push: -0.0018/-0.0186  screened: -0.0176/-0.0519  screened_random: +0.0006/-0.0005
+  test/algebra/2700.json            astra: -0.0282/-0.0666  blind_push: -0.0080/-0.0292  screened: -0.0180/-0.0427  screened_random: -0.0008/+0.0000
+  test/algebra/621.json             astra: -0.0255/-0.0577  blind_push: -0.0031/-0.0202  screened: -0.0144/-0.0281  screened_random: -0.0006/-0.0001
+{
+ "astra": {
+  "productive_delta_mean": -0.039440467953681946,
+  "loop_delta_mean": -0.08164851972833276,
+  "selectivity": -0.04220805177465081,
+  "selectivity_se": 0.009643126462693856,
+  "loop_hit_harder_in": 10,
+  "n": 12
+ },
+ "blind_push": {
+  "productive_delta_mean": -0.010734178125858307,
+  "loop_delta_mean": -0.02920317913716038,
+  "selectivity": -0.018469001011302073,
+  "selectivity_se": 0.003490620462604815,
+  "loop_hit_harder_in": 11,
+  "n": 12
+ },
+ "screened": {
+  "productive_delta_mean": -0.026171958694855373,
+  "loop_delta_mean": -0.047259633895009756,
+  "selectivity": -0.021087675200154383,
+  "selectivity_se": 0.006316785936204439,
+  "loop_hit_harder_in": 9,
+  "n": 12
+ },
+ "screened_random": {
+  "productive_delta_mean": -9.145339330037434e-05,
+  "loop_delta_mean": -5.423557013273239e-06,
+  "selectivity": 8.60298362871011e-05,
+  "selectivity_se": 0.00023243381513256655,
+  "loop_hit_harder_in": 6,
+  "n": 12
+ }
+}
