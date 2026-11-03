@@ -234,5 +234,181 @@
   "loop_delta_mean": -0.08866851187000672,
   "loop_delta_se": 0.007963686218838598,
   "loop_more_suppressed_in": 22
+ },
+ "entry": {
+  "n": 16,
+  "new_tokens": 384,
+  "per_sample": {
+   "base": [
+    {
+     "id": "test/algebra/1072.json",
+     "copy_rate": 0.1875,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/1098.json",
+     "copy_rate": 0.2265625,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/1275.json",
+     "copy_rate": 0.5729166666666666,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/1837.json",
+     "copy_rate": 0.8645833333333334,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/1937.json",
+     "copy_rate": 0.234375,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2046.json",
+     "copy_rate": 0.6510416666666666,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2199.json",
+     "copy_rate": 0.53125,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2427.json",
+     "copy_rate": 0.8411458333333334,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/246.json",
+     "copy_rate": 0.3802083333333333,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2570.json",
+     "copy_rate": 0.578125,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2700.json",
+     "copy_rate": 0.4375,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/621.json",
+     "copy_rate": 0.7135416666666666,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/661.json",
+     "copy_rate": 0.5911458333333334,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/722.json",
+     "copy_rate": 0.4791666666666667,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/892.json",
+     "copy_rate": 0.4140625,
+     "closed_think": false
+    },
+    {
+     "id": "test/counting_and_probability/1060.json",
+     "copy_rate": 0.4088541666666667,
+     "closed_think": false
+    }
+   ],
+   "edited": [
+    {
+     "id": "test/algebra/1072.json",
+     "copy_rate": 0.109375,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/1098.json",
+     "copy_rate": 0.10416666666666667,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/1275.json",
+     "copy_rate": 0.4270833333333333,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/1837.json",
+     "copy_rate": 0.453125,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/1937.json",
+     "copy_rate": 0.3463541666666667,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2046.json",
+     "copy_rate": 0.19010416666666666,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2199.json",
+     "copy_rate": 0.036458333333333336,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2427.json",
+     "copy_rate": 0.078125,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/246.json",
+     "copy_rate": 0.2734375,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2570.json",
+     "copy_rate": 0.4296875,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/2700.json",
+     "copy_rate": 0.296875,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/621.json",
+     "copy_rate": 0.625,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/661.json",
+     "copy_rate": 0.3645833333333333,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/722.json",
+     "copy_rate": 0.4947916666666667,
+     "closed_think": false
+    },
+    {
+     "id": "test/algebra/892.json",
+     "copy_rate": 0.10677083333333333,
+     "closed_think": false
+    },
+    {
+     "id": "test/counting_and_probability/1060.json",
+     "copy_rate": 0.09375,
+     "closed_think": false
+    }
+   ]
+  },
+  "copy_rate_base_mean": 0.5069986979166666,
+  "copy_rate_edited_mean": 0.27685546875,
+  "paired_diff_mean": -0.23014322916666669,
+  "paired_diff_se": 0.05486952747968753,
+  "base_looping_share(copy>0.5)": 0.5,
+  "edited_looping_share(copy>0.5)": 0.0625
  }
 }
