@@ -101,7 +101,19 @@ container restart, `results/h2/rediscover_loop_edit_run1_partial.json`):
 | Tool's | −0.031 | −0.065 | −0.034 ± 0.010 |
 | Random, same size | +0.000 | −0.000 | −0.000 ± 0.000 |
 
-<!-- H2_RUN2 -->
+The container then moved to a CPU without bf16 units, so the full run was repeated in float32, re-scoring base and
+Astra in the same precision (`results/h2/rediscover_loop_edit.json`). It finds the same direction and the same neurons
+to the digit, and matches the first run's 10 answers to within 0.001 nats/token. All 12 held-out answers:
+
+| Edit | Reasoning before the loop | Loop text | Selectivity (loop − reasoning) |
+|---|---|---|---|
+| Astra's | −0.039 | −0.082 | −0.042 ± 0.010 |
+| **Tool's** | −0.028 | −0.061 | **−0.033 ± 0.008** |
+| Random, same size | −0.000 | −0.000 | +0.000 ± 0.000 |
+
+The tool's edit hits the loop harder than the reasoning on 11 / 12 answers, and reaches ~75% of Astra's loop
+suppression and ~77% of its selectivity. A random edit of the same size does nothing. The pipeline took 368 s on 4
+cores, against Astra's 158 turns, ≥ 11M tokens and 50 forward passes.
 
 **H2 verdict.** Yes, with caveats. For every reading we tried, a few dozen lines of ordinary linear algebra or
 activation statistics recover most of what Astra read, in seconds to minutes of CPU instead of hundreds of thousands to
