@@ -19,8 +19,8 @@ import time
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 OUT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "results", "h1")
-ARMS = {"add": ["full", "full_r1", "pick4", "pick4r", "pick4u", "spectrum4", "rand4a", "rand4b", "anti4", "neur", "neur_rand"],
-        "french": ["full", "pick4", "pick4r", "pick4u", "spectrum4", "rand4a", "anti4", "neur"]}
+ARMS = {"add": ["full", "pick4", "pick4r", "pick4u", "spectrum4", "arb4", "rand4a", "rand4b", "anti4", "neur", "neur_rand"],
+        "french": ["full", "pick4", "pick4r", "pick4u", "spectrum4", "rand4a", "anti4"]}
 
 
 def one(purpose, arm, steps, dtype_name="bfloat16"):
