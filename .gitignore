@@ -11,3 +11,4 @@ third_party/lm_understand-logs-full
 results/h1/*.log
 results/verify/exp8_qwen35_edit.log
 results/h2/*.pt
+results/h2/*.log
